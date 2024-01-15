@@ -9,7 +9,14 @@ defmodule EasyBills.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      preferred_cli_env: [
+        ci: :test,
+        "ci.deps_and_security": :test,
+        "ci.deps": :test,
+        "ci.formatting": :test,
+        "ci.migrations": :test
+      ]
     ]
   end
 
@@ -69,7 +76,25 @@ defmodule EasyBills.MixProject do
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
       "assets.build": ["tailwind default", "esbuild default"],
-      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
+      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"],
+      ci: [
+        "ci.deps_and_security",
+        "ci.formatting",
+        "ci.code_quality",
+        "ci.test"
+      ],
+      "ci.deps_and_security": ["sobelow --config .sobelow-config"],
+      "ci.code_quality": [
+        "compile --force --warnings-as-errors",
+        "credo --strict"
+      ],
+      "ci.formatting": ["format --check-formatted", "cmd --cd assets npx prettier -c .."],
+      "ci.test": [
+        "ecto.create --quiet",
+        "ecto.migrate --quiet",
+        "test --cover --warnings-as-errors"
+      ],
+      prettier: ["cmd --cd assets npx prettier -w .."]
     ]
   end
 end
