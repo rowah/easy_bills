@@ -1,0 +1,12 @@
+{
+  "coverage_options": {
+    "minimum_coverage": 0
+  },
+  "skip_files": [
+    "lib/easy_bills.ex",
+    "lib/easy_bills_web/components/core_components",
+    "lib/easy_bills_web/gettext.ex",
+    "lib/easy_bills_web/telemetry.ex",
+    "test/support/data_case.ex"
+  ]
+}
