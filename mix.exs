@@ -70,6 +70,7 @@ defmodule EasyBills.MixProject do
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:sobelow, "~> 0.13", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.1", only: [:dev, :test], runtime: false},
+      {:mix_audit, "~> 1.0", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.18", only: :test}
     ]
   end
@@ -93,6 +94,7 @@ defmodule EasyBills.MixProject do
         "ci.deps_and_security",
         "ci.formatting",
         "ci.code_quality",
+        "ci.migrations",
         "ci.test"
       ],
       "ci.deps_and_security": ["sobelow --config .sobelow-config"],
@@ -102,6 +104,11 @@ defmodule EasyBills.MixProject do
         "dialyzer"
       ],
       "ci.formatting": ["format --check-formatted", "cmd --cd assets npx prettier -c .."],
+      "ci.migrations": [
+        "ecto.create --quiet",
+        "ecto.migrate --quiet",
+        "ecto.rollback --all --quiet"
+      ],
       "ci.test": [
         "ecto.create --quiet",
         "ecto.migrate --quiet",
