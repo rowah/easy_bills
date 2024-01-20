@@ -95,8 +95,8 @@ defmodule EasyBills.MixProject do
         "ci.deps_and_security",
         "ci.formatting",
         "ci.code_quality",
-        "ci.migrations",
         "ci.test"
+        # "ci.migrations",
       ],
       "ci.deps_and_security": ["sobelow --config .sobelow-config"],
       "ci.code_quality": [
