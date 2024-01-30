@@ -2,27 +2,45 @@ defmodule EasyBillsWeb.UserForgotPasswordLive do
   use EasyBillsWeb, :live_view
 
   alias EasyBills.Accounts
+  alias EasyBillsWeb.IconsComponent
 
   def render(assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm">
-      <.header class="text-center">
-        Forgot your password?
-        <:subtitle>We'll send a password reset link to your inbox</:subtitle>
-      </.header>
+    <div class="flex">
+      <div class="w-1/2 h-screen hidden lg:block">
+        <img
+          src={~p"/images/section-invoice.png"}
+          alt="Placeholder Image"
+          class="object-cover w-full h-full"
+        />
+      </div>
+      <div class="my-auto mx-auto space-y-16 max-w-md">
+        <div class="flex mt-16">
+          <IconsComponent.logo_icon />
+          <h2 class="text-2xl font-bold ml-3 text-purple-500 mt-5">EasyBills</h2>
+        </div>
+        <.header class="text-center">
+          Forgot password?
+          <:subtitle>
+            <b>Enter the email</b>
+            that you used to create your account and we will send you a
+            <b>link to reset your password</b>
+          </:subtitle>
+        </.header>
 
-      <.simple_form for={@form} id="reset_password_form" phx-submit="send_email">
-        <.input field={@form[:email]} type="email" placeholder="Email" required />
-        <:actions>
-          <.button phx-disable-with="Sending..." class="w-full">
-            Send password reset instructions
-          </.button>
-        </:actions>
-      </.simple_form>
-      <p class="text-center text-sm mt-4">
-        <.link href={~p"/users/register"}>Register</.link>
-        | <.link href={~p"/users/log_in"}>Log in</.link>
-      </p>
+        <.simple_form for={@form} id="reset_password_form" phx-submit="send_email">
+          <.input field={@form[:email]} label="Email" type="email" placeholder="Email" required />
+          <:actions>
+            <.button phx-disable-with="Sending..." class="w-full">
+              Send reset link
+            </.button>
+          </:actions>
+        </.simple_form>
+        <p class="text-center text-sm mt-4">
+          <.link href={~p"/users/register"}>Register</.link>
+          | <.link href={~p"/users/log_in"}>Log in</.link>
+        </p>
+      </div>
     </div>
     """
   end
