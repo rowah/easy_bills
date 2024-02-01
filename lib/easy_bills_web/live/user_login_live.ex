@@ -22,13 +22,13 @@ defmodule EasyBillsWeb.UserLoginLive do
           Sign in to EasyBills
         </.header>
 
-        <.simple_form for={@form} id="login_form" action={~p"/users/log_in"} phx-update="ignore">
+        <.simple_form for={@form} id="login_form" action={~p"/log_in"} phx-update="ignore">
           <.input field={@form[:email]} type="email" label="Email" required />
           <.input field={@form[:password]} type="password" label="Password" required />
 
           <:actions>
             <.input field={@form[:remember_me]} type="checkbox" label="Remember me" />
-            <.link href={~p"/users/reset_password"} class="text-sm font-semibold">
+            <.link href={~p"/reset_password"} class="text-sm font-semibold">
               Forgot password?
             </.link>
           </:actions>
@@ -41,7 +41,7 @@ defmodule EasyBillsWeb.UserLoginLive do
 
         <p>
           Don't have an account?
-          <.link navigate={~p"/users/register"} class="font-semibold text-purple-400 hover:underline">
+          <.link navigate={~p"/register"} class="font-semibold text-purple-400 hover:underline">
             Sign up
           </.link>
         </p>
