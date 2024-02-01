@@ -38,6 +38,7 @@ defmodule EasyBillsWeb.UserRegistrationLive do
         <h3 class="text-center font-bold text-3xl">
           Create an account
         </h3>
+        <p>Begin creating invoices for free</p>
 
         <.simple_form
           for={@form}
@@ -70,7 +71,7 @@ defmodule EasyBillsWeb.UserRegistrationLive do
         <p class="mt-6 ml-[20%]">
           Already have an account?
           <.link navigate={~p"/users/log_in"} class="font-semibold text-purple-400 hover:underline">
-            Sign in
+            Login
           </.link>
         </p>
       </div>
@@ -81,12 +82,12 @@ defmodule EasyBillsWeb.UserRegistrationLive do
   def render(%{template: :success} = assigns) do
     ~H"""
     <div class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden py-6 sm:py-12 bg-white">
-      <div class="max-w-xl px-5 text-center bg-purple-200">
+      <div class="max-w-xl px-5 text-center bg-purple-200 rounded-lg">
         <h2 class="mb-2 text-[42px] font-bold text-zinc-800">Confirm your Email Address</h2>
-        <p class="mb-2 text-lg text-zinc-500">
+        <p class="mb-2 text-lg text-zinc-500 leading-loose">
           We've sent a confirmation email to <span class="font-medium text-indigo-500">mail@yourdomain.com</span>. Please follow the link in the message to confirm your email address. If you did not receive the email, please check your spam folder or:
         </p>
-        <.button phx-disable-with="Creating account..." class="w-full mb-4">
+        <.button phx-disable-with="Resending link..." class="w-full mb-12">
           Resend Confirmation Instruction
         </.button>
       </div>

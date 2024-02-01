@@ -13,7 +13,7 @@ defmodule EasyBillsWeb.UserLoginLive do
           class="object-cover w-full h-full"
         />
       </div>
-      <div class="space-y-6 mx-auto">
+      <div class="lg:w-[26%] space-y-6 mx-auto">
         <div class="flex mt-16">
           <IconsComponent.logo_icon />
           <h2 class="text-2xl font-bold ml-3 text-purple-500 mt-5">EasyBills</h2>
@@ -33,15 +33,15 @@ defmodule EasyBillsWeb.UserLoginLive do
             </.link>
           </:actions>
           <:actions>
-            <.button phx-disable-with="Signing in..." class="w-full bg-purple-500">
-              Login
+            <.button phx-disable-with="Signing in..." class="w-full bg-purple-300">
+              Continue
             </.button>
           </:actions>
         </.simple_form>
 
         <p>
           Don't have an account?
-          <.link navigate={~p"/users/register"} class="font-semibold text-brand hover:underline">
+          <.link navigate={~p"/users/register"} class="font-semibold text-purple-400 hover:underline">
             Sign up
           </.link>
         </p>

@@ -1,6 +1,6 @@
 <.flash_group flash={@flash} />
 <div class="flex">
-  <div class="w-1/2 h-screen hidden lg:block">
+  <div class="w-1/2 h-screen hidden lg:block mb-4">
     <img
       src={~p"/images/section-invoice.png"}
       alt="Placeholder Image"
@@ -17,6 +17,12 @@
           <h2 class="text-2xl font-bold ml-3 text-purple-500 mt-5">EasyBills</h2>
         </div>
       </div>
+      <h1 class="font-bold">Welcome! Let's create your profile</h1>
+      <p class="text-gray-400">Just a few more steps</p>
+      <h2 class="font-bold mt-6">Add an avatar</h2>
+
+      <div></div>
+      <%!--
       <p class="text-[0.8125rem] leading-6 text-zinc-900">
         <%= @current_user.email %>
       </p>
@@ -36,7 +42,7 @@
         >
           Log out
         </.link>
-      </p>
+      </p> --%>
     <% else %>
       <div class="space-y-4">
         <div class="flex md:mt-32 lg:mt-0">
