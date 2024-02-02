@@ -62,7 +62,7 @@ defmodule EasyBillsWeb.UserSettingsLiveTest do
         })
 
       assert result =~ "Change Email"
-      assert result =~ "must have the @ sign and no spaces"
+      assert result =~ "Please enter a valid email address"
     end
 
     test "renders errors with invalid data (phx-submit)", %{conn: conn, user: user} do
@@ -133,7 +133,7 @@ defmodule EasyBillsWeb.UserSettingsLiveTest do
         })
 
       assert result =~ "Change Password"
-      assert result =~ "should be at least 12 character(s)"
+      assert result =~ "8+ characters(s)"
       assert result =~ "does not match password"
     end
 
@@ -152,7 +152,7 @@ defmodule EasyBillsWeb.UserSettingsLiveTest do
         |> render_submit()
 
       assert result =~ "Change Password"
-      assert result =~ "should be at least 12 character(s)"
+      assert result =~ "8+ characters(s)"
       assert result =~ "does not match password"
       assert result =~ "is not valid"
     end

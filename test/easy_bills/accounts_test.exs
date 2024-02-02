@@ -62,10 +62,10 @@ defmodule EasyBills.AccountsTest do
       {:error, changeset} = Accounts.register_user(%{email: "not valid", password: "not valid"})
 
       assert %{
-               email: ["must have the @ sign and no spaces"],
+               email: ["Please enter a valid email address"],
                password: [
                  "at least one upper case character",
-                 "should be at least 12 character(s)"
+                 "8+ characters(s)"
                ],
                name: ["can't be blank"],
                username: ["can't be blank"]
@@ -143,7 +143,7 @@ defmodule EasyBills.AccountsTest do
       {:error, changeset} =
         Accounts.apply_user_email(user, valid_user_password(), %{email: "not valid"})
 
-      assert %{email: ["must have the @ sign and no spaces"]} = errors_on(changeset)
+      assert %{email: ["Please enter a valid email address"]} = errors_on(changeset)
     end
 
     test "validates maximum value for email for security", %{user: user} do
@@ -274,7 +274,7 @@ defmodule EasyBills.AccountsTest do
       assert %{
                password: [
                  "at least one upper case character",
-                 "should be at least 12 character(s)"
+                 "8+ characters(s)"
                ],
                password_confirmation: ["does not match password"]
              } = errors_on(changeset)
@@ -486,7 +486,7 @@ defmodule EasyBills.AccountsTest do
       assert %{
                password: [
                  "at least one upper case character",
-                 "should be at least 12 character(s)"
+                 "8+ characters(s)"
                ],
                password_confirmation: ["does not match password"]
              } = errors_on(changeset)
