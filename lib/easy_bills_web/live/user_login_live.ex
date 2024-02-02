@@ -1,4 +1,6 @@
 defmodule EasyBillsWeb.UserLoginLive do
+  @moduledoc false
+
   use EasyBillsWeb, :live_view
 
   alias EasyBillsWeb.IconsComponent
@@ -16,7 +18,7 @@ defmodule EasyBillsWeb.UserLoginLive do
       <div class="lg:w-[26%] space-y-6 mx-auto">
         <div class="flex mt-16">
           <IconsComponent.logo_icon />
-          <h2 class="text-2xl font-bold ml-3 text-purple-500 mt-5">EasyBills</h2>
+          <h2 class="text-6xl font-bold ml-3 text-purple-600 mt-3">EasyBills</h2>
         </div>
         <.header class="text-center">
           Sign in to EasyBills
@@ -33,7 +35,7 @@ defmodule EasyBillsWeb.UserLoginLive do
             </.link>
           </:actions>
           <:actions>
-            <.button phx-disable-with="Signing in..." class="w-full bg-purple-300">
+            <.button phx-disable-with="Signing in..." class="w-full bg-purple-500">
               Continue
             </.button>
           </:actions>

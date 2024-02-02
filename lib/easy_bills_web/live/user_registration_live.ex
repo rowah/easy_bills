@@ -26,19 +26,21 @@ defmodule EasyBillsWeb.UserRegistrationLive do
       <div class="w-1/2 h-screen hidden lg:block">
         <img
           src={~p"/images/section-invoice.png"}
-          alt="Placeholder Image"
+          alt="EasyBills Image"
           class="object-cover w-full h-full"
         />
       </div>
-      <div class="mx-auto mt-16">
-        <div class="flex mb-14">
-          <IconsComponent.logo_icon />
-          <h2 class="text-2xl font-bold ml-3 text-purple-500 mt-5">EasyBills</h2>
+      <div class="md:w-[30%] mx-auto mt-16">
+        <div class="flex mb-14 hidden lg:block">
+          <div class="flex">
+            <IconsComponent.logo_icon />
+            <h2 class="text-6xl font-bold ml-3 text-purple-600 mt-3">EasyBills</h2>
+          </div>
         </div>
         <h3 class="text-center font-bold text-3xl">
           Create an account
         </h3>
-        <p>Begin creating invoices for free</p>
+        <p>Begin creating invoices for free!</p>
 
         <.simple_form
           for={@form}
@@ -63,7 +65,7 @@ defmodule EasyBillsWeb.UserRegistrationLive do
           <.input field={@form[:password]} type="password" label="Password" required />
 
           <:actions>
-            <.button phx-disable-with="Creating account..." class="w-full bg-purple-400">
+            <.button phx-disable-with="Creating account..." class="w-full bg-purple-500">
               Sign Up
             </.button>
           </:actions>
@@ -71,7 +73,7 @@ defmodule EasyBillsWeb.UserRegistrationLive do
         <p class="mt-6 ml-[20%]">
           Already have an account?
           <.link navigate={~p"/log_in"} class="font-semibold text-purple-400 hover:underline">
-            Login
+            Sign in
           </.link>
         </p>
       </div>

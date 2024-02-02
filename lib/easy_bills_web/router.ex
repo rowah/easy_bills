@@ -20,7 +20,8 @@ defmodule EasyBillsWeb.Router do
   scope "/", EasyBillsWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    # get "/", PageController, :home
+    live "/", HomeLive
   end
 
   # Other scopes may use custom stacks.

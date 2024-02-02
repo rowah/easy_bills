@@ -17,7 +17,7 @@ defmodule EasyBillsWeb.UserForgotPasswordLive do
       <div class="my-auto mx-auto space-y-16 max-w-md">
         <div class="flex mt-16">
           <IconsComponent.logo_icon />
-          <h2 class="text-2xl font-bold ml-3 text-purple-500 mt-5">EasyBills</h2>
+          <h2 class="text-6xl font-bold ml-3 text-purple-600 mt-3">EasyBills</h2>
         </div>
         <.header class="text-center">
           Forgot password?
