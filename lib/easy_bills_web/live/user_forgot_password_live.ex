@@ -31,7 +31,7 @@ defmodule EasyBillsWeb.UserForgotPasswordLive do
         <.simple_form for={@form} id="reset_password_form" phx-submit="send_email">
           <.input field={@form[:email]} label="Email" type="email" placeholder="Email" required />
           <:actions>
-            <.button phx-disable-with="Sending..." class="w-full bg-purple-400">
+            <.button phx-disable-with="Sending..." class="w-full bg-purple-600">
               Send reset link
             </.button>
           </:actions>

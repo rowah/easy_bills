@@ -14,7 +14,7 @@ defmodule EasyBillsWeb.UserConfirmationLiveTest do
   describe "Confirm user" do
     test "renders confirmation page", %{conn: conn} do
       {:ok, _lv, html} = live(conn, ~p"/confirm/some-token")
-      assert html =~ "Confirm Account"
+      assert html =~ "Confirm email"
     end
 
     test "confirms the given token once", %{conn: conn, user: user} do

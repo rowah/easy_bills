@@ -2,18 +2,28 @@ defmodule EasyBillsWeb.UserConfirmationLive do
   use EasyBillsWeb, :live_view
 
   alias EasyBills.Accounts
+  alias EasyBillsWeb.IconsComponent
 
   def render(%{live_action: :edit} = assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm">
-      <.header class="text-center">Confirm Account</.header>
-
+    <div class="mx-auto max-w-lg">
+      <IconsComponent.logo_icon />
+      <.header class="">Hi, username</.header>
+      <p>Welcome to EasyBills,</p>
+      <hr />
+      <p class="mb-6">Please take a second to confirm email as your email address:</p>
+      <p>
+        Once you do, you will be able to opt-in to notifications of activity and access other features that require a valid email address.
+      </p>
       <.simple_form for={@form} id="confirmation_form" phx-submit="confirm_account">
         <.input field={@form[:token]} type="hidden" />
         <:actions>
-          <.button phx-disable-with="Confirming..." class="w-full">Confirm my account</.button>
+          <.button phx-disable-with="Confirming..." class="w-1/2 bg-purple-600">
+            Confirm email
+          </.button>
         </:actions>
       </.simple_form>
+      <p class="mt-6">Hight fives, <br /> team EasyBills</p>
 
       <p class="text-center mt-4">
         <.link href={~p"/register"}>Register</.link> | <.link href={~p"/login"}>Log in</.link>

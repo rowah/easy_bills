@@ -35,7 +35,7 @@ defmodule EasyBillsWeb.UserLoginLive do
             </.link>
           </:actions>
           <:actions>
-            <.button phx-disable-with="Signing in..." class="w-full bg-purple-400">
+            <.button phx-disable-with="Signing in..." class="w-full bg-purple-600">
               Continue
             </.button>
           </:actions>
