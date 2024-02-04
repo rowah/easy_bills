@@ -54,12 +54,12 @@ defmodule EasyBillsWeb.Router do
     live_session :redirect_if_user_is_authenticated,
       on_mount: [{EasyBillsWeb.UserAuth, :redirect_if_user_is_authenticated}] do
       live "/register", UserRegistrationLive, :new
-      live "/log_in", UserLoginLive, :new
+      live "/login", UserLoginLive, :new
       live "/reset_password", UserForgotPasswordLive, :new
       live "/reset_password/:token", UserResetPasswordLive, :edit
     end
 
-    post "/log_in", UserSessionController, :create
+    post "/login", UserSessionController, :create
   end
 
   scope "/", EasyBillsWeb do
@@ -75,7 +75,7 @@ defmodule EasyBillsWeb.Router do
   scope "/", EasyBillsWeb do
     pipe_through [:browser]
 
-    delete "/log_out", UserSessionController, :delete
+    delete "/logout", UserSessionController, :delete
 
     live_session :current_user,
       on_mount: [{EasyBillsWeb.UserAuth, :mount_current_user}] do

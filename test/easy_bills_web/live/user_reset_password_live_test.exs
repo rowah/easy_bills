@@ -43,7 +43,7 @@ defmodule EasyBillsWeb.UserResetPasswordLiveTest do
           user: %{"password" => "Onret1@", "password_confirmation" => "Anothersecret123456!"}
         )
 
-      assert result =~ "should be at least 8 character(s)"
+      assert result =~ "8+ characters"
       assert result =~ "does not match password"
     end
   end
@@ -82,7 +82,7 @@ defmodule EasyBillsWeb.UserResetPasswordLiveTest do
         |> render_submit()
 
       assert result =~ "Reset Password"
-      assert result =~ "should be at least 8 character(s)"
+      assert result =~ "8+ characters"
       assert result =~ "does not match password"
     end
   end

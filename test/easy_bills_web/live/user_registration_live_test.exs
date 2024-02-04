@@ -1,4 +1,4 @@
-defmodule EasyBillsWeb.RegistrationLiveTest do
+defmodule EasyBillsWeb.UserRegistrationLiveTest do
   use EasyBillsWeb.ConnCase
 
   import Phoenix.LiveViewTest
@@ -32,7 +32,7 @@ defmodule EasyBillsWeb.RegistrationLiveTest do
 
       assert result =~ "Sign Up"
       assert result =~ "Please enter a valid email address"
-      assert result =~ "should be at least 8 character(s)"
+      assert result =~ "8+ characters"
     end
   end
 

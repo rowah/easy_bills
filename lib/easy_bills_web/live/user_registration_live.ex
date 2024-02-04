@@ -1,4 +1,4 @@
-defmodule EasyBillsWeb.RegistrationLive do
+defmodule EasyBillsWeb.UserRegistrationLive do
   use EasyBillsWeb, :live_view
 
   alias EasyBills.Accounts
@@ -65,7 +65,7 @@ defmodule EasyBillsWeb.RegistrationLive do
           <.input field={@form[:password]} type="password" label="Password" required />
 
           <:actions>
-            <.button phx-disable-with="Creating account..." class="w-full bg-purple-500">
+            <.button phx-disable-with="Creating account..." class="w-full bg-purple-400">
               Sign Up
             </.button>
           </:actions>
