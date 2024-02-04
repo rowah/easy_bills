@@ -77,7 +77,7 @@ defmodule EasyBillsWeb.HomeLive do
               </svg>
 
               <.link
-                href={~p"/log_in"}
+                href={~p"/login"}
                 class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
               >
                 <span class="block w-max font-semibold tracking-wide text-gray-700 text-sm transition duration-300 group-hover:text-blue-600 sm:text-base">

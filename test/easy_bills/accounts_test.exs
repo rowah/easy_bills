@@ -64,8 +64,9 @@ defmodule EasyBills.AccountsTest do
       assert %{
                email: ["Please enter a valid email address"],
                password: [
-                 "at least one upper case character",
-                 "8+ characters(s)"
+                 "special character (*#$%&!-@)",
+                 "upper- case character",
+                 "number"
                ],
                name: ["can't be blank"],
                username: ["can't be blank"]
@@ -250,11 +251,11 @@ defmodule EasyBills.AccountsTest do
     test "allows fields to be set" do
       changeset =
         Accounts.change_user_password(%User{}, %{
-          "password" => "New valid Password"
+          "password" => "NewvalidPassword1!"
         })
 
       assert changeset.valid?
-      assert get_change(changeset, :password) == "New valid Password"
+      assert get_change(changeset, :password) == "NewvalidPassword1!"
       assert is_nil(get_change(changeset, :hashed_password))
     end
   end
@@ -273,8 +274,9 @@ defmodule EasyBills.AccountsTest do
 
       assert %{
                password: [
-                 "at least one upper case character",
-                 "8+ characters(s)"
+                 "special character (*#$%&!-@)",
+                 "upper- case character",
+                 "number"
                ],
                password_confirmation: ["does not match password"]
              } = errors_on(changeset)
@@ -299,11 +301,11 @@ defmodule EasyBills.AccountsTest do
     test "updates the password", %{user: user} do
       {:ok, user} =
         Accounts.update_user_password(user, valid_user_password(), %{
-          password: "New valid Password"
+          password: "NewvalidPassword!2"
         })
 
       assert is_nil(user.password)
-      assert Accounts.get_user_by_email_and_password(user.email, "New valid Password")
+      assert Accounts.get_user_by_email_and_password(user.email, "NewvalidPassword!2")
     end
 
     test "deletes all tokens for the given user", %{user: user} do
@@ -311,7 +313,7 @@ defmodule EasyBills.AccountsTest do
 
       {:ok, _} =
         Accounts.update_user_password(user, valid_user_password(), %{
-          password: "New valid password"
+          password: "NewvalidPassword1!"
         })
 
       refute Repo.get_by(UserToken, user_id: user.id)
@@ -485,8 +487,9 @@ defmodule EasyBills.AccountsTest do
 
       assert %{
                password: [
-                 "at least one upper case character",
-                 "8+ characters(s)"
+                 "special character (*#$%&!-@)",
+                 "upper- case character",
+                 "number"
                ],
                password_confirmation: ["does not match password"]
              } = errors_on(changeset)
@@ -499,14 +502,14 @@ defmodule EasyBills.AccountsTest do
     end
 
     test "updates the password", %{user: user} do
-      {:ok, updated_user} = Accounts.reset_user_password(user, %{password: "New valid Password"})
+      {:ok, updated_user} = Accounts.reset_user_password(user, %{password: "NewvalidPassword1!"})
       assert is_nil(updated_user.password)
-      assert Accounts.get_user_by_email_and_password(user.email, "New valid Password")
+      assert Accounts.get_user_by_email_and_password(user.email, "NewvalidPassword1!")
     end
 
     test "deletes all tokens for the given user", %{user: user} do
       _ = Accounts.generate_user_session_token(user)
-      {:ok, _} = Accounts.reset_user_password(user, %{password: "New valid Password"})
+      {:ok, _} = Accounts.reset_user_password(user, %{password: "NewvalidPassword1!"})
       refute Repo.get_by(UserToken, user_id: user.id)
     end
   end

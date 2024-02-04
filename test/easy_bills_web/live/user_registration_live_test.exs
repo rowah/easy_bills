@@ -1,4 +1,4 @@
-defmodule EasyBillsWeb.UserRegistrationLiveTest do
+defmodule EasyBillsWeb.RegistrationLiveTest do
   use EasyBillsWeb.ConnCase
 
   import Phoenix.LiveViewTest
@@ -28,11 +28,11 @@ defmodule EasyBillsWeb.UserRegistrationLiveTest do
       result =
         lv
         |> element("#registration_form")
-        |> render_change(user: %{"email" => "with spaces", "password" => "too short"})
+        |> render_change(user: %{"email" => "with spaces", "password" => "2Short!"})
 
       assert result =~ "Sign Up"
       assert result =~ "Please enter a valid email address"
-      assert result =~ "8+ characters"
+      assert result =~ "should be at least 8 character(s)"
     end
   end
 
@@ -77,9 +77,9 @@ defmodule EasyBillsWeb.UserRegistrationLiveTest do
 
       {:ok, _login_live, login_html} =
         lv
-        |> element(~s|main a:fl-contains("Login")|)
+        |> element(~s|main a:fl-contains("Sign in")|)
         |> render_click()
-        |> follow_redirect(conn, ~p"/log_in")
+        |> follow_redirect(conn, ~p"/login")
 
       assert login_html =~ "Continue"
     end

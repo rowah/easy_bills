@@ -24,7 +24,7 @@ defmodule EasyBillsWeb.UserLoginLive do
           Sign in to EasyBills
         </.header>
 
-        <.simple_form for={@form} id="login_form" action={~p"/log_in"} phx-update="ignore">
+        <.simple_form for={@form} id="login_form" action={~p"/login"} phx-update="ignore">
           <.input field={@form[:email]} type="email" label="Email" required />
           <.input field={@form[:password]} type="password" label="Password" required />
 

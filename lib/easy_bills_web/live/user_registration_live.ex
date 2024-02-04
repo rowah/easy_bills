@@ -1,4 +1,4 @@
-defmodule EasyBillsWeb.UserRegistrationLive do
+defmodule EasyBillsWeb.RegistrationLive do
   use EasyBillsWeb, :live_view
 
   alias EasyBills.Accounts
@@ -48,7 +48,7 @@ defmodule EasyBillsWeb.UserRegistrationLive do
           phx-submit="save"
           phx-change="validate"
           phx-trigger-action={@trigger_submit}
-          action={~p"/log_in?_action=registered"}
+          action={~p"/login?_action=registered"}
           method="post"
         >
           <.error :if={@check_errors}>
@@ -72,7 +72,7 @@ defmodule EasyBillsWeb.UserRegistrationLive do
         </.simple_form>
         <p class="mt-6 ml-[20%]">
           Already have an account?
-          <.link navigate={~p"/log_in"} class="font-semibold text-purple-400 hover:underline">
+          <.link navigate={~p"/login"} class="font-semibold text-purple-400 hover:underline">
             Sign in
           </.link>
         </p>

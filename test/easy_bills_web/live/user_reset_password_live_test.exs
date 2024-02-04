@@ -40,10 +40,10 @@ defmodule EasyBillsWeb.UserResetPasswordLiveTest do
         lv
         |> element("#reset_password_form")
         |> render_change(
-          user: %{"password" => "secret12", "password_confirmation" => "secret123456"}
+          user: %{"password" => "Onret1@", "password_confirmation" => "Anothersecret123456!"}
         )
 
-      assert result =~ "8+ characters"
+      assert result =~ "should be at least 8 character(s)"
       assert result =~ "does not match password"
     end
   end
@@ -56,16 +56,16 @@ defmodule EasyBillsWeb.UserResetPasswordLiveTest do
         lv
         |> form("#reset_password_form",
           user: %{
-            "password" => "New valid Password",
-            "password_confirmation" => "New valid Password"
+            "password" => "NewvalidPassword1!",
+            "password_confirmation" => "NewvalidPassword1!"
           }
         )
         |> render_submit()
-        |> follow_redirect(conn, ~p"/log_in")
+        |> follow_redirect(conn, ~p"/login")
 
       refute get_session(conn, :user_token)
       assert Phoenix.Flash.get(conn.assigns.flash, :info) =~ "Password reset successfully"
-      assert Accounts.get_user_by_email_and_password(user.email, "New valid Password")
+      assert Accounts.get_user_by_email_and_password(user.email, "NewvalidPassword1!")
     end
 
     test "does not reset password on invalid data", %{conn: conn, token: token} do
@@ -75,14 +75,14 @@ defmodule EasyBillsWeb.UserResetPasswordLiveTest do
         lv
         |> form("#reset_password_form",
           user: %{
-            "password" => "too short",
-            "password_confirmation" => "does not match"
+            "password" => "Shor@1",
+            "password_confirmation" => "Does1 not m@ch"
           }
         )
         |> render_submit()
 
       assert result =~ "Reset Password"
-      assert result =~ "8+ characters(s)"
+      assert result =~ "should be at least 8 character(s)"
       assert result =~ "does not match password"
     end
   end
@@ -95,7 +95,7 @@ defmodule EasyBillsWeb.UserResetPasswordLiveTest do
         lv
         |> element(~s|main a:fl-contains("Log in")|)
         |> render_click()
-        |> follow_redirect(conn, ~p"/log_in")
+        |> follow_redirect(conn, ~p"/login")
 
       assert conn.resp_body =~ "Continue"
     end

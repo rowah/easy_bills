@@ -20,7 +20,7 @@ defmodule EasyBillsWeb.UserSettingsLiveTest do
       assert {:error, redirect} = live(conn, ~p"/settings")
 
       assert {:redirect, %{to: path, flash: flash}} = redirect
-      assert path == ~p"/log_in"
+      assert path == ~p"/login"
       assert %{"error" => "You must log in to access this page."} = flash
     end
   end
@@ -133,7 +133,7 @@ defmodule EasyBillsWeb.UserSettingsLiveTest do
         })
 
       assert result =~ "Change Password"
-      assert result =~ "8+ characters(s)"
+      assert result =~ "upper- case character"
       assert result =~ "does not match password"
     end
 
@@ -152,7 +152,7 @@ defmodule EasyBillsWeb.UserSettingsLiveTest do
         |> render_submit()
 
       assert result =~ "Change Password"
-      assert result =~ "8+ characters(s)"
+      assert result =~ "upper- case character"
       assert result =~ "does not match password"
       assert result =~ "is not valid"
     end
@@ -202,7 +202,7 @@ defmodule EasyBillsWeb.UserSettingsLiveTest do
       conn = build_conn()
       {:error, redirect} = live(conn, ~p"/settings/confirm_email/#{token}")
       assert {:redirect, %{to: path, flash: flash}} = redirect
-      assert path == ~p"/log_in"
+      assert path == ~p"/login"
       assert %{"error" => message} = flash
       assert message == "You must log in to access this page."
     end

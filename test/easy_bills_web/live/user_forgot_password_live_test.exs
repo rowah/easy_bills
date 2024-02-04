@@ -13,7 +13,7 @@ defmodule EasyBillsWeb.UserForgotPasswordLiveTest do
 
       assert html =~ "Forgot password?"
       assert has_element?(lv, ~s|a[href="#{~p"/register"}"]|, "Register")
-      assert has_element?(lv, ~s|a[href="#{~p"/log_in"}"]|, "Log in")
+      assert has_element?(lv, ~s|a[href="#{~p"/login"}"]|, "Log in")
     end
 
     test "redirects if already logged in", %{conn: conn} do
