@@ -6,7 +6,7 @@ defmodule EasyBills.Accounts.User do
 
   schema "users" do
     field :address, :map
-    field :avatar, :string
+    field :avatar_url, :string
     field :confirmed_at, :naive_datetime
     field :email, :string
     field :hashed_password, :string, redact: true

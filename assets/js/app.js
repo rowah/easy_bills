@@ -20,12 +20,17 @@ import 'phoenix_html'
 // Establish Phoenix Socket and LiveView configuration.
 import { Socket } from 'phoenix'
 import { LiveSocket } from 'phoenix_live_view'
+// import ProfileFormHooks from './hooks/profile_form'
 import topbar from '../vendor/topbar'
+// let Hooks = {
+//   ...ProfileFormHooks,
+// }
 
 let csrfToken = document
   .querySelector("meta[name='csrf-token']")
   .getAttribute('content')
 let liveSocket = new LiveSocket('/live', Socket, {
+  // hooks: Hooks,
   params: { _csrf_token: csrfToken },
 })
 

@@ -4,7 +4,7 @@ defmodule EasyBills.Repo.Migrations.AddUserDetails do
   def change do
     alter table(:users) do
       add :address, :map
-      add :avatar, :string
+      add :avatar_url, :string
       add :name, :string
       add :username, :string
     end

@@ -69,6 +69,7 @@ defmodule EasyBillsWeb.Router do
       on_mount: [{EasyBillsWeb.UserAuth, :ensure_authenticated}] do
       live "/settings", UserSettingsLive, :edit
       live "/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+      live "/welcome", UserWelcomeLive
     end
   end
 
