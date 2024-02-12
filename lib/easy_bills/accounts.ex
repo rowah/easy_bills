@@ -174,6 +174,12 @@ defmodule EasyBills.Accounts do
     UserNotifier.deliver_update_email_instructions(user, update_email_url_fun.(encoded_token))
   end
 
+  def update_user_address(user, address_params) do
+    user
+    |> Ecto.Changeset.change(%{address: address_params})
+    |> Repo.update()
+  end
+
   @doc """
   Returns an `%Ecto.Changeset{}` for changing the user password.
 

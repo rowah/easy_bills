@@ -38,7 +38,7 @@ defmodule EasyBillsWeb.UserWelcomeLive do
           class="object-cover w-full h-full"
         />
       </div>
-      <div class="md:w-[30%] mx-auto mt-16">
+      <div class="md:w-[30%] mx-auto mt-16" id="avatar-image-container" phx-hook="UserAvatar">
         <div class="flex mb-14 hidden lg:block">
           <div class="flex">
             <IconsComponent.logo_icon />
@@ -51,18 +51,27 @@ defmodule EasyBillsWeb.UserWelcomeLive do
         <p class="text-gray-400">Just a few more steps...</p>
 
         <h4 class="font-bold mt-6">Add an avatar</h4>
-        <img src={@current_user.avatar_url} alt="Image" />
+        <div class="w-32 h-32 rounded-full border-2 border-dashed border-gray-400">
+          <img src={@current_user.avatar_url} alt="Image" class="rounded-full h-32 w-32" />
+          <%= for entry <- @uploads.avatar_url.entries do %>
+            <figure>
+              <.live_img_preview entry={entry} class="rounded-full w-32 h-32" />
+            </figure>
+          <% end %>
+        </div>
         <.form for={@changeset} id="upload-form" phx-change="validate" phx-submit="save">
-          <.live_file_input upload={@uploads.avatar_url} />
+          <.live_file_input
+            upload={@uploads.avatar_url}
+            id="live-file-input"
+            class="invisible live-file-input"
+          />
+          <div id="avatar-upload-button">Choose Image</div>
           <button type="submit">upload</button>
         </.form>
       </div>
 
       <section phx-drop-target={@uploads.avatar_url.ref}>
         <%= for entry <- @uploads.avatar_url.entries do %>
-          <figure>
-            <.live_img_preview entry={entry} class="rounded-full w-32 h-32" />
-          </figure>
           <%= for err <- upload_errors(@uploads.avatar_url, entry) do %>
             <p class="alert alert-danger"><%= humanize(err) %></p>
           <% end %>
@@ -74,7 +83,6 @@ defmodule EasyBillsWeb.UserWelcomeLive do
 
   @impl Phoenix.LiveView
   def handle_event("validate", _params, socket) do
-    IO.inspect(socket.assigns.uploads, label: "UPLOADS")
     {:noreply, socket}
   end
 
@@ -95,8 +103,7 @@ defmodule EasyBillsWeb.UserWelcomeLive do
       {:ok, _user} ->
         {:noreply,
          socket
-         |> update(:uploaded_files, &(&1 ++ uploaded_files))
-         |> assign(step: :address_update)}
+         |> update(:uploaded_files, &(&1 ++ uploaded_files))}
 
       {:error, _changeset} ->
         {:noreply, socket}
