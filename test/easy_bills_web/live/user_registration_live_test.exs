@@ -17,7 +17,7 @@ defmodule EasyBillsWeb.UserRegistrationLiveTest do
         conn
         |> log_in_user(user_fixture())
         |> live(~p"/register")
-        |> follow_redirect(conn, "/")
+        |> follow_redirect(conn, "/welcome")
 
       assert {:ok, _conn} = result
     end
