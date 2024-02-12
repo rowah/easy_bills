@@ -51,3 +51,6 @@ npm-debug.log
 #VScode files
 .vscode
 /scripts/
+
+#Ignore avatar uploads
+/priv/static/uploads

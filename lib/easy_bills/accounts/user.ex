@@ -42,7 +42,7 @@ defmodule EasyBills.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :username, :name, :password])
+    |> cast(attrs, [:email, :username, :name, :password, :avatar_url])
     |> validate_required([:name, :username])
     |> validate_email(opts)
     |> validate_password(opts)
