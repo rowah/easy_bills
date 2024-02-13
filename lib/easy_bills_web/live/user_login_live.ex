@@ -3,7 +3,7 @@ defmodule EasyBillsWeb.UserLoginLive do
 
   use EasyBillsWeb, :live_view
 
-  alias EasyBillsWeb.IconsComponent
+  alias EasyBillsWeb.CoreComponents
 
   def render(assigns) do
     ~H"""
@@ -17,7 +17,7 @@ defmodule EasyBillsWeb.UserLoginLive do
       </div>
       <div class="lg:w-[26%] space-y-6 mx-auto">
         <div class="flex mt-16">
-          <IconsComponent.logo_icon />
+          <CoreComponents.logo_icon />
           <h2 class="text-6xl font-bold ml-3 text-purple-600 mt-3">EasyBills</h2>
         </div>
         <.header class="text-center">

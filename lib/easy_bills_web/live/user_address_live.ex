@@ -3,7 +3,7 @@ defmodule EasyBillsWeb.UserAddressLive do
 
   alias EasyBills.Accounts
   alias EasyBills.Accounts.User
-  alias EasyBillsWeb.IconsComponent
+  alias EasyBillsWeb.CoreComponents
 
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
@@ -34,7 +34,7 @@ defmodule EasyBillsWeb.UserAddressLive do
       <div class="md:w-[30%] mx-auto mt-16">
         <div class="flex mb-14 hidden lg:block">
           <div class="flex">
-            <IconsComponent.logo_icon />
+            <CoreComponents.logo_icon />
             <h2 class="text-6xl font-bold ml-3 text-purple-600 mt-3">EasyBills</h2>
           </div>
         </div>
