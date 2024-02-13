@@ -52,7 +52,6 @@ defmodule EasyBillsWeb.UserWelcomeLive do
 
         <h4 class="font-bold mt-6">Add an avatar</h4>
         <div class="w-32 h-32 rounded-full border-2 border-dashed border-gray-400">
-          <img src={@current_user.avatar_url} alt="Image" class="rounded-full h-32 w-32" />
           <%= for entry <- @uploads.avatar_url.entries do %>
             <figure>
               <.live_img_preview entry={entry} class="rounded-full w-32 h-32" />
@@ -60,13 +59,26 @@ defmodule EasyBillsWeb.UserWelcomeLive do
           <% end %>
         </div>
         <.form for={@changeset} id="upload-form" phx-change="validate" phx-submit="save">
-          <.live_file_input
-            upload={@uploads.avatar_url}
-            id="live-file-input"
-            class="invisible live-file-input"
-          />
-          <div id="avatar-upload-button">Choose Image</div>
-          <button type="submit">upload</button>
+          <div class="relative flex items-center">
+            <.live_file_input
+              upload={@uploads.avatar_url}
+              id="live-file-input"
+              class="invisible live-file-input"
+            />
+            <span
+              id="avatar-upload-button"
+              class="absolute left-1/2 transform -translate-y-[180%] bg-purple-600 text-white py-2 px-6 rounded-full cursor-pointer font-bold"
+            >
+              Choose Image
+            </span>
+          </div>
+
+          <button
+            type="submit"
+            class="mt-36 bg-gray-400 text-white py-2 px-6 rounded-full ml-[70%] font-bold"
+          >
+            Continue
+          </button>
         </.form>
       </div>
 
