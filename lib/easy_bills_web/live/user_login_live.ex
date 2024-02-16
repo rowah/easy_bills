@@ -15,6 +15,9 @@ defmodule EasyBillsWeb.UserLoginLive do
           class="object-cover w-full h-full"
         />
       </div>
+      <.link navigate={~p"/"} class="flex text-purple-600 mt-8 ml-3">
+        <CoreComponents.back_icon /> <span class="mt-[-2px]">Back</span>
+      </.link>
       <div class="lg:w-[26%] space-y-6 mx-auto">
         <div class="flex mt-16">
           <CoreComponents.logo_icon />
@@ -35,7 +38,7 @@ defmodule EasyBillsWeb.UserLoginLive do
             </.link>
           </:actions>
           <:actions>
-            <.button phx-disable-with="Signing in..." class="w-full bg-purple-600">
+            <.button phx-disable-with="Signing in..." class="w-full bg-purple-500">
               Continue
             </.button>
           </:actions>

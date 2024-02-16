@@ -37,7 +37,7 @@ easy_bills-*.tar
 /priv/plts/
 
 # macos temp files
-.DS-Store
+.DS_Store
 
 # Environment secrets
 .env

@@ -65,7 +65,7 @@ defmodule EasyBillsWeb.UserRegistrationLive do
           <.input field={@form[:password]} type="password" label="Password" required />
 
           <:actions>
-            <.button phx-disable-with="Creating account..." class="w-full bg-purple-600">
+            <.button phx-disable-with="Creating account..." class="w-full bg-purple-500">
               Sign Up
             </.button>
           </:actions>
