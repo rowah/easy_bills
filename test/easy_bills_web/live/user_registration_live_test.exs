@@ -83,5 +83,17 @@ defmodule EasyBillsWeb.UserRegistrationLiveTest do
 
       assert login_html =~ "Continue"
     end
+
+    test "redirects to previous page when the back icon is clicked", %{conn: conn} do
+      {:ok, lv, _html} = live(conn, ~p"/register")
+
+      {:ok, conn} =
+        lv
+        |> element(~s|main a:fl-contains("Back")|)
+        |> render_click()
+        |> follow_redirect(conn, ~p"/")
+
+      assert conn.resp_body =~ "Sign in to EasyBills"
+    end
   end
 end

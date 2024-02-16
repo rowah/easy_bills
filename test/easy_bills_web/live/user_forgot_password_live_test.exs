@@ -16,6 +16,18 @@ defmodule EasyBillsWeb.UserForgotPasswordLiveTest do
       assert has_element?(lv, ~s|a[href="#{~p"/login"}"]|, "Log in")
     end
 
+    test "redirects to login page when the back icon is clicked", %{conn: conn} do
+      {:ok, lv, _html} = live(conn, ~p"/reset_password")
+
+      {:ok, conn} =
+        lv
+        |> element(~s|main a:fl-contains("Back")|)
+        |> render_click()
+        |> follow_redirect(conn, ~p"/login")
+
+      assert conn.resp_body =~ "Continue with google"
+    end
+
     test "redirects if already logged in", %{conn: conn} do
       result =
         conn

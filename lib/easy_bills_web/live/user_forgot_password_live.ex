@@ -14,8 +14,8 @@ defmodule EasyBillsWeb.UserForgotPasswordLive do
           class="object-cover w-full h-full"
         />
       </div>
-      <.link navigate={~p"/login"} class="flex text-purple-600 mt-8 ml-3">
-        <CoreComponents.back_icon /> <span class="mt-[-2px]">Back</span>
+      <.link href={~p"/login"} class="flex text-purple-600 mt-8 ml-3">
+        <CoreComponents.back_icon /> Back
       </.link>
       <div class="my-auto mx-auto space-y-16 max-w-md">
         <div class="flex mt-16">
@@ -34,7 +34,7 @@ defmodule EasyBillsWeb.UserForgotPasswordLive do
         <.simple_form for={@form} id="reset_password_form" phx-submit="send_email">
           <.input field={@form[:email]} label="Email" type="email" placeholder="Email" required />
           <:actions>
-            <.button phx-disable-with="Sending..." class="w-full bg-purple-500">
+            <.button phx-disable-with="Sending..." class="w-full bg-purple-700">
               Send reset link
             </.button>
           </:actions>

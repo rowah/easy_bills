@@ -83,5 +83,17 @@ defmodule EasyBillsWeb.UserLoginLiveTest do
 
       assert conn.resp_body =~ "Forgot password?"
     end
+
+    test "redirects to landing page when the back icon is clicked", %{conn: conn} do
+      {:ok, lv, _html} = live(conn, ~p"/login")
+
+      {:ok, conn} =
+        lv
+        |> element(~s|main a:fl-contains("Back")|)
+        |> render_click()
+        |> follow_redirect(conn, ~p"/")
+
+      assert conn.resp_body =~ "Sign in to EasyBills"
+    end
   end
 end
