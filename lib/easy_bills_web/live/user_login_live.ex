@@ -84,7 +84,7 @@ defmodule EasyBillsWeb.UserLoginLive do
               fill="#EB4335"
             />
           </svg>
-          <.link navigate={~p"/auth/:provider"} class="font-semibold text-purple-400 hover:underline">
+          <.link navigate={~p"/login"} class="font-semibold text-purple-400 hover:underline">
             Login with Google
           </.link>
         </button>

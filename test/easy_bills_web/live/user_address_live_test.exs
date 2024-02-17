@@ -1,7 +1,6 @@
 defmodule EasyBillsWeb.UserAddressLiveTest do
   use EasyBillsWeb.ConnCase
 
-  alias EasyBills.Accounts
   import Phoenix.LiveViewTest
   import EasyBills.AccountsFixtures
 
