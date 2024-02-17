@@ -1,6 +1,7 @@
 defmodule EasyBillsWeb.InvoicesLiveTest do
   use EasyBillsWeb.ConnCase
 
+  alias EasyBills.Accounts
   import Phoenix.LiveViewTest
   import EasyBills.AccountsFixtures
 
@@ -11,7 +12,7 @@ defmodule EasyBillsWeb.InvoicesLiveTest do
         |> log_in_user(user_fixture())
         |> live(~p"/invoices")
 
-      assert html =~ "INVOICES"
+      assert html =~ "Invoices"
       assert html =~ "Log out"
       assert html =~ "Settings"
     end

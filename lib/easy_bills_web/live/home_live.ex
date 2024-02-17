@@ -78,11 +78,9 @@ defmodule EasyBillsWeb.HomeLive do
 
               <.link
                 href={~p"/login"}
-                class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+                class="text-md leading-6 text-gray-700 font-semibold hover:text-zinc-700 tracking-wide"
               >
-                <span class="block w-max font-semibold tracking-wide text-gray-700 text-sm transition duration-300 group-hover:text-blue-600 sm:text-base">
-                  Continue with email
-                </span>
+                Continue with email
               </.link>
             </div>
           </button>

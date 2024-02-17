@@ -16,6 +16,16 @@ defmodule EasyBills.AccountsFixtures do
     })
   end
 
+  def user_address do
+    %{
+      city: "Nairobi",
+      country: "Kenya",
+      postal_code: "00100",
+      phone_number: "0726351575",
+      street_address: "24136"
+    }
+  end
+
   def user_fixture(attrs \\ %{}) do
     {:ok, user} =
       attrs

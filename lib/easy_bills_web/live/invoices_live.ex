@@ -34,7 +34,7 @@ defmodule EasyBillsWeb.InvoicesLive do
         </p>
       </nav>
       <main class="p-5 h-[100vh] text-center text-2xl font-bold tracking-tight text-white">
-        INVOICES
+        Invoices
       </main>
     </div>
     """

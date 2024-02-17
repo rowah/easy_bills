@@ -15,8 +15,8 @@ defmodule EasyBillsWeb.UserLoginLive do
           class="object-cover w-full h-full"
         />
       </div>
-      <.link navigate={~p"/"} class="flex text-purple-600 mt-8 ml-3">
-        <CoreComponents.back_icon /> <span class="mt-[-2px]">Back</span>
+      <.link href={~p"/"} class="flex text-purple-600 mt-8 ml-3">
+        <CoreComponents.back_icon /> Back
       </.link>
       <div class="lg:w-[26%] space-y-6 mx-auto">
         <div class="flex mt-16">
@@ -84,7 +84,9 @@ defmodule EasyBillsWeb.UserLoginLive do
               fill="#EB4335"
             />
           </svg>
-          <p class="text-base font-medium ml-4 text-gray-700">Login with Google</p>
+          <.link navigate={~p"/auth/:provider"} class="font-semibold text-purple-400 hover:underline">
+            Login with Google
+          </.link>
         </button>
       </div>
     </div>
