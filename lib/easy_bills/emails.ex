@@ -7,6 +7,8 @@ defmodule EasyBills.Emails do
 
   import Swoosh.Email
   alias EasyBills.Emails.ConfirmationInstructions
+  alias EasyBills.Emails.ResetPasswordInstructions
+  alias EasyBills.Emails.UpdateEmailInstructions
 
   def confirmation_instructions(user, url) do
     rendered_email =
@@ -34,6 +36,63 @@ defmodule EasyBills.Emails do
     |> deliver()
   end
 
+  def reset_password_instructions(user, url) do
+    rendered_email =
+      ResetPasswordInstructions.render(
+        name: user.name,
+        username: user.username,
+        confirmation_url: url
+      )
+
+    new()
+    |> to(user.email)
+    |> from({"Accounts Management Team", "admin@easy-bills.com"})
+    |> subject("Reset password instructions")
+    |> html_body(rendered_email)
+    |> text_body("""
+    Hi #{user.name} #{user.username},
+
+    You can reset your password by visiting the URL below:
+
+    #{url}
+
+    # If you didn't request this change, please ignore this.
+    """)
+    |> deliver()
+  end
+
+  def update_email_instructions(user, url) do
+    rendered_email =
+      UpdateEmailInstructions.render(
+        name: user.name,
+        username: user.username,
+        confirmation_url: url
+      )
+
+    new()
+    |> to(user.email)
+    |> from({"Accounts Management Team", "admin@easy-bills.com"})
+    |> subject("Update email instructions")
+    |> html_body(rendered_email)
+    |> text_body("""
+    Hi #{user.name} #{user.username},
+
+    You can change your email by visiting the URL below:
+
+    #{url}
+
+    If you didn't request this change, please ignore this.
+    """)
+    |> deliver()
+  end
+
+  @spec generate_template(
+          binary()
+          | maybe_improper_list(
+              binary() | maybe_improper_list(any(), binary() | []) | char(),
+              binary() | []
+            )
+        ) :: binary()
   def generate_template(file_path) do
     {:ok, template} =
       file_path

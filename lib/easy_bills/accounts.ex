@@ -273,6 +273,7 @@ defmodule EasyBills.Accounts do
     end
   end
 
+  @spec confirm_user(binary()) :: :error | {:ok, any()}
   @doc """
   Confirms a user by the given token.
 
