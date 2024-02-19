@@ -72,7 +72,9 @@ defmodule EasyBills.MixProject do
       {:sobelow, "~> 0.13", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.1", only: [:dev, :test], runtime: false},
       {:mix_audit, "~> 1.0", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.18", only: :test}
+      {:excoveralls, "~> 0.18", only: :test},
+      {:hackney, "~> 1.20"},
+      {:mjml, "~> 3.0"}
     ]
   end
 

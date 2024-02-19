@@ -9,8 +9,7 @@ defmodule EasyBillsWeb.UserAddressLive do
   def mount(_params, _session, socket) do
     user = socket.assigns.current_user
 
-    changeset =
-      User.registration_changeset(user, %{})
+    changeset = User.registration_changeset(user, %{})
 
     socket =
       socket

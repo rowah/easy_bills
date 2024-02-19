@@ -38,11 +38,13 @@ defmodule EasyBillsWeb.Router do
     # as long as you are also using SSL (which you should anyway).
     import Phoenix.LiveDashboard.Router
 
-    scope "/dev" do
-      pipe_through :browser
+    if Mix.env() == :dev do
+      scope "/dev" do
+        pipe_through :browser
 
-      live_dashboard "/dashboard", metrics: EasyBillsWeb.Telemetry
-      forward "/mailbox", Plug.Swoosh.MailboxPreview
+        live_dashboard "/dashboard", metrics: EasyBillsWeb.Telemetry
+        forward "/mailbox", Plug.Swoosh.MailboxPreview
+      end
     end
   end
 
