@@ -49,10 +49,9 @@ defmodule EasyBillsWeb.InvoicesLive do
             </svg>
           </div>
 
-          <%!-- <img src={@current_user.avatar_url} alt="Image" class="rounded-full h-32 w-32" /> --%>
           <img
-            src="https://avatars.githubusercontent.com/u/76947107?v=4"
-            alt="Image"
+            src={@current_user.avatar_url}
+            alt={"#{@current_user.username}'s" <> " Avatar"}
             class="rounded-full h-20 w-20 mx-auto mb-6"
           />
         </div>

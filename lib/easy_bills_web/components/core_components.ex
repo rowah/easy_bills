@@ -612,8 +612,7 @@ defmodule EasyBillsWeb.CoreComponents do
   def logo_icon_white(assigns) do
     ~H"""
     <svg width="170" height="200" class="border-radius-[50%]" xmlns="http://www.w3.org/2000/svg">
-      <rect width="100%" height="100%" fill="rgb(103, 61, 244)" stroke-width="2"
-        ry="24" />
+      <rect width="100%" height="100%" fill="rgb(103, 61, 244)" stroke-width="2" ry="24" />
       <rect x="0" y="100" width="170" height="100" fill="rgb(127, 90, 245)" ry="24" />
       <svg x="50" y="65" width="70" height="70" viewBox="0 0 85 80">
         <path
