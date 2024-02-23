@@ -56,8 +56,8 @@
           padding-right="25px"
           padding-top="20px"
         >
-          You can change your email by clicking the button below. 
-          If you didn't request this change, please ignore this.
+          You can change your email by clicking the button below. If you didn't
+          request this change, please ignore this.
         </mj-text>
         <mj-button
           align="center"

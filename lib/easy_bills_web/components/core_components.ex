@@ -609,6 +609,24 @@ defmodule EasyBillsWeb.CoreComponents do
     """
   end
 
+  def logo_icon_white(assigns) do
+    ~H"""
+    <svg width="170" height="200" class="border-radius-[50%]" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="rgb(103, 61, 244)" stroke-width="2"
+        ry="24" />
+      <rect x="0" y="100" width="170" height="100" fill="rgb(127, 90, 245)" ry="24" />
+      <svg x="50" y="65" width="70" height="70" viewBox="0 0 85 80">
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M22.1763 0.108887L42.4672 40.6907L62.7581 0.109081C75.9694 7.30834 84.934 21.3193 84.934 37.424C84.934 60.8779 65.9209 79.891 42.467 79.891C19.0131 79.891 0 60.8779 0 37.424C0 21.3191 8.96477 7.30809 22.1763 0.108887Z"
+          fill="#FFFFFF"
+        />
+      </svg>
+    </svg>
+    """
+  end
+
   @doc """
   Renders a [Heroicon](https://heroicons.com).
 
