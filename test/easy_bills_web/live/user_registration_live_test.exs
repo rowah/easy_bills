@@ -37,22 +37,18 @@ defmodule EasyBillsWeb.UserRegistrationLiveTest do
   end
 
   describe "register user" do
-    test "creates account and logs the user in", %{conn: conn} do
+    test "creates account and directs user to check their email to confirm their email address",
+         %{conn: conn} do
       {:ok, lv, _html} = live(conn, ~p"/register")
-
       email = unique_user_email()
-      form = form(lv, "#registration_form", user: valid_user_attributes(email: email))
-      render_submit(form)
-      # conn = follow_trigger_action(form, conn)
 
-      # assert redirected_to(conn) == ~p"/"
+      result =
+        lv
+        |> form("#registration_form", user: valid_user_attributes(email: email))
+        |> render_submit()
 
-      # Now do a logged in request and assert on the menu
-      # conn = get(conn, "/")
-      # response = html_response(conn, 200)
-      # assert response =~ email
-      # assert response =~ "Settings"
-      # assert response =~ "Log out"
+      assert result =~ "Please follow the link in the message to confirm your email address"
+      assert result =~ "Resend Confirmation Instruction"
     end
 
     test "renders errors for duplicated email", %{conn: conn} do
@@ -68,6 +64,37 @@ defmodule EasyBillsWeb.UserRegistrationLiveTest do
         |> render_submit()
 
       assert result =~ "has already been taken"
+    end
+
+    test "warns user of invalid email during registration", %{conn: conn} do
+      {:ok, lv, _html} = live(conn, ~p"/register")
+
+      html =
+        lv
+        |> form("#registration_form",
+          user: %{"email" => "emailwithoutatsign", "password" => "valid_password"}
+        )
+        |> render_change()
+
+      assert html =~ "Please enter a valid email address"
+    end
+
+    test "warns user of a weak password", %{conn: conn} do
+      {:ok, lv, _html} = live(conn, ~p"/register")
+
+      user = user_fixture(%{email: "test1@email.com"})
+
+      html =
+        lv
+        |> form("#registration_form",
+          user: %{"email" => user.email, "password" => "n"}
+        )
+        |> render_change()
+
+      assert html =~ "special character"
+      assert html =~ "upper- case character"
+      assert html =~ "number"
+      assert html =~ "8+ characters"
     end
   end
 

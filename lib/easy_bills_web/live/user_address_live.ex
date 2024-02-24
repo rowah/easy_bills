@@ -30,7 +30,7 @@ defmodule EasyBillsWeb.UserAddressLive do
           class="object-cover w-full h-full"
         />
       </div>
-      <.link href={~p"/login"} class="flex text-purple-600 mt-8 ml-3">
+      <.link href={~p"/welcome"} id="back-icon" class="flex text-purple-600 mt-8 ml-3">
         <CoreComponents.back_icon /> Back
       </.link>
       <div class="md:w-[30%] mx-auto mt-16">

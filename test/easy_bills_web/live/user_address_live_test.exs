@@ -41,11 +41,20 @@ defmodule EasyBillsWeb.UserAddressLiveTest do
       assert conn.resp_body =~ "Invoices"
     end
 
-    test "navigates back to welcome page using back icon", %{conn: conn} do
-      {:ok, _lv, _html} =
+    test "navigates back to avatar upload page when back icon gets clicked", %{conn: conn} do
+      {:ok, lv, _html} =
         conn
         |> log_in_user(user_fixture())
         |> live(~p"/address")
+
+      {:ok, conn} =
+        lv
+        |> element("#back-icon")
+        |> render_click()
+        |> follow_redirect(conn, ~p"/welcome")
+
+      assert conn.resp_body =~ "Choose Image"
+      assert conn.resp_body =~ "Add an avatar"
     end
   end
 end
