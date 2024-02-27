@@ -29,6 +29,9 @@ config :easy_bills, EasyBillsWeb.Endpoint,
 # at the `config/runtime.exs`.
 config :easy_bills, EasyBills.Mailer, adapter: Swoosh.Adapters.Local
 
+# Configures mjml
+config :easy_bills, EasyBills.Emails, adapter: Swoosh.Adapters.Local
+
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.17.11",

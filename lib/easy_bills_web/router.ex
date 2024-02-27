@@ -1,6 +1,8 @@
 defmodule EasyBillsWeb.Router do
   use EasyBillsWeb, :router
 
+  import EasyBillsWeb.UserAuth
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -8,6 +10,7 @@ defmodule EasyBillsWeb.Router do
     plug :put_root_layout, html: {EasyBillsWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :fetch_current_user
   end
 
   pipeline :api do
@@ -17,7 +20,8 @@ defmodule EasyBillsWeb.Router do
   scope "/", EasyBillsWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    # get "/", PageController, :home
+    live "/", HomeLive
   end
 
   # Other scopes may use custom stacks.
@@ -34,11 +38,54 @@ defmodule EasyBillsWeb.Router do
     # as long as you are also using SSL (which you should anyway).
     import Phoenix.LiveDashboard.Router
 
-    scope "/dev" do
-      pipe_through :browser
+    if Mix.env() == :dev do
+      scope "/dev" do
+        pipe_through :browser
 
-      live_dashboard "/dashboard", metrics: EasyBillsWeb.Telemetry
-      forward "/mailbox", Plug.Swoosh.MailboxPreview
+        live_dashboard "/dashboard", metrics: EasyBillsWeb.Telemetry
+        forward "/mailbox", Plug.Swoosh.MailboxPreview
+      end
+    end
+  end
+
+  ## Authentication routes
+
+  scope "/", EasyBillsWeb do
+    pipe_through [:browser, :redirect_if_user_is_authenticated]
+
+    live_session :redirect_if_user_is_authenticated,
+      on_mount: [{EasyBillsWeb.UserAuth, :redirect_if_user_is_authenticated}] do
+      live "/register", UserRegistrationLive, :new
+      live "/login", UserLoginLive, :new
+      live "/reset_password", UserForgotPasswordLive, :new
+      live "/reset_password/:token", UserResetPasswordLive, :edit
+    end
+
+    post "/login", UserSessionController, :create
+  end
+
+  scope "/", EasyBillsWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    live_session :require_authenticated_user,
+      on_mount: [{EasyBillsWeb.UserAuth, :ensure_authenticated}] do
+      live "/settings", UserSettingsLive, :edit
+      live "/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+      live "/welcome", UserWelcomeLive
+      live "/address", UserAddressLive
+      live "/invoices", InvoicesLive
+    end
+  end
+
+  scope "/", EasyBillsWeb do
+    pipe_through [:browser]
+
+    delete "/logout", UserSessionController, :delete
+
+    live_session :current_user,
+      on_mount: [{EasyBillsWeb.UserAuth, :mount_current_user}] do
+      live "/confirm/:token", UserConfirmationLive, :edit
+      live "/confirm", UserConfirmationInstructionsLive, :new
     end
   end
 end

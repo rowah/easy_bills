@@ -56,7 +56,7 @@ config :easy_bills, EasyBillsWeb.Endpoint,
 config :easy_bills, EasyBillsWeb.Endpoint,
   live_reload: [
     patterns: [
-      ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"priv/static/[uploads].*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
       ~r"lib/easy_bills_web/(controllers|live|components)/.*(ex|heex)$"
     ]

@@ -1,0 +1,10 @@
+.user-avatar {
+  @apply absolute;
+  @apply h-full;
+  @apply rounded-full;
+  @apply w-full;
+}
+
+.user-avatar[src=''] {
+  @apply hidden;
+}

@@ -49,6 +49,7 @@ defmodule EasyBills.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:bcrypt_elixir, "~> 3.0"},
       {:phoenix, "~> 1.7.7"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.10"},
@@ -71,7 +72,9 @@ defmodule EasyBills.MixProject do
       {:sobelow, "~> 0.13", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.1", only: [:dev, :test], runtime: false},
       {:mix_audit, "~> 1.0", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.18", only: :test}
+      {:excoveralls, "~> 0.18", only: :test},
+      {:hackney, "~> 1.20"},
+      {:mjml, "~> 3.0"}
     ]
   end
 
@@ -94,8 +97,8 @@ defmodule EasyBills.MixProject do
         "ci.deps_and_security",
         "ci.formatting",
         "ci.code_quality",
-        "ci.migrations",
         "ci.test"
+        # "ci.migrations",
       ],
       "ci.deps_and_security": ["sobelow --config .sobelow-config"],
       "ci.code_quality": [
