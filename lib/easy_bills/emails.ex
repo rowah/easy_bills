@@ -6,9 +6,11 @@ defmodule EasyBills.Emails do
   use Swoosh.Mailer, otp_app: :easy_bills
 
   import Swoosh.Email
+
   alias EasyBills.Emails.ConfirmationInstructions
   alias EasyBills.Emails.ResetPasswordInstructions
   alias EasyBills.Emails.UpdateEmailInstructions
+  alias EasyBills.Mailer
 
   def confirmation_instructions(user, url) do
     rendered_email =
@@ -19,21 +21,25 @@ defmodule EasyBills.Emails do
         tier: "Platinum"
       )
 
-    new()
-    |> to(user.email)
-    |> from({"Onboarding Team", "welcome@easy-bills.com"})
-    |> subject("Welcome to EasyBills!")
-    |> html_body(rendered_email)
-    |> text_body("""
-    Hi #{user.name} #{user.username},
+    email =
+      new()
+      |> to(user.email)
+      |> from({"Onboarding Team", "welcome@easy-bills.com"})
+      |> subject("Welcome to EasyBills!")
+      |> html_body(rendered_email)
+      |> text_body("""
+      Hi #{user.name} #{user.username},
 
-    You can confirm your account by visiting the URL below:
+      You can confirm your account by visiting the URL below:
 
-    #{url}
+      #{url}
 
-    If you didn't create an account with us, please ignore this.
-    """)
-    |> deliver()
+      If you didn't create an account with us, please ignore this.
+      """)
+
+    with {:ok, _metadata} <- Mailer.deliver(email) do
+      {:ok, email}
+    end
   end
 
   def reset_password_instructions(user, url) do
@@ -44,21 +50,25 @@ defmodule EasyBills.Emails do
         confirmation_url: url
       )
 
-    new()
-    |> to(user.email)
-    |> from({"Accounts Management Team", "admin@easy-bills.com"})
-    |> subject("Reset password instructions")
-    |> html_body(rendered_email)
-    |> text_body("""
-    Hi #{user.name} #{user.username},
+    email =
+      new()
+      |> to(user.email)
+      |> from({"Accounts Management Team", "admin@easy-bills.com"})
+      |> subject("Reset password instructions")
+      |> html_body(rendered_email)
+      |> text_body("""
+      Hi #{user.name} #{user.username},
 
-    You can reset your password by visiting the URL below:
+      You can reset your password by visiting the URL below:
 
-    #{url}
+      #{url}
 
-    # If you didn't request this change, please ignore this.
-    """)
-    |> deliver()
+      # If you didn't request this change, please ignore this.
+      """)
+
+    with {:ok, _metadata} <- Mailer.deliver(email) do
+      {:ok, email}
+    end
   end
 
   def update_email_instructions(user, url) do
@@ -69,21 +79,25 @@ defmodule EasyBills.Emails do
         confirmation_url: url
       )
 
-    new()
-    |> to(user.email)
-    |> from({"Accounts Management Team", "admin@easy-bills.com"})
-    |> subject("Update email instructions")
-    |> html_body(rendered_email)
-    |> text_body("""
-    Hi #{user.name} #{user.username},
+    email =
+      new()
+      |> to(user.email)
+      |> from({"Accounts Management Team", "admin@easy-bills.com"})
+      |> subject("Update email instructions")
+      |> html_body(rendered_email)
+      |> text_body("""
+      Hi #{user.name} #{user.username},
 
-    You can change your email by visiting the URL below:
+      You can change your email by visiting the URL below:
 
-    #{url}
+      #{url}
 
-    If you didn't request this change, please ignore this.
-    """)
-    |> deliver()
+      If you didn't request this change, please ignore this.
+      """)
+
+    with {:ok, _metadata} <- Mailer.deliver(email) do
+      {:ok, email}
+    end
   end
 
   @spec generate_template(
