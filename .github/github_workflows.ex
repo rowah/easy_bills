@@ -260,8 +260,8 @@ defmodule GitHubWorkFlows do
       name: name,
       "runs-on": "ubuntu-latest",
       env: [
-        "elixir-version": "1.16.0",
-        "otp-version": "25.2.1"
+        "elixir-version": "1.16.1",
+        "otp-version": "24.3.4.16"
       ],
       steps:
         [

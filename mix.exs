@@ -5,7 +5,7 @@ defmodule EasyBills.MixProject do
     [
       app: :easy_bills,
       version: "0.1.0",
-      elixir: "~> 1.14",
+      elixir: "~> 1.16.1",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -50,7 +50,7 @@ defmodule EasyBills.MixProject do
   defp deps do
     [
       {:bcrypt_elixir, "~> 3.0"},
-      {:phoenix, "~> 1.7.7"},
+      {:phoenix, "~> 1.7.11"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.10"},
       {:postgrex, ">= 0.0.0"},
