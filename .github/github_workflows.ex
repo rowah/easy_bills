@@ -261,7 +261,7 @@ defmodule GitHubWorkFlows do
       "runs-on": "ubuntu-latest",
       env: [
         "elixir-version": "1.16.1",
-        "otp-version": "24.3.4.16"
+        "otp-version": "25.3.2.9"
       ],
       steps:
         [
