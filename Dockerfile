@@ -15,8 +15,6 @@ ARG ELIXIR_VERSION=1.16.1
 ARG OTP_VERSION=25.3.2.9
 ARG UBUNTU_VERSION=jammy-20240125
 
-#hexpm/elixir:1.14.4-erlang-25.3-ubuntu-jammy-20240125
-#hexpm/elixir:1.16.1-erlang-25.3.2.9-ubuntu-jammy-20240125
 ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-ubuntu-${UBUNTU_VERSION}"
 ARG RUNNER_IMAGE="ubuntu:${UBUNTU_VERSION}"
 
@@ -97,7 +95,3 @@ USER nobody
 # ENTRYPOINT ["/tini", "--"]
 
 CMD ["/app/bin/server"]
-
-# Appended by flyctl
-# ENV ECTO_IPV6 true
-# ENV ERL_AFLAGS "-proto_dist inet6_tcp"
