@@ -6,7 +6,7 @@ defmodule GitHubWorkFlows do
   def get do
     %{
       "main.yml" => main_workflow(),
-      "p.yml" => pr_workflow(),
+      "pr.yml" => pr_workflow(),
     }
   end
 
@@ -55,7 +55,6 @@ defmodule GitHubWorkFlows do
       sobelow: sobelow_job(),
       test: test_job(),
       unused_deps: unused_deps_job(),
-      deploy_staging_app: deploy_staging_app_job()
     ]
   end
 
