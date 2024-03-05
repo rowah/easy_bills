@@ -293,3 +293,26 @@ jobs:
         env:
           MIX_ENV: test
         run: mix deps.unlock --check-unused
+  deploy_staging_app:
+    name: Deploy staging app
+    needs:
+      - compile
+      - credo
+      - deps_audit
+      - dialyzer
+      - format
+      - hex_audit
+      - migrations
+      - prettier
+      - sobelow
+      - test
+      - unused_deps
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: fly deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          POOL_SIZE: '1'

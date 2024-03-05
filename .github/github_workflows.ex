@@ -19,7 +19,10 @@ defmodule GitHubWorkFlows do
             branches: ["main"]
           ]
         ],
-        jobs: jobs()
+        jobs: jobs() ++
+        [
+          deploy_staging_app: deploy_staging_app_job()
+        ]
       ]
     ]
   end
@@ -51,14 +54,8 @@ defmodule GitHubWorkFlows do
       prettier: prettier_job(),
       sobelow: sobelow_job(),
       test: test_job(),
-      unused_deps: unused_deps_job()
-    ]
-  end
-
-  defp checkout_step do
-    [
-      name: "Checkout",
-      uses: "actions/checkout@v4"
+      unused_deps: unused_deps_job(),
+      deploy_staging_app: deploy_staging_app_job()
     ]
   end
 
@@ -249,6 +246,53 @@ defmodule GitHubWorkFlows do
         ]
       ]
     )
+  end
+
+  defp  deploy_staging_app_job do
+    deploy_job("staging",
+    steps: [
+      checkout_step(),
+      [
+        uses: "superfly/fly-ctl-actions/setup-flyctl@master"
+      ],
+      [
+        run: "flyctl deploy --remote-only",
+        env: [
+          FLY_API_TOKEN: "${{ secrets.FLY_API_TOKEN }}",
+          POOL_SIZE: '1'
+        ]
+      ]
+    ]
+    )
+  end
+
+
+  defp checkout_step do
+    [
+      name: "Checkout",
+      uses: "actions/checkout@v4"
+    ]
+  end
+
+
+  defp deploy_job(env, opts) do
+    [
+      name: "Deploy #{env} app",
+      needs: [
+        "compile",
+        "credo",
+        "deps_audit",
+        "dialyzer",
+        "format",
+        "hex_audit",
+        "migrations",
+        "prettier",
+        "sobelow",
+        "test",
+        "unused_deps"
+      ],
+      "runs-on": "ubuntu-latest"
+    ] ++ opts
   end
 
   defp elixir_job(name, opts) do
