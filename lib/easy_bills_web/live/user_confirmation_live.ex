@@ -18,7 +18,7 @@ defmodule EasyBillsWeb.UserConfirmationLive do
       <.simple_form for={@form} id="confirmation_form" phx-submit="confirm_account">
         <.input field={@form[:token]} type="hidden" />
         <:actions>
-          <.button phx-disable-with="Confirming..." class="w-1/2 bg-purple-500">
+          <.button phx-disable-with="Confirming..." class="w-1/2">
             Confirm email
           </.button>
         </:actions>
