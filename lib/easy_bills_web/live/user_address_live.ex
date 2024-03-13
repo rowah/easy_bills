@@ -31,7 +31,11 @@ defmodule EasyBillsWeb.UserAddressLive do
         />
       </div>
       <div class="md:w-[30%] mx-auto mt-16">
-        <.link href={~p"/"} class="flex text-purple-600 absolute mt-[-6%] lg:mt-[-2%] lg:ml-[-8%]">
+        <.link
+          href={~p"/welcome"}
+          id="back-icon"
+          class="flex text-purple-600 absolute mt-[-6%] lg:mt-[-2%] lg:ml-[-8%]"
+        >
           <CoreComponents.back_icon /> <span class="mt-[-2px] ml-1">Back</span>
         </.link>
         <div class="flex mb-14 hidden lg:block">

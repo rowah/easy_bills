@@ -8,7 +8,7 @@ defmodule EasyBillsWeb.UserConfirmationLive do
     ~H"""
     <div class="mx-auto max-w-lg">
       <CoreComponents.logo_icon />
-      <.header class="">Hi, username</.header>
+      <.header class="">Hi, @user.username</.header>
       <p>Welcome to EasyBills,</p>
       <hr />
       <p class="mb-6">Please take a second to confirm email as your email address:</p>
@@ -23,10 +23,10 @@ defmodule EasyBillsWeb.UserConfirmationLive do
           </.button>
         </:actions>
       </.simple_form>
-      <p class="mt-6">Hight fives, <br /> team EasyBills</p>
+      <p class="mt-6">High fives, <br /> Team EasyBills</p>
 
-      <p class="text-center mt-4">
-        <.link href={~p"/register"}>Register</.link> | <.link href={~p"/login"}>Log in</.link>
+      <p class="mt-4">
+        If the button above does not work, try copying and pasting the URL into your browser.
       </p>
     </div>
     """

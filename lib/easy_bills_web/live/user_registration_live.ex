@@ -31,7 +31,11 @@ defmodule EasyBillsWeb.UserRegistrationLive do
         />
       </div>
       <div class="md:w-[30%] mx-auto mt-16">
-        <.link href={~p"/"} class="flex text-purple-600 absolute mt-[-6%] lg:mt-[-2%] lg:ml-[-8%]">
+        <.link
+          href={~p"/"}
+          id="back-icon"
+          class="flex text-purple-600 absolute mt-[-6%] lg:mt-[-2%] lg:ml-[-8%]"
+        >
           <CoreComponents.back_icon /> <span class="mt-[-2px] ml-1">Back</span>
         </.link>
         <div class="flex mb-14 hidden lg:block">
@@ -93,7 +97,7 @@ defmodule EasyBillsWeb.UserRegistrationLive do
       <div class="max-w-xl px-5 text-center bg-purple-200 rounded-lg">
         <h2 class="mb-2 text-[42px] font-bold text-zinc-800">Confirm your Email Address</h2>
         <p class="mb-2 text-lg text-zinc-500 leading-loose">
-          We've sent a confirmation email to <span class="font-medium text-indigo-500">mail@yourdomain.com</span>. Please follow the link in the message to confirm your email address. If you did not receive the email, please check your spam folder or:
+          We've sent a confirmation email to <span class="font-medium text-indigo-500">@user.email</span>. Please follow the link in the message to confirm your email address. If you did not receive the email, please check your spam folder or:
         </p>
         <.button phx-disable-with="Resending link..." class="w-full mb-12">
           Resend Confirmation Instruction

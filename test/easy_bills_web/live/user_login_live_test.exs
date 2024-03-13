@@ -87,7 +87,7 @@ defmodule EasyBillsWeb.UserLoginLiveTest do
 
       {:ok, conn} =
         lv
-        |> element(~s|main a:fl-contains("Back")|)
+        |> element("#back-icon")
         |> render_click()
         |> follow_redirect(conn, ~p"/")
 

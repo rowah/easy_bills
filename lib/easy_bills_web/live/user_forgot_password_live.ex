@@ -15,7 +15,11 @@ defmodule EasyBillsWeb.UserForgotPasswordLive do
         />
       </div>
       <div class="my-auto mx-auto space-y-16 max-w-md">
-        <.link href={~p"/"} class="flex text-purple-600 absolute ml-[-8%] mt-6 lg:mt-[-4%]">
+        <.link
+          href={~p"/login"}
+          id="back-icon"
+          class="flex text-purple-600 absolute ml-[-8%] mt-6 lg:mt-[-4%]"
+        >
           <CoreComponents.back_icon /> <span class="mt-[-2px] ml-1">Back</span>
         </.link>
         <div class="flex mt-16">
