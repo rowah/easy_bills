@@ -33,7 +33,7 @@ defmodule EasyBillsWeb.UserLoginLive do
 
           <:actions>
             <.input field={@form[:remember_me]} type="checkbox" label="Remember me" />
-            <.link href={~p"/reset_password"} class="text-sm font-semibold">
+            <.link href={~p"/reset_password"} class="text-sm font-semibold text-purple-500">
               Forgot password?
             </.link>
           </:actions>
@@ -84,7 +84,7 @@ defmodule EasyBillsWeb.UserLoginLive do
               fill="#EB4335"
             />
           </svg>
-          <.link navigate={~p"/login"} class="font-semibold text-purple-400 hover:underline">
+          <.link navigate={~p"/login"} class="font-semibold text-purple-400 hover:underline ml-8">
             Login with Google
           </.link>
         </button>
