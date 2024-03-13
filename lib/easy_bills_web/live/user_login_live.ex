@@ -15,10 +15,10 @@ defmodule EasyBillsWeb.UserLoginLive do
           class="object-cover w-full h-full"
         />
       </div>
-      <.link href={~p"/"} class="flex text-purple-600 mt-8 ml-3">
-        <CoreComponents.back_icon /> Back
-      </.link>
       <div class="lg:w-[26%] space-y-6 mx-auto">
+        <.link href={~p"/"} class="flex text-purple-600 absolute mt-2 ml-[-8%]">
+          <CoreComponents.back_icon /> <span class="mt-[-2px] ml-1">Back</span>
+        </.link>
         <div class="flex mt-16">
           <CoreComponents.logo_icon />
           <h2 class="text-6xl font-bold ml-3 text-purple-600 mt-3">EasyBills</h2>

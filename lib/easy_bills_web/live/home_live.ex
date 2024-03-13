@@ -93,7 +93,7 @@ defmodule EasyBillsWeb.HomeLive do
             Don't have an account?
             <.link
               href={~p"/register"}
-              class="text-[0.8125rem] leading-6 text-purple-500 font-semibold hover:text-zinc-700"
+              class="leading-6 text-purple-500 font-semibold hover:text-zinc-700"
             >
               Sign up
             </.link>
