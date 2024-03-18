@@ -93,7 +93,7 @@ defmodule EasyBillsWeb.UserAddressLive do
   end
 
   def country_options do
-    ["Kenya", "Uganda", "Tanzania"]
+    Enum.map(Countries.all(), & &1.name)
   end
 
   def handle_event("validate", _params, socket) do

@@ -74,7 +74,8 @@ defmodule EasyBills.MixProject do
       {:mix_audit, "~> 1.0", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.18", only: :test},
       {:hackney, "~> 1.20"},
-      {:mjml, "~> 3.0"}
+      {:mjml, "~> 3.0"},
+      {:countries, "~> 1.6"}
     ]
   end
 
