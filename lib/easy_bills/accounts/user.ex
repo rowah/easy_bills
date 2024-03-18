@@ -4,8 +4,9 @@ defmodule EasyBills.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias EasyBills.Accounts.UserBusinessAddress
+
   schema "users" do
-    field :address, :map
     field :avatar_url, :string
     field :confirmed_at, :naive_datetime
     field :email, :string
@@ -13,6 +14,8 @@ defmodule EasyBills.Accounts.User do
     field :name, :string
     field :password, :string, virtual: true, redact: true
     field :username, :string
+
+    has_one :address, UserBusinessAddress
 
     timestamps()
   end

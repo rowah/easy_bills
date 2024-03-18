@@ -176,7 +176,19 @@ defmodule EasyBills.Accounts do
 
   def update_user_address(user, address_params) do
     user
-    |> Ecto.Changeset.change(%{address: address_params})
+    |> Repo.preload(:address)
+    |> Ecto.Changeset.cast(address_params, [
+      :country,
+      :city,
+      :street_address,
+      :postal_code,
+      :phone_number
+    ])
+    |> Ecto.Changeset.cast_assoc(:address, address_params)
+    |> Ecto.Changeset.change(
+      address_params
+      |> Map.new(fn {key, value} -> {String.to_atom(key), value} end)
+    )
     |> Repo.update()
   end
 
