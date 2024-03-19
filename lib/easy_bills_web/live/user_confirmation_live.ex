@@ -2,12 +2,12 @@ defmodule EasyBillsWeb.UserConfirmationLive do
   use EasyBillsWeb, :live_view
 
   alias EasyBills.Accounts
-  alias EasyBillsWeb.CoreComponents
+  alias EasyBillsWeb.CommonComponents.LogoIcons
 
   def render(%{live_action: :edit} = assigns) do
     ~H"""
     <div class="mx-auto max-w-lg">
-      <CoreComponents.logo_icon />
+      <LogoIcons.logo_icon_white />
       <.header class="">Hi, @user.username</.header>
       <p>Welcome to EasyBills,</p>
       <hr />
