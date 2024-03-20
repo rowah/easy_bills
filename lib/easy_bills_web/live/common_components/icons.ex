@@ -1,4 +1,4 @@
-defmodule EasyBillsWeb.CommonComponents.LogoIcons do
+defmodule EasyBillsWeb.CommonComponents.Icons do
   @moduledoc false
 
   use EasyBillsWeb, :html
@@ -48,6 +48,18 @@ defmodule EasyBillsWeb.CommonComponents.LogoIcons do
         clip-rule="evenodd"
         d="M42.6942 33.2922L52 51.9999L61.3058 33.2922C67.6645 36.6407 72 43.314 72 50.9999C72 62.0456 63.0457 70.9999 52 70.9999C40.9543 70.9999 32 62.0456 32 50.9999C32 43.314 36.3355 36.6407 42.6942 33.2922Z"
         fill="white"
+      />
+    </svg>
+    """
+  end
+
+  def white_background_plus_icon(assigns) do
+    ~H"""
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="16" fill="white" />
+      <path
+        d="M17.3131 21.0229V17.3131H21.0229V14.7328H17.3131V11.0229H14.7328V14.7328H11.0229V17.3131H14.7328V21.0229H17.3131Z"
+        fill="#7C5DFA"
       />
     </svg>
     """

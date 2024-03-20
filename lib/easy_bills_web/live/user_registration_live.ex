@@ -3,8 +3,8 @@ defmodule EasyBillsWeb.UserRegistrationLive do
 
   alias EasyBills.Accounts
   alias EasyBills.Accounts.User
+  alias EasyBillsWeb.CommonComponents.Icons
   alias EasyBillsWeb.CoreComponents
-  alias EasyBillsWeb.CommonComponents.LogoIcons
 
   @impl Phoenix.LiveView
 
@@ -41,7 +41,7 @@ defmodule EasyBillsWeb.UserRegistrationLive do
         </.link>
         <div class="flex mb-14 hidden lg:block">
           <div class="flex">
-            <LogoIcons.logo_icon />
+            <Icons.logo_icon />
             <h2 class="text-6xl font-bold ml-3 text-purple-600 mt-3">EasyBills</h2>
           </div>
         </div>

@@ -3,7 +3,7 @@ defmodule EasyBillsWeb.HomeLive do
 
   use EasyBillsWeb, :live_view
 
-  alias EasyBillsWeb.CommonComponents.LogoIcons
+  alias EasyBillsWeb.CommonComponents.Icons
 
   def render(assigns) do
     ~H"""
@@ -17,7 +17,7 @@ defmodule EasyBillsWeb.HomeLive do
       </div>
       <div class="mx-auto mt-16 items-center justify-center mx-w-md">
         <div class="flex mb-20">
-          <LogoIcons.logo_icon />
+          <Icons.logo_icon />
           <h2 class="text-6xl font-bold ml-3 text-purple-600 mt-3">EasyBills</h2>
         </div>
         <h3 class="text-center font-bold text-3xl">
