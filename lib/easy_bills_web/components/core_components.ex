@@ -114,18 +114,18 @@ defmodule EasyBillsWeb.CoreComponents do
       phx-click={JS.push("lv:clear-flash", value: %{key: @kind}) |> hide("##{@id}")}
       role="alert"
       class={[
-        "fixed top-2 right-2 w-80 sm:w-96 z-50 rounded-lg p-3 ring-1",
+        "fixed right-2 w-full z-50 p-3",
         @kind == :info && "bg-emerald-50 text-emerald-800 ring-emerald-500 fill-cyan-900",
-        @kind == :error && "bg-rose-50 text-rose-900 shadow-md ring-rose-500 fill-rose-900"
+        @kind == :error && "bg-red-400 font-bold text-white shadow-md ring-rose-500 fill-rose-900"
       ]}
       {@rest}
     >
-      <p :if={@title} class="flex items-center gap-1.5 text-sm font-semibold leading-6">
-        <.icon :if={@kind == :info} name="hero-information-circle-mini" class="h-4 w-4" />
-        <.icon :if={@kind == :error} name="hero-exclamation-circle-mini" class="h-4 w-4" />
-        <%= @title %>
-      </p>
-      <p class="mt-2 text-sm leading-5"><%= msg %></p>
+      <%!-- <p :if={@title} class="flex items-center gap-1.5 text-sm font-semibold leading-6"> --%>
+      <%!-- <.icon :if={@kind == :info} name="hero-information-circle-mini" class="h-4 w-4" /> --%>
+      <%!-- <.icon :if={@kind == :error} name="hero-exclamation-circle-mini" class="h-4 w-4" /> --%>
+      <%!-- <%= @title %> --%>
+      <%!-- </p> --%>
+      <p class="mt-2 text-sm text-center leading-5"><%= msg %></p>
       <button type="button" class="group absolute top-1 right-1 p-2" aria-label={gettext("close")}>
         <.icon name="hero-x-mark-solid" class="h-5 w-5 opacity-40 group-hover:opacity-70" />
       </button>
