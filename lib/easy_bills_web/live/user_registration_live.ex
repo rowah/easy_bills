@@ -63,8 +63,8 @@ defmodule EasyBillsWeb.UserRegistrationLive do
             Oops, something went wrong! Please check the errors below.
           </.error>
 
-          <div class="lg:flex">
-            <div class="lg:mr-6 sm:mb-4 lg:mb-0">
+          <div class="lg:flex justify-between">
+            <div class="sm:mb-4 lg:mb-0">
               <.input field={@form[:name]} type="text" label="Name" required />
             </div>
             <.input field={@form[:username]} type="text" label="Username" required />
