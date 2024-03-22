@@ -49,7 +49,8 @@ defmodule EasyBillsWeb.UserLoginLiveTest do
 
       conn = submit_form(form, conn)
 
-      assert Phoenix.Flash.get(conn.assigns.flash, :error) == "Invalid email or password"
+      assert Phoenix.Flash.get(conn.assigns.flash, :error) ==
+               "We couldn’t find an account matching the email and password you entered. Please crosscheck your email and password and try again"
 
       assert redirected_to(conn) == "/login"
     end
