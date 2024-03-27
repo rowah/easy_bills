@@ -60,9 +60,9 @@ defmodule EasyBills.Accounts.User do
     changeset
     |> validate_required([:password])
     |> validate_length(:password, min: 8, message: "8+ characters")
-    |> validate_length(:password, max: 72, message: "should be at most 72 character(s)")
+    |> validate_length(:password, max: 72, message: "at most 72 character(s)")
     |> validate_format(:password, ~r/[0-9]/, message: "number")
-    |> validate_format(:password, ~r/[A-Z]/, message: "upper- case character")
+    |> validate_format(:password, ~r/[A-Z]/, message: "upper-case character")
     |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/, message: "special character (*#$%&!-@)")
     |> maybe_hash_password(opts)
   end

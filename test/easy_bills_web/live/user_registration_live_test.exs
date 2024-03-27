@@ -92,7 +92,7 @@ defmodule EasyBillsWeb.UserRegistrationLiveTest do
         |> render_change()
 
       assert html =~ "special character"
-      assert html =~ "upper- case character"
+      assert html =~ "upper-case character"
       assert html =~ "number"
       assert html =~ "8+ characters"
     end
