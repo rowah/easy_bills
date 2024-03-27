@@ -11,9 +11,9 @@ defmodule EasyBillsWeb.InvoicesLiveTest do
         |> log_in_user(user_fixture())
         |> live(~p"/invoices")
 
-      assert html =~ "Invoices"
-      assert html =~ "Log out"
-      assert html =~ "Settings"
+      assert html =~ "There is nothing here"
+      assert html =~ "No invoices"
+      assert html =~ "Create an invoice by clicking the New Invoice button and get started"
     end
   end
 end

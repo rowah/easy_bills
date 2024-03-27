@@ -3,6 +3,7 @@ defmodule EasyBillsWeb.UserLoginLive do
 
   use EasyBillsWeb, :live_view
 
+  alias EasyBillsWeb.CommonComponents.Icons
   alias EasyBillsWeb.CoreComponents
 
   def render(assigns) do
@@ -15,12 +16,12 @@ defmodule EasyBillsWeb.UserLoginLive do
           class="object-cover w-full h-full"
         />
       </div>
-      <.link href={~p"/"} class="flex text-purple-600 mt-8 ml-3">
-        <CoreComponents.back_icon /> Back
-      </.link>
-      <div class="lg:w-[26%] space-y-6 mx-auto">
+      <div class="lg:w-[26%] mx-auto">
+        <.link href={~p"/"} id="back-icon" class="flex text-purple-600 absolute mt-6 ml-[-8%]">
+          <CoreComponents.back_icon /> <span class="mt-[-2px] ml-1">Back</span>
+        </.link>
         <div class="flex mt-16">
-          <CoreComponents.logo_icon />
+          <Icons.logo_icon />
           <h2 class="text-6xl font-bold ml-3 text-purple-600 mt-3">EasyBills</h2>
         </div>
         <.header class="text-center">
@@ -33,7 +34,7 @@ defmodule EasyBillsWeb.UserLoginLive do
 
           <:actions>
             <.input field={@form[:remember_me]} type="checkbox" label="Remember me" />
-            <.link href={~p"/reset_password"} class="text-sm font-semibold">
+            <.link href={~p"/reset_password"} class="text-sm font-semibold text-purple-500">
               Forgot password?
             </.link>
           </:actions>
@@ -58,7 +59,7 @@ defmodule EasyBillsWeb.UserLoginLive do
         <button
           aria-label="Continue with google"
           role="button"
-          class="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-10"
+          class="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full"
         >
           <svg
             width="19"
@@ -84,7 +85,7 @@ defmodule EasyBillsWeb.UserLoginLive do
               fill="#EB4335"
             />
           </svg>
-          <.link navigate={~p"/login"} class="font-semibold text-purple-400 hover:underline">
+          <.link navigate={~p"/login"} class="font-semibold text-purple-400 hover:underline ml-8">
             Login with Google
           </.link>
         </button>

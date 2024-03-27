@@ -133,7 +133,7 @@ defmodule EasyBillsWeb.UserSettingsLiveTest do
         })
 
       assert result =~ "Change Password"
-      assert result =~ "upper- case character"
+      assert result =~ "upper-case character"
       assert result =~ "does not match password"
     end
 
@@ -152,7 +152,7 @@ defmodule EasyBillsWeb.UserSettingsLiveTest do
         |> render_submit()
 
       assert result =~ "Change Password"
-      assert result =~ "upper- case character"
+      assert result =~ "upper-case character"
       assert result =~ "does not match password"
       assert result =~ "is not valid"
     end

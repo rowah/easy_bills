@@ -65,7 +65,7 @@ defmodule EasyBills.AccountsTest do
                email: ["Please enter a valid email address"],
                password: [
                  "special character (*#$%&!-@)",
-                 "upper- case character",
+                 "upper-case character",
                  "number"
                ],
                name: ["can't be blank"],
@@ -77,7 +77,7 @@ defmodule EasyBills.AccountsTest do
       too_long = String.duplicate("db", 100)
       {:error, changeset} = Accounts.register_user(%{email: too_long, password: too_long})
       assert "should be at most 160 character(s)" in errors_on(changeset).email
-      assert "should be at most 72 character(s)" in errors_on(changeset).password
+      assert "at most 72 character(s)" in errors_on(changeset).password
     end
 
     test "validates email uniqueness" do
@@ -275,7 +275,7 @@ defmodule EasyBills.AccountsTest do
       assert %{
                password: [
                  "special character (*#$%&!-@)",
-                 "upper- case character",
+                 "upper-case character",
                  "number"
                ],
                password_confirmation: ["does not match password"]
@@ -288,7 +288,7 @@ defmodule EasyBills.AccountsTest do
       {:error, changeset} =
         Accounts.update_user_password(user, valid_user_password(), %{password: too_long})
 
-      assert "should be at most 72 character(s)" in errors_on(changeset).password
+      assert "at most 72 character(s)" in errors_on(changeset).password
     end
 
     test "validates current password", %{user: user} do
@@ -488,7 +488,7 @@ defmodule EasyBills.AccountsTest do
       assert %{
                password: [
                  "special character (*#$%&!-@)",
-                 "upper- case character",
+                 "upper-case character",
                  "number"
                ],
                password_confirmation: ["does not match password"]
@@ -498,7 +498,7 @@ defmodule EasyBills.AccountsTest do
     test "validates maximum values for password for security", %{user: user} do
       too_long = String.duplicate("Db", 100)
       {:error, changeset} = Accounts.reset_user_password(user, %{password: too_long})
-      assert "should be at most 72 character(s)" in errors_on(changeset).password
+      assert "at most 72 character(s)" in errors_on(changeset).password
     end
 
     test "updates the password", %{user: user} do

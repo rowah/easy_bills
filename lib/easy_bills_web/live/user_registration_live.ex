@@ -3,6 +3,7 @@ defmodule EasyBillsWeb.UserRegistrationLive do
 
   alias EasyBills.Accounts
   alias EasyBills.Accounts.User
+  alias EasyBillsWeb.CommonComponents.Icons
   alias EasyBillsWeb.CoreComponents
 
   @impl Phoenix.LiveView
@@ -30,13 +31,17 @@ defmodule EasyBillsWeb.UserRegistrationLive do
           class="object-cover w-full h-full"
         />
       </div>
-      <.link href={~p"/"} class="flex text-purple-600 mt-8 ml-3">
-        <CoreComponents.back_icon /> Back
-      </.link>
       <div class="md:w-[30%] mx-auto mt-16">
+        <.link
+          href={~p"/"}
+          id="back-icon"
+          class="flex text-purple-600 absolute mt-[-6%] lg:mt-[-2%] lg:ml-[-8%]"
+        >
+          <CoreComponents.back_icon /> <span class="mt-[-2px] ml-1">Back</span>
+        </.link>
         <div class="flex mb-14 hidden lg:block">
           <div class="flex">
-            <CoreComponents.logo_icon />
+            <Icons.logo_icon />
             <h2 class="text-6xl font-bold ml-3 text-purple-600 mt-3">EasyBills</h2>
           </div>
         </div>
@@ -58,8 +63,8 @@ defmodule EasyBillsWeb.UserRegistrationLive do
             Oops, something went wrong! Please check the errors below.
           </.error>
 
-          <div class="lg:flex">
-            <div class="lg:mr-6 sm:mb-4 lg:mb-0">
+          <div class="lg:flex justify-between">
+            <div class="sm:mb-4 lg:mb-0">
               <.input field={@form[:name]} type="text" label="Name" required />
             </div>
             <.input field={@form[:username]} type="text" label="Username" required />
@@ -93,7 +98,7 @@ defmodule EasyBillsWeb.UserRegistrationLive do
       <div class="max-w-xl px-5 text-center bg-purple-200 rounded-lg">
         <h2 class="mb-2 text-[42px] font-bold text-zinc-800">Confirm your Email Address</h2>
         <p class="mb-2 text-lg text-zinc-500 leading-loose">
-          We've sent a confirmation email to <span class="font-medium text-indigo-500">mail@yourdomain.com</span>. Please follow the link in the message to confirm your email address. If you did not receive the email, please check your spam folder or:
+          We've sent a confirmation email to <span class="font-medium text-indigo-500">@user.email</span>. Please follow the link in the message to confirm your email address. If you did not receive the email, please check your spam folder or:
         </p>
         <.button phx-disable-with="Resending link..." class="w-full mb-12">
           Resend Confirmation Instruction

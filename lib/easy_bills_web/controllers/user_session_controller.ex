@@ -28,7 +28,10 @@ defmodule EasyBillsWeb.UserSessionController do
     else
       # In order to prevent user enumeration attacks, don't disclose whether the email is registered.
       conn
-      |> put_flash(:error, "Invalid email or password")
+      |> put_flash(
+        :error,
+        "We couldn’t find an account matching the email and password you entered. Please crosscheck your email and password and try again"
+      )
       |> put_flash(:email, String.slice(email, 0, 160))
       |> redirect(to: ~p"/login")
     end
