@@ -34,7 +34,7 @@ defmodule EasyBillsWeb.InvoicesLive do
           </p>
           <div class="border-b-2 mb-6 text-white">
             <.icon name="hero-moon" />
-            <.icon name="hero-sun" />
+            <.icon name="hero-sun" class="hidden" />
           </div>
 
           <img

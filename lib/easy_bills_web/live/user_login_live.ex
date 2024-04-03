@@ -29,8 +29,29 @@ defmodule EasyBillsWeb.UserLoginLive do
         </.header>
 
         <.simple_form for={@form} id="login_form" action={~p"/login"} phx-update="ignore">
-          <.input field={@form[:email]} type="email" label="Email" required />
-          <.input field={@form[:password]} type="password" label="Password" required />
+          <.input
+            field={@form[:email]}
+            type="email"
+            label="Email"
+            placeholder="Enter Your Email"
+            required
+          />
+          <div class="relative">
+            <.input
+              field={@form[:password]}
+              type="password"
+              label="Password"
+              placeholder="Enter Your Password"
+              required
+            />
+            <span
+              class="absolute inset-y-0 right-0 top-8 flex items-center pr-3 text-gray-700 cursor-pointer"
+              phx-click="toggle-password"
+            >
+              <.icon name="hero-eye" />
+              <.icon name="hero-eye-slash" class="hidden" />
+            </span>
+          </div>
 
           <:actions>
             <.input field={@form[:remember_me]} type="checkbox" label="Remember me" />
