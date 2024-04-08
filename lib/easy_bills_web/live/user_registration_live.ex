@@ -24,14 +24,14 @@ defmodule EasyBillsWeb.UserRegistrationLive do
   def render(%{template: :new} = assigns) do
     ~H"""
     <div class="flex">
-      <div class="w-1/2 h-screen hidden lg:block">
+      <div class="w-1/2 hidden lg:block">
         <img
           src={~p"/images/section-invoice.png"}
           alt="EasyBills Image"
           class="object-cover w-full h-full"
         />
       </div>
-      <div class="md:w-[30%] mx-auto mt-16">
+      <div class="md:w-[30%] mx-auto mt-16 h-[100vh]">
         <.link
           href={~p"/"}
           id="back-icon"
@@ -39,7 +39,7 @@ defmodule EasyBillsWeb.UserRegistrationLive do
         >
           <CoreComponents.back_icon /> <span class="mt-[-2px] ml-1">Back</span>
         </.link>
-        <div class="flex mb-14 hidden lg:block">
+        <div class="flex mb-6 hidden lg:block">
           <div class="flex">
             <Icons.logo_icon />
             <h2 class="text-6xl font-bold ml-3 text-purple-600 mt-3">EasyBills</h2>
@@ -58,6 +58,7 @@ defmodule EasyBillsWeb.UserRegistrationLive do
           phx-trigger-action={@trigger_submit}
           action={~p"/login?_action=registered"}
           method="post"
+          class="mt-[-20px]"
         >
           <.error :if={@check_errors}>
             Oops, something went wrong! Please check the errors below.
@@ -65,12 +66,49 @@ defmodule EasyBillsWeb.UserRegistrationLive do
 
           <div class="lg:flex justify-between">
             <div class="sm:mb-4 lg:mb-0">
-              <.input field={@form[:name]} type="text" label="Name" required />
+              <.input
+                field={@form[:name]}
+                type="text"
+                label="Name"
+                placeholder="Enter Your Name"
+                required
+              />
             </div>
-            <.input field={@form[:username]} type="text" label="Username" required />
+            <.input
+              field={@form[:username]}
+              type="text"
+              label="Username"
+              placeholder="Enter Your Username"
+              required
+            />
           </div>
-          <.input field={@form[:email]} type="email" label="Email" required />
-          <.input field={@form[:password]} type="password" label="Password" required />
+          <.input
+            field={@form[:email]}
+            type="email"
+            label="Email"
+            placeholder="Enter Your Email"
+            required
+          />
+          <div class="relative">
+            <.input
+              field={@form[:password]}
+              type="password"
+              label="Password"
+              placeholder="Enter Your Password"
+              required
+            />
+            <span class="absolute inset-y-0 right-0 top-8 flex items-center pr-3 text-gray-700 cursor-pointer">
+              <.icon name="hero-eye" />
+              <.icon name="hero-eye-slash" class="hidden" />
+            </span>
+          </div>
+
+          <label class="flex left-0 flex-row-reverse items-center justify-between">
+            <span>
+              I agree with EasyBills' <.link>Terms of Use</.link> and <.link>Privacy Policy</.link>
+            </span>
+            <.input field={@form[:policy_and_terms]} type="checkbox" />
+          </label>
 
           <:actions>
             <.button phx-disable-with="Creating account..." class="w-full">
@@ -98,9 +136,13 @@ defmodule EasyBillsWeb.UserRegistrationLive do
       <div class="max-w-xl px-5 text-center bg-purple-200 rounded-lg">
         <h2 class="mb-2 text-[42px] font-bold text-zinc-800">Confirm your Email Address</h2>
         <p class="mb-2 text-lg text-zinc-500 leading-loose">
-          We've sent a confirmation email to <span class="font-medium text-indigo-500">@user.email</span>. Please follow the link in the message to confirm your email address. If you did not receive the email, please check your spam folder or:
+          We've sent a confirmation email to <span class="font-medium text-indigo-500"><%= @form.data.email %></span>. Please follow the link in the message to confirm your email address. If you did not receive the email, please check your spam folder or:
         </p>
-        <.button phx-disable-with="Resending link..." class="w-full mb-12">
+        <.button
+          phx-click="resend_confirmation"
+          phx-disable-with="Resending link..."
+          class="w-full mb-12"
+        >
           Resend Confirmation Instruction
         </.button>
       </div>
@@ -122,7 +164,6 @@ defmodule EasyBillsWeb.UserRegistrationLive do
 
         {:noreply,
          socket
-         |> assign(trigger_submit: true)
          |> assign_form(changeset)
          |> assign(:template, :success)}
 
