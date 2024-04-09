@@ -4,11 +4,9 @@ defmodule EasyBillsWeb.UserWelcomeLive do
   use EasyBillsWeb, :live_view
 
   alias EasyBills.Accounts.User
-  # alias EasyBillsWeb.SimpleS3Upload
   alias EasyBillsWeb.CommonComponents.Icons
 
   import Phoenix.HTML.Form
-  # import Phoenix.Naming
 
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
@@ -20,6 +18,7 @@ defmodule EasyBillsWeb.UserWelcomeLive do
      socket
      |> assign(:changeset, changeset)
      |> assign(:uploaded_files, [])
+     |> assign(:avatar_selected?, false)
      |> allow_upload(:avatar_url,
        accept: ~w(.jpg .jpeg .png),
        max_entries: 1
@@ -74,7 +73,9 @@ defmodule EasyBillsWeb.UserWelcomeLive do
 
           <button
             type="submit"
-            class="mt-36 bg-gray-400 text-white py-2 px-6 rounded-full ml-[70%] font-bold"
+            class={"mt-36 text-white py-2 px-6 rounded-full ml-[70%] font-bold" <> if(@avatar_selected?, do: " bg-gray-500", else: " bg-gray-300")}
+            phx-disable-with="Submitting..."
+            disabled={!@avatar_selected?}
           >
             Continue
           </button>
@@ -94,7 +95,7 @@ defmodule EasyBillsWeb.UserWelcomeLive do
 
   @impl Phoenix.LiveView
   def handle_event("validate", _params, socket) do
-    {:noreply, socket}
+    {:noreply, socket |> assign(:avatar_selected?, true)}
   end
 
   @impl Phoenix.LiveView

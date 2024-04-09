@@ -1,7 +1,6 @@
 let ProfileFormHooks = {}
 ProfileFormHooks.UserAvatar = {
   mounted() {
-    console.log('MOUNTED')
     let hook = this
     let container = hook.el
     let fileInput = container.querySelector('.live-file-input')
