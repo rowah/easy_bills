@@ -62,6 +62,7 @@ defmodule EasyBillsWeb.UserWelcomeLive do
               upload={@uploads.avatar_url}
               id="live-file-input"
               class="invisible live-file-input"
+              phx-change="enable-button"
             />
             <span
               id="avatar-upload-button"
@@ -95,6 +96,10 @@ defmodule EasyBillsWeb.UserWelcomeLive do
 
   @impl Phoenix.LiveView
   def handle_event("validate", _params, socket) do
+    {:noreply, socket}
+  end
+
+  def handle_event("enable-button", _params, socket) do
     {:noreply, socket |> assign(:avatar_selected?, true)}
   end
 
