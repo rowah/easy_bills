@@ -29,17 +29,13 @@ defmodule EasyBillsWeb.UserAuth do
   """
   def log_in_user(conn, user, params \\ %{}) do
     token = Accounts.generate_user_session_token(user)
-    user_return_to = get_session(conn, :user_return_to)
 
-    if user.avatar_url do
-      conn
-      |> session_manager(token, params)
-      |> redirect(to: user_return_to || signed_in_path(conn))
-    else
-      conn
-      |> session_manager(token, params)
-      |> redirect(to: user_return_to || ~p"/welcome")
-    end
+    conn
+    |> renew_session()
+    |> put_token_in_session(token)
+    |> maybe_write_remember_me_cookie(token, params)
+
+    # |> redirect(to: user_return_to || signed_in_path(conn))
   end
 
   defp maybe_write_remember_me_cookie(conn, token, %{"remember_me" => "true"}) do
@@ -192,7 +188,7 @@ defmodule EasyBillsWeb.UserAuth do
   def redirect_if_user_is_authenticated(conn, _opts) do
     if conn.assigns[:current_user] do
       conn
-      |> redirect(to: ~p"/welcome")
+      |> redirect(to: signed_in_path(conn))
       |> halt()
     else
       conn
@@ -230,11 +226,4 @@ defmodule EasyBillsWeb.UserAuth do
   defp maybe_store_return_to(conn), do: conn
 
   defp signed_in_path(_conn), do: ~p"/invoices"
-
-  defp session_manager(conn, token, params) do
-    conn
-    |> renew_session()
-    |> put_token_in_session(token)
-    |> maybe_write_remember_me_cookie(token, params)
-  end
 end
