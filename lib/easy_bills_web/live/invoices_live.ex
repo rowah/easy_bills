@@ -14,7 +14,7 @@ defmodule EasyBillsWeb.InvoicesLive do
     <div class="bg-white">
       <nav class="bg-black flex flex-col absolute w-58 h-full justify-between rounded-r-3xl">
         <Icons.logo_icon_white />
-        <div class="space-x-auto">
+        <div class="space-x-auto text-center">
           <p>
             <.link
               href={~p"/settings"}
@@ -32,7 +32,7 @@ defmodule EasyBillsWeb.InvoicesLive do
               Log out
             </.link>
           </p>
-          <div class="border-b-2 mb-6 text-white">
+          <div class="border-b-2 mb-4 pb-2 text-white">
             <.icon name="hero-moon" />
             <.icon name="hero-sun" class="hidden" />
           </div>
