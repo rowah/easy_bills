@@ -18,7 +18,7 @@ defmodule EasyBillsWeb.UserLoginLiveTest do
         conn
         |> log_in_user(user_fixture())
         |> live(~p"/login")
-        |> follow_redirect(conn, "/welcome")
+        |> follow_redirect(conn, "/invoices")
 
       assert {:ok, _conn} = result
     end
