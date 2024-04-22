@@ -16,15 +16,6 @@ defmodule EasyBills.AccountsFixtures do
     })
   end
 
-  def other_valid_user_attributes(attrs \\ %{}) do
-    Enum.into(attrs, %{
-      email: "jane@doe.com",
-      name: "Jane",
-      password: valid_user_password(),
-      username: "Doe"
-    })
-  end
-
   def user_address do
     %{
       city: "Nairobi",
@@ -39,15 +30,6 @@ defmodule EasyBills.AccountsFixtures do
     {:ok, user} =
       attrs
       |> valid_user_attributes()
-      |> EasyBills.Accounts.register_user()
-
-    user
-  end
-
-  def user_two_fixture(attrs \\ %{}) do
-    {:ok, user} =
-      attrs
-      |> other_valid_user_attributes()
       |> EasyBills.Accounts.register_user()
 
     user

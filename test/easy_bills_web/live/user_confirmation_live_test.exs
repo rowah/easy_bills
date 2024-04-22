@@ -8,7 +8,7 @@ defmodule EasyBillsWeb.UserConfirmationLiveTest do
   alias EasyBills.Repo
 
   setup do
-    %{user: user_fixture(), user_two: user_two_fixture()}
+    %{user: user_fixture()}
   end
 
   describe "Confirm user" do
@@ -51,28 +51,15 @@ defmodule EasyBillsWeb.UserConfirmationLiveTest do
       assert Repo.all(Accounts.UserToken) == []
     end
 
-    # test "does not confirm email with invalid token", %{conn: conn, user: user_two} do
-    #   token =
-    #     extract_user_token(fn url ->
-    #       Accounts.deliver_user_confirmation_instructions(user, url)
-    #     end)
+    test "does not confirm email with invalid or used token", %{conn: conn, user: _user} do
+      invalid_or_used_token = "20kenGCS-Ca-ICPbrNRE33QRX125MZLIShatuMIKahII"
+      {:ok, _lv, html} = live(conn, ~p"/confirm/#{invalid_or_used_token}")
 
-    #   {:ok, decoded_token} = Base.url_decode64(token, padding: false)
-    #   hashed_token = :crypto.hash(:sha256, decoded_token)
+      assert html =~
+               "We are sorry, but the user confirmation link may be invalid or it has expired"
 
-    #   user = Accounts.get_user_by_confirmation_token(hashed_token)
-    #   {:ok, lv, _html} = live(conn, ~p"/confirm/invalid-token")
-
-    #   {:ok, conn} =
-    #     lv
-    #     |> form("#confirmation_form")
-    #     |> render_submit()
-    #     |> follow_redirect(conn, ~p"/")
-
-    #   assert Phoenix.Flash.get(conn.assigns.flash, :error) =~
-    #            "User confirmation link is invalid or it has expired"
-
-    #   refute Accounts.get_user!(user.id).confirmed_at
-    # end
+      assert html =~ "Oops!"
+      assert html =~ "Page not found"
+    end
   end
 end
