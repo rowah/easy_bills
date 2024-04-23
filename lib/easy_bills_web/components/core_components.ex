@@ -361,6 +361,10 @@ defmodule EasyBillsWeb.CoreComponents do
   # def input(%{type: "password"} = assigns) do
   #   ~H"""
   #   <div phx-feedback-for={@name}>
+  #     <span class="absolute inset-y-0 right-0 top-8 flex items-center pr-3 text-gray-700 cursor-pointer">
+  #       <.icon name="hero-eye" />
+  #       <.icon name="hero-eye-slash" class="hidden" />
+  #     </span>
   #     <div>
   #       <%!-- <.label for={@id}><%= @label %></.label> --%>
   #       <label for={@id} class="block text-sm font-semibold leading-6 text-zinc-800">
@@ -381,10 +385,6 @@ defmodule EasyBillsWeb.CoreComponents do
   #       />
   #       <%!-- <%= @name %> -name <%= @id %> -id <%= @type %> -type
   #       user[password] -name user_password -id password -type --%>
-  #       <span class="absolute inset-y-0 right-0 top-8 flex items-center pr-3 text-gray-700 cursor-pointer">
-  #         <.icon name="hero-eye" />
-  #         <.icon name="hero-eye-slash" class="hidden" />
-  #       </span>
   #     </div>
   #     <div class="flex flex-wrap">
   #       <%!-- <.error :for={msg <- @errors}><%= msg %></.error> --%>

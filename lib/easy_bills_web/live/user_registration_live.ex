@@ -97,10 +97,6 @@ defmodule EasyBillsWeb.UserRegistrationLive do
               placeholder="Enter Your Password"
               required
             />
-            <span class="absolute inset-y-0 right-0 top-8 flex items-center pr-3 text-gray-700 cursor-pointer">
-              <.icon name="hero-eye" />
-              <.icon name="hero-eye-slash" class="hidden" />
-            </span>
           </div>
 
           <label class="flex left-0 flex-row-reverse items-center justify-between">

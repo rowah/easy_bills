@@ -66,7 +66,7 @@ defmodule EasyBillsWeb.UserLoginLive do
           </:actions>
         </.simple_form>
 
-        <p>
+        <p class="mt-4">
           Don't have an account?
           <.link navigate={~p"/register"} class="font-semibold text-purple-400 hover:underline">
             Sign up
@@ -106,7 +106,7 @@ defmodule EasyBillsWeb.UserLoginLive do
               fill="#EB4335"
             />
           </svg>
-          <.link navigate={~p"/login"} class="font-semibold text-purple-400 hover:underline ml-8">
+          <.link navigate={~p"/login"} class="font-semibold text-purple-400 hover:underline mx-auto">
             Login with Google
           </.link>
         </button>
