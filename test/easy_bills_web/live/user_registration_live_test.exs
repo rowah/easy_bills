@@ -17,7 +17,7 @@ defmodule EasyBillsWeb.UserRegistrationLiveTest do
         conn
         |> log_in_user(user_fixture())
         |> live(~p"/register")
-        |> follow_redirect(conn, "/welcome")
+        |> follow_redirect(conn, "/invoices")
 
       assert {:ok, _conn} = result
     end
@@ -92,7 +92,7 @@ defmodule EasyBillsWeb.UserRegistrationLiveTest do
         |> render_change()
 
       assert html =~ "special character"
-      assert html =~ "upper- case character"
+      assert html =~ "upper-case character"
       assert html =~ "number"
       assert html =~ "8+ characters"
     end
@@ -116,7 +116,7 @@ defmodule EasyBillsWeb.UserRegistrationLiveTest do
 
       {:ok, conn} =
         lv
-        |> element(~s|main a:fl-contains("Back")|)
+        |> element("#back-icon")
         |> render_click()
         |> follow_redirect(conn, ~p"/")
 

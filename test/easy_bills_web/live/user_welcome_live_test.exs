@@ -4,6 +4,18 @@ defmodule EasyBillsWeb.UserWelcomeLiveTest do
   import Phoenix.LiveViewTest
   import EasyBills.AccountsFixtures
 
+  def upload_image(lv) do
+    lv
+    |> file_input("#upload-form", :avatar_url, [
+      %{
+        name: "avatar.jpeg",
+        content: File.read!("priv/static/images/avatar.jpeg"),
+        size: File.stat!("priv/static/images/avatar.jpeg").size,
+        type: "image/jpeg"
+      }
+    ])
+  end
+
   describe "welcome page" do
     test "renders welcome page", %{conn: conn} do
       {:ok, _lv, html} =
@@ -27,16 +39,7 @@ defmodule EasyBillsWeb.UserWelcomeLiveTest do
     test "user uploads and previews avatar", %{conn: conn} do
       {:ok, lv, _html} = live(conn, ~p"/welcome")
 
-      uploaded_image =
-        lv
-        |> file_input("#upload-form", :avatar_url, [
-          %{
-            name: "avatar.jpeg",
-            content: File.read!("priv/static/images/avatar.jpeg"),
-            size: File.stat!("priv/static/images/avatar.jpeg").size,
-            type: "image/jpeg"
-          }
-        ])
+      uploaded_image = upload_image(lv)
 
       avatar = uploaded_image.entries |> List.first() |> Map.get("name")
       assert avatar =~ "avatar.jpeg"
@@ -45,16 +48,7 @@ defmodule EasyBillsWeb.UserWelcomeLiveTest do
     test "redirects to address page on avatar upload form submission", %{conn: conn} do
       {:ok, lv, _html} = live(conn, ~p"/welcome")
 
-      uploaded_image =
-        lv
-        |> file_input("#upload-form", :avatar_url, [
-          %{
-            name: "avatar.jpeg",
-            content: File.read!("priv/static/images/avatar.jpeg"),
-            size: File.stat!("priv/static/images/avatar.jpeg").size,
-            type: "image/jpeg"
-          }
-        ])
+      uploaded_image = upload_image(lv)
 
       {:ok, _lv, html} =
         lv

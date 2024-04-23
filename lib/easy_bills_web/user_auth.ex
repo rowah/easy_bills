@@ -7,6 +7,7 @@ defmodule EasyBillsWeb.UserAuth do
   import Phoenix.Controller
 
   alias EasyBills.Accounts
+  alias EasyBills.Accounts.User
 
   # Make the remember me cookie valid for 60 days.
   # If you want bump or reduce this value, also change
@@ -27,7 +28,9 @@ defmodule EasyBillsWeb.UserAuth do
   disconnected on log out. The line can be safely removed
   if you are not using LiveView.
   """
-  def log_in_user(conn, user, params \\ %{}) do
+  def log_in_user(conn, user, params \\ %{})
+
+  def log_in_user(conn, %User{avatar_url: nil} = user, params) do
     token = Accounts.generate_user_session_token(user)
     user_return_to = get_session(conn, :user_return_to)
 
@@ -35,7 +38,18 @@ defmodule EasyBillsWeb.UserAuth do
     |> renew_session()
     |> put_token_in_session(token)
     |> maybe_write_remember_me_cookie(token, params)
-    |> redirect(to: user_return_to || signed_in_path(conn))
+    |> redirect(to: user_return_to || signed_in_path_without_avatar(conn))
+  end
+
+  def log_in_user(conn, %User{} = user, params) do
+    token = Accounts.generate_user_session_token(user)
+    user_return_to = get_session(conn, :user_return_to)
+
+    conn
+    |> renew_session()
+    |> put_token_in_session(token)
+    |> maybe_write_remember_me_cookie(token, params)
+    |> redirect(to: user_return_to || signed_in_path_with_avatar(conn))
   end
 
   defp maybe_write_remember_me_cookie(conn, token, %{"remember_me" => "true"}) do
@@ -168,7 +182,7 @@ defmodule EasyBillsWeb.UserAuth do
     socket = mount_current_user(socket, session)
 
     if socket.assigns.current_user do
-      {:halt, Phoenix.LiveView.redirect(socket, to: signed_in_path(socket))}
+      {:halt, Phoenix.LiveView.redirect(socket, to: signed_in_path_with_avatar(socket))}
     else
       {:cont, socket}
     end
@@ -188,7 +202,7 @@ defmodule EasyBillsWeb.UserAuth do
   def redirect_if_user_is_authenticated(conn, _opts) do
     if conn.assigns[:current_user] do
       conn
-      |> redirect(to: signed_in_path(conn))
+      |> redirect(to: signed_in_path_with_avatar(conn))
       |> halt()
     else
       conn
@@ -225,5 +239,7 @@ defmodule EasyBillsWeb.UserAuth do
 
   defp maybe_store_return_to(conn), do: conn
 
-  defp signed_in_path(_conn), do: ~p"/welcome"
+  defp signed_in_path_with_avatar(_conn), do: ~p"/invoices"
+
+  defp signed_in_path_without_avatar(_conn), do: ~p"/welcome"
 end

@@ -241,6 +241,14 @@ defmodule EasyBills.Accounts do
   end
 
   @doc """
+  Gets the user with the given signed token.
+  """
+  def get_user_by_confirmation_token(token) do
+    {:ok, query} = UserToken.verify_confirmation_token_query(token)
+    Repo.one(query)
+  end
+
+  @doc """
   Deletes the signed token with the given context.
   """
   def delete_user_session_token(token) do

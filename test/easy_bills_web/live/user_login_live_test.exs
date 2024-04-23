@@ -18,7 +18,7 @@ defmodule EasyBillsWeb.UserLoginLiveTest do
         conn
         |> log_in_user(user_fixture())
         |> live(~p"/login")
-        |> follow_redirect(conn, "/welcome")
+        |> follow_redirect(conn, "/invoices")
 
       assert {:ok, _conn} = result
     end
@@ -49,7 +49,8 @@ defmodule EasyBillsWeb.UserLoginLiveTest do
 
       conn = submit_form(form, conn)
 
-      assert Phoenix.Flash.get(conn.assigns.flash, :error) == "Invalid email or password"
+      assert Phoenix.Flash.get(conn.assigns.flash, :error) ==
+               "We couldn’t find an account matching the email and password you entered. Please crosscheck your email and password and try again"
 
       assert redirected_to(conn) == "/login"
     end
@@ -87,7 +88,7 @@ defmodule EasyBillsWeb.UserLoginLiveTest do
 
       {:ok, conn} =
         lv
-        |> element(~s|main a:fl-contains("Back")|)
+        |> element("#back-icon")
         |> render_click()
         |> follow_redirect(conn, ~p"/")
 

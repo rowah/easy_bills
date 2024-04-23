@@ -114,18 +114,18 @@ defmodule EasyBillsWeb.CoreComponents do
       phx-click={JS.push("lv:clear-flash", value: %{key: @kind}) |> hide("##{@id}")}
       role="alert"
       class={[
-        "fixed top-2 right-2 w-80 sm:w-96 z-50 rounded-lg p-3 ring-1",
+        "fixed right-2 w-full z-50 p-3",
         @kind == :info && "bg-emerald-50 text-emerald-800 ring-emerald-500 fill-cyan-900",
-        @kind == :error && "bg-rose-50 text-rose-900 shadow-md ring-rose-500 fill-rose-900"
+        @kind == :error && "bg-red-400 font-bold text-white shadow-md ring-rose-500 fill-rose-900"
       ]}
       {@rest}
     >
-      <p :if={@title} class="flex items-center gap-1.5 text-sm font-semibold leading-6">
-        <.icon :if={@kind == :info} name="hero-information-circle-mini" class="h-4 w-4" />
-        <.icon :if={@kind == :error} name="hero-exclamation-circle-mini" class="h-4 w-4" />
-        <%= @title %>
-      </p>
-      <p class="mt-2 text-sm leading-5"><%= msg %></p>
+      <%!-- <p :if={@title} class="flex items-center gap-1.5 text-sm font-semibold leading-6"> --%>
+      <%!-- <.icon :if={@kind == :info} name="hero-information-circle-mini" class="h-4 w-4" /> --%>
+      <%!-- <.icon :if={@kind == :error} name="hero-exclamation-circle-mini" class="h-4 w-4" /> --%>
+      <%!-- <%= @title %> --%>
+      <%!-- </p> --%>
+      <p class="mt-2 text-sm text-center leading-5"><%= msg %></p>
       <button type="button" class="group absolute top-1 right-1 p-2" aria-label={gettext("close")}>
         <.icon name="hero-x-mark-solid" class="h-5 w-5 opacity-40 group-hover:opacity-70" />
       </button>
@@ -358,6 +358,49 @@ defmodule EasyBillsWeb.CoreComponents do
     """
   end
 
+  # def input(%{type: "password"} = assigns) do
+  #   ~H"""
+  #   <div phx-feedback-for={@name}>
+  #     <span class="absolute inset-y-0 right-0 top-8 flex items-center pr-3 text-gray-700 cursor-pointer">
+  #       <.icon name="hero-eye" />
+  #       <.icon name="hero-eye-slash" class="hidden" />
+  #     </span>
+  #     <div>
+  #       <%!-- <.label for={@id}><%= @label %></.label> --%>
+  #       <label for={@id} class="block text-sm font-semibold leading-6 text-zinc-800">
+  #         Password
+  #       </label>
+  #       <input
+  #         type={@type}
+  #         name={@name}
+  #         id={@id}
+  #         value={Phoenix.HTML.Form.normalize_value(@type, @value)}
+  #         class={[
+  #           "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-0 sm:text-sm sm:leading-6",
+  #           "phx-no-feedback:border-zinc-300 phx-no-feedback:focus:border-zinc-400",
+  #           @errors == [] && "border-zinc-300 focus:border-zinc-400",
+  #           @errors != [] && "border-rose-400 focus:border-rose-400"
+  #         ]}
+  #         {@rest}
+  #       />
+  #       <%!-- <%= @name %> -name <%= @id %> -id <%= @type %> -type
+  #       user[password] -name user_password -id password -type --%>
+  #     </div>
+  #     <div class="flex flex-wrap">
+  #       <%!-- <.error :for={msg <- @errors}><%= msg %></.error> --%>
+  #       <p
+  #         :for={msg <- @errors}
+  #         class="mt-3 flex gap-3 w-1/2 text-sm leading-6 text-black items-center"
+  #       >
+  #         <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+  #         <%!-- <.icon name="hero-exclamation-circle-mini" class="mt-0.5 h-5 w-5 flex-none" /> --%>
+  #         <%= msg %>
+  #       </p>
+  #     </div>
+  #   </div>
+  #   """
+  # end
+
   # All other inputs text, datetime-local, url, password, etc. are handled here...
   def input(assigns) do
     ~H"""
@@ -376,7 +419,9 @@ defmodule EasyBillsWeb.CoreComponents do
         ]}
         {@rest}
       />
-      <.error :for={msg <- @errors}><%= msg %></.error>
+      <div class="flex flex-wrap justify-between">
+        <.error :for={msg <- @errors}><%= msg %></.error>
+      </div>
     </div>
     """
   end
@@ -402,7 +447,7 @@ defmodule EasyBillsWeb.CoreComponents do
 
   def error(assigns) do
     ~H"""
-    <p class="mt-3 flex gap-3 text-sm leading-6 text-rose-600 phx-no-feedback:hidden">
+    <p class="mt-3 flex gap-1 text-sm leading-6 text-rose-600">
       <.icon name="hero-exclamation-circle-mini" class="mt-0.5 h-5 w-5 flex-none" />
       <%= render_slot(@inner_block) %>
     </p>
@@ -550,10 +595,7 @@ defmodule EasyBillsWeb.CoreComponents do
   def back(assigns) do
     ~H"""
     <div class="mt-16">
-      <.link
-        navigate={@navigate}
-        class="text-sm font-semibold leading-6 text-zinc-900 hover:text-zinc-700"
-      >
+      <.link navigate={@navigate} class="text-sm font-semibold leading-6 text-purple-500">
         <.icon name="hero-arrow-left-solid" class="h-3 w-3" />
         <%= render_slot(@inner_block) %>
       </.link>

@@ -3,6 +3,7 @@ defmodule EasyBillsWeb.UserAddressLive do
 
   alias EasyBills.Accounts
   alias EasyBills.Accounts.User
+  alias EasyBillsWeb.CommonComponents.Icons
   alias EasyBillsWeb.CoreComponents
 
   @impl Phoenix.LiveView
@@ -30,13 +31,17 @@ defmodule EasyBillsWeb.UserAddressLive do
           class="object-cover w-full h-full"
         />
       </div>
-      <.link href={~p"/welcome"} id="back-icon" class="flex text-purple-600 mt-8 ml-3">
-        <CoreComponents.back_icon /> Back
-      </.link>
       <div class="md:w-[30%] mx-auto mt-16">
+        <.link
+          href={~p"/welcome"}
+          id="back-icon"
+          class="flex text-purple-600 absolute mt-[-6%] lg:mt-[-2%] lg:ml-[-8%]"
+        >
+          <CoreComponents.back_icon /> <span class="mt-[-2px] ml-1">Back</span>
+        </.link>
         <div class="flex mb-14 hidden lg:block">
           <div class="flex">
-            <CoreComponents.logo_icon />
+            <Icons.logo_icon />
             <h2 class="text-6xl font-bold ml-3 text-purple-600 mt-3">EasyBills</h2>
           </div>
         </div>
@@ -89,7 +94,7 @@ defmodule EasyBillsWeb.UserAddressLive do
   end
 
   def country_options do
-    ["Kenya", "Uganda", "Tanzania"]
+    Enum.map(Countries.all(), & &1.name) |> Enum.sort()
   end
 
   def handle_event("validate", _params, socket) do

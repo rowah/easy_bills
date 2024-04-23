@@ -1,7 +1,7 @@
 defmodule EasyBillsWeb.InvoicesLive do
   use EasyBillsWeb, :live_view
 
-  alias EasyBillsWeb.CoreComponents
+  alias EasyBillsWeb.CommonComponents.Icons
 
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
@@ -13,8 +13,8 @@ defmodule EasyBillsWeb.InvoicesLive do
     ~H"""
     <div class="bg-white">
       <nav class="bg-black flex flex-col absolute w-58 h-full justify-between rounded-r-3xl">
-        <CoreComponents.logo_icon_white />
-        <div class="space-x-auto">
+        <Icons.logo_icon_white />
+        <div class="space-x-auto text-center">
           <p>
             <.link
               href={~p"/settings"}
@@ -32,21 +32,9 @@ defmodule EasyBillsWeb.InvoicesLive do
               Log out
             </.link>
           </p>
-          <div class="border-b-2 mb-6 text-white">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6 mx-auto mb-4"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
-              />
-            </svg>
+          <div class="border-b-2 mb-4 pb-2 text-white">
+            <.icon name="hero-moon" />
+            <.icon name="hero-sun" class="hidden" />
           </div>
 
           <img
@@ -56,13 +44,21 @@ defmodule EasyBillsWeb.InvoicesLive do
           />
         </div>
       </nav>
-      <main class="p-5 h-[100vh] text-center text-2xl font-bold tracking-tight text-black">
-        <div>
+      <main class="p-5 h-[100vh] text-center tracking-tight text-black">
+        <div class="flex w-1/2 justify-between mx-auto mt-6">
           <div>
-            <h2>Invoices</h2>
-            <h6>No invoices</h6>
+            <h2 class="font-bold text-lg">Invoices</h2>
+            <h6 class="text-xs font-gray-300">No invoices</h6>
+          </div>
+          <div class="flex flex-row items-center font-bold">
+            <p class="mr-1">Filter by status</p>
+            <.icon name="hero-chevron-down" />
+            <button class="btn bg-purple-500 rounded-full w-36 h-12 text-white flex items-center justify-between px-2 ml-6">
+              <Icons.white_background_plus_icon /> New Invoice
+            </button>
           </div>
         </div>
+        <EasyBillsWeb.Invoices.EmptyInvoiceBox.empty_inbox />
       </main>
     </div>
     """
