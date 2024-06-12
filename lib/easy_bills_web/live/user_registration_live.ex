@@ -1,5 +1,6 @@
 defmodule EasyBillsWeb.UserRegistrationLive do
-  alias EasyBillsWeb.OnboardingLive.UserRegistration
+  @moduledoc false
+
   use EasyBillsWeb, :live_view
 
   alias EasyBills.Accounts

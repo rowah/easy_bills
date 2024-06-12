@@ -5,6 +5,7 @@ defmodule EasyBillsWeb.OnboardingLive.UserRegistration.New do
 
   alias EasyBillsWeb.CommonComponents.Icons
   alias EasyBillsWeb.CoreComponents
+  alias EasyBillsWeb.OnboardingLive.Shared.NewPasswordInputComponent
   alias EasyBillsWeb.OnboardingLive.Shared.RegularTemplate
 
   @impl Phoenix.LiveComponent
@@ -76,13 +77,14 @@ defmodule EasyBillsWeb.OnboardingLive.UserRegistration.New do
               required
             />
             <div class="relative">
-              <.input
+              <%!-- <.input
                 field={@form[:password]}
                 type="password"
                 label="Password"
                 placeholder="Enter Your Password"
                 required
-              />
+              /> --%>
+              <NewPasswordInputComponent.new_password_input form={@form} />
             </div>
 
             <label class="flex left-0 flex-row-reverse items-center justify-between">

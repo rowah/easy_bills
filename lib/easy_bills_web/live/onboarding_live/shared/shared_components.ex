@@ -27,4 +27,57 @@ defmodule EasyBillsWeb.OnboardingLive.Shared.SharedComponents do
     </div>
     """
   end
+
+  @spec password_criteria_icon(assigns()) :: output()
+  def password_criteria_icon(assigns) do
+    ~H"""
+    <svg
+      width="14"
+      height="10"
+      viewBox="0 0 14 10"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      class={@class}
+    >
+      <path
+        d="M12.3334 1.66675L5.00008 9.00008L1.66675 5.66675"
+        stroke={@stroke_color}
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+    """
+  end
+
+  attr :class, :string, default: nil
+
+  @spec password_criteria_not_met_icon(assigns()) :: output()
+  def password_criteria_not_met_icon(assigns) do
+    ~H"""
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      class={@class}
+    >
+      <path
+        d="M12 4L4 12"
+        stroke="#FE888D"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M4 4L12 12"
+        stroke="#FE888D"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+    """
+  end
 end
