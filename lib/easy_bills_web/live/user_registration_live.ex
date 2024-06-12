@@ -1,13 +1,13 @@
 defmodule EasyBillsWeb.UserRegistrationLive do
+  alias EasyBillsWeb.OnboardingLive.UserRegistration
   use EasyBillsWeb, :live_view
 
   alias EasyBills.Accounts
   alias EasyBills.Accounts.User
-  alias EasyBillsWeb.CommonComponents.Icons
-  alias EasyBillsWeb.CoreComponents
+  alias EasyBillsWeb.OnboardingLive.Shared.SharedComponents
+  alias EasyBillsWeb.OnboardingLive.UserRegistration
 
   @impl Phoenix.LiveView
-
   def mount(_params, _session, socket) do
     changeset = Accounts.change_user_registration(%User{})
 
@@ -23,126 +23,19 @@ defmodule EasyBillsWeb.UserRegistrationLive do
   @impl Phoenix.LiveView
   def render(%{template: :new} = assigns) do
     ~H"""
-    <div class="flex">
-      <div class="w-1/2 hidden lg:block">
-        <img
-          src={~p"/images/section-invoice.png"}
-          alt="EasyBills Image"
-          class="object-cover w-full h-full"
-        />
-      </div>
-      <div class="md:w-[30%] mx-auto mt-16 h-[100vh]">
-        <.link
-          href={~p"/"}
-          id="back-icon"
-          class="flex text-purple-600 absolute mt-[-6%] lg:mt-[-2%] lg:ml-[-8%]"
-        >
-          <CoreComponents.back_icon /> <span class="mt-[-2px] ml-1">Back</span>
-        </.link>
-        <div class="flex mb-6 hidden lg:block">
-          <div class="flex">
-            <Icons.logo_icon />
-            <h2 class="text-6xl font-bold ml-3 text-purple-600 mt-3">EasyBills</h2>
-          </div>
-        </div>
-        <h3 class="text-center font-bold text-3xl">
-          Create an account
-        </h3>
-        <p>Begin creating invoices for free!</p>
-
-        <.simple_form
-          for={@form}
-          id="registration_form"
-          phx-submit="save"
-          phx-change="validate"
-          phx-trigger-action={@trigger_submit}
-          action={~p"/login?_action=registered"}
-          method="post"
-          class="mt-[-20px]"
-        >
-          <.error :if={@check_errors}>
-            Oops, something went wrong! Please check the errors below.
-          </.error>
-
-          <div class="lg:flex justify-between">
-            <div class="sm:mb-4 lg:mb-0">
-              <.input
-                field={@form[:name]}
-                type="text"
-                label="Name"
-                placeholder="Enter Your Name"
-                required
-              />
-            </div>
-            <.input
-              field={@form[:username]}
-              type="text"
-              label="Username"
-              placeholder="Enter Your Username"
-              required
-            />
-          </div>
-          <.input
-            field={@form[:email]}
-            type="email"
-            label="Email"
-            placeholder="Enter Your Email"
-            required
-          />
-          <div class="relative">
-            <.input
-              field={@form[:password]}
-              type="password"
-              label="Password"
-              placeholder="Enter Your Password"
-              required
-            />
-          </div>
-
-          <label class="flex left-0 flex-row-reverse items-center justify-between">
-            <span>
-              I agree with EasyBills' <.link>Terms of Use</.link> and <.link>Privacy Policy</.link>
-            </span>
-            <.input field={@form[:policy_and_terms]} type="checkbox" />
-          </label>
-
-          <:actions>
-            <.button phx-disable-with="Creating account..." class="w-full">
-              Sign Up
-            </.button>
-          </:actions>
-        </.simple_form>
-        <p class="mt-6 ml-[20%]">
-          Already have an account?
-          <.link navigate={~p"/login"} class="font-semibold text-purple-400 hover:underline">
-            Sign in
-          </.link>
-        </p>
-      </div>
-    </div>
+    <.live_component
+      module={UserRegistration.New}
+      id="registration_form"
+      form={@form}
+      check_errors={@check_errors}
+      trigger_submit={@trigger_submit}
+    />
     """
   end
 
   def render(%{template: :success} = assigns) do
     ~H"""
-    <div
-      id="confirmation_instructions"
-      class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden py-6 sm:py-12 bg-white"
-    >
-      <div class="max-w-xl px-5 text-center bg-purple-200 rounded-lg">
-        <h2 class="mb-2 text-[42px] font-bold text-zinc-800">Confirm your Email Address</h2>
-        <p class="mb-2 text-lg text-zinc-500 leading-loose">
-          We've sent a confirmation email to <span class="font-medium text-indigo-500"><%= @form.data.email %></span>. Please follow the link in the message to confirm your email address. If you did not receive the email, please check your spam folder or:
-        </p>
-        <.button
-          phx-click="resend_confirmation"
-          phx-disable-with="Resending link..."
-          class="w-full mb-12"
-        >
-          Resend Confirmation Instruction
-        </.button>
-      </div>
-    </div>
+    <SharedComponents.registration_success_page form={@form} title="Confirm your Email Address" />
     """
   end
 

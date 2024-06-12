@@ -1,4 +1,6 @@
 /_build/
+build
+.elixir_ls
 /.elixir_ls/
 /.git/
 /config/
