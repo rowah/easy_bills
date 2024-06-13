@@ -18,7 +18,7 @@ defmodule EasyBillsWeb.OnboardingLive.UserRegistration.New do
     ~H"""
     <div>
       <RegularTemplate.regular socket={@socket}>
-        <div class="md:w-[30%] mx-auto mt-16 h-[100vh]">
+        <div class="mx-auto mt-16 h-[100vh]">
           <.link
             href={~p"/"}
             id="back-icon"
@@ -77,21 +77,17 @@ defmodule EasyBillsWeb.OnboardingLive.UserRegistration.New do
               required
             />
             <div class="relative">
-              <%!-- <.input
-                field={@form[:password]}
-                type="password"
-                label="Password"
-                placeholder="Enter Your Password"
-                required
-              /> --%>
               <NewPasswordInputComponent.new_password_input form={@form} />
             </div>
 
-            <label class="flex left-0 flex-row-reverse items-center justify-between">
-              <span>
-                I agree with EasyBills' <.link>Terms of Use</.link> and <.link>Privacy Policy</.link>
+            <label class="flex flex-col left-0 flex-row-reverse items-center justify-between">
+              <span class="flex space-x-2 flex-row-reverse">
+                <.input
+                  field={@form[:policy_and_terms]}
+                  type="checkbox"
+                  label="I agree with EasyBills' Terms of Use and Privacy Policy"
+                />
               </span>
-              <.input field={@form[:policy_and_terms]} type="checkbox" />
             </label>
 
             <:actions>

@@ -31,7 +31,7 @@ defmodule EasyBillsWeb.UserAddressLive do
           class="object-cover w-full h-full"
         />
       </div>
-      <div class="md:w-[30%] mx-auto mt-16">
+      <div class="mx-auto mt-16">
         <.link
           href={~p"/welcome"}
           id="back-icon"

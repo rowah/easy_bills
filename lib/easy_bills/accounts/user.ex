@@ -46,6 +46,7 @@ defmodule EasyBills.Accounts.User do
     |> validate_required([:name, :username])
     |> validate_email(opts)
     |> validate_password(opts)
+    |> validate_acceptance(:policy_and_terms, message: "You must accept the terms and policy")
   end
 
   defp validate_email(changeset, opts) do

@@ -36,7 +36,7 @@ defmodule EasyBillsWeb.UserWelcomeLive do
           class="object-cover w-full h-full"
         />
       </div>
-      <div class="md:w-[30%] mx-auto mt-16" id="avatar-image-container" phx-hook="UserAvatar">
+      <div class="mx-auto mt-16" id="avatar-image-container" phx-hook="UserAvatar">
         <div class="flex mb-14 hidden lg:block">
           <div class="flex">
             <Icons.logo_icon />
