@@ -5,6 +5,7 @@ defmodule EasyBillsWeb.UserAddressLive do
   alias EasyBills.Accounts.User
   alias EasyBillsWeb.CommonComponents.Icons
   alias EasyBillsWeb.CoreComponents
+  alias EasyBillsWeb.OnboardingLive.Shared.RegularTemplate
 
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
@@ -23,14 +24,7 @@ defmodule EasyBillsWeb.UserAddressLive do
   @impl Phoenix.LiveView
   def render(assigns) do
     ~H"""
-    <div class="flex">
-      <div class="w-1/2 h-screen hidden lg:block">
-        <img
-          src={~p"/images/section-invoice.png"}
-          alt="EasyBills Image"
-          class="object-cover w-full h-full"
-        />
-      </div>
+    <RegularTemplate.regular>
       <div class="mx-auto mt-16">
         <.link
           href={~p"/welcome"}
@@ -89,7 +83,7 @@ defmodule EasyBillsWeb.UserAddressLive do
           </div>
         </.simple_form>
       </div>
-    </div>
+    </RegularTemplate.regular>
     """
   end
 

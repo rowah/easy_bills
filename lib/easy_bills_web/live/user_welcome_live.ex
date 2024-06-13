@@ -5,6 +5,7 @@ defmodule EasyBillsWeb.UserWelcomeLive do
 
   alias EasyBills.Accounts.User
   alias EasyBillsWeb.CommonComponents.Icons
+  alias EasyBillsWeb.OnboardingLive.Shared.RegularTemplate
 
   import Phoenix.HTML.Form
 
@@ -28,14 +29,7 @@ defmodule EasyBillsWeb.UserWelcomeLive do
   @impl Phoenix.LiveView
   def render(assigns) do
     ~H"""
-    <div class="flex">
-      <div class="w-1/2 h-screen hidden lg:block">
-        <img
-          src={~p"/images/section-invoice.png"}
-          alt="EasyBills Image"
-          class="object-cover w-full h-full"
-        />
-      </div>
+    <RegularTemplate.regular>
       <div class="mx-auto mt-16" id="avatar-image-container" phx-hook="UserAvatar">
         <div class="flex mb-14 hidden lg:block">
           <div class="flex">
@@ -92,7 +86,7 @@ defmodule EasyBillsWeb.UserWelcomeLive do
           <% end %>
         <% end %>
       </section>
-    </div>
+    </RegularTemplate.regular>
     """
   end
 

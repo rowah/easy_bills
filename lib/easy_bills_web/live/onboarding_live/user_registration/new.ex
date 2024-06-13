@@ -18,7 +18,7 @@ defmodule EasyBillsWeb.OnboardingLive.UserRegistration.New do
     ~H"""
     <div>
       <RegularTemplate.regular socket={@socket}>
-        <div class="mx-auto mt-16 h-[100vh]">
+        <div class="mx-auto mt-16">
           <.link
             href={~p"/"}
             id="back-icon"

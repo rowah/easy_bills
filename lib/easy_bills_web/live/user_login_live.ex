@@ -5,17 +5,11 @@ defmodule EasyBillsWeb.UserLoginLive do
 
   alias EasyBillsWeb.CommonComponents.Icons
   alias EasyBillsWeb.CoreComponents
+  alias EasyBillsWeb.OnboardingLive.Shared.RegularTemplate
 
   def render(assigns) do
     ~H"""
-    <div class="flex">
-      <div class="w-1/2 h-screen hidden lg:block">
-        <img
-          src={~p"/images/section-invoice.png"}
-          alt="Placeholder Image"
-          class="object-cover w-full h-full"
-        />
-      </div>
+    <RegularTemplate.regular>
       <div class="lg:w-[26%] mx-auto">
         <.link href={~p"/"} id="back-icon" class="flex text-purple-600 absolute mt-6 ml-[-8%]">
           <CoreComponents.back_icon /> <span class="mt-[-2px] ml-1">Back</span>
@@ -111,7 +105,7 @@ defmodule EasyBillsWeb.UserLoginLive do
           </.link>
         </button>
       </div>
-    </div>
+    </RegularTemplate.regular>
     """
   end
 

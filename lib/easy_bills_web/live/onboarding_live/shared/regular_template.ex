@@ -14,7 +14,7 @@ defmodule EasyBillsWeb.OnboardingLive.Shared.RegularTemplate do
         <img
           src={~p"/images/section-invoice.png"}
           alt="EasyBills Image"
-          class="object-cover w-full h-full"
+          class="object-cover w-full h-[100vh]"
         />
       </div>
       <%= render_slot(@inner_block) %>

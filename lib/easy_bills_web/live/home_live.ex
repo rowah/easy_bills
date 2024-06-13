@@ -4,17 +4,11 @@ defmodule EasyBillsWeb.HomeLive do
   use EasyBillsWeb, :live_view
 
   alias EasyBillsWeb.CommonComponents.Icons
+  alias EasyBillsWeb.OnboardingLive.Shared.RegularTemplate
 
   def render(assigns) do
     ~H"""
-    <div class="flex">
-      <div class="w-1/2 h-screen hidden lg:block">
-        <img
-          src={~p"/images/section-invoice.png"}
-          alt="EasyBills Image"
-          class="object-cover w-full h-full"
-        />
-      </div>
+    <RegularTemplate.regular>
       <div class="mx-auto mt-16 items-center justify-center mx-w-md">
         <div class="flex mb-20">
           <Icons.logo_icon />
@@ -100,7 +94,7 @@ defmodule EasyBillsWeb.HomeLive do
           </p>
         </div>
       </div>
-    </div>
+    </RegularTemplate.regular>
     """
   end
 end
