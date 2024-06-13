@@ -26,7 +26,7 @@ defmodule EasyBillsWeb.UserLoginLiveTest do
 
   describe "user login" do
     test "redirects if user login with valid credentials", %{conn: conn} do
-      password = "123456789abcD"
+      password = "123456789abcD@"
       user = user_fixture(%{password: password})
 
       {:ok, lv, _html} = live(conn, ~p"/login")

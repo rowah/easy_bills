@@ -5,13 +5,14 @@ defmodule EasyBills.AccountsFixtures do
   """
 
   def unique_user_email, do: "user#{System.unique_integer()}@example.com"
-  def valid_user_password, do: "NewvalidPassword!1"
+  def valid_user_password, do: "NewvalidPassword!1@"
 
   def valid_user_attributes(attrs \\ %{}) do
     Enum.into(attrs, %{
       email: unique_user_email(),
       name: "John",
       password: valid_user_password(),
+      policy_and_terms: true,
       username: "Doe"
     })
   end

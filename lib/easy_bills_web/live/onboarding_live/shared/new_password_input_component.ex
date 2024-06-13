@@ -109,7 +109,7 @@ defmodule EasyBillsWeb.OnboardingLive.Shared.NewPasswordInputComponent do
         />
 
         <.password_condition
-          description="Uppercase"
+          description="upper - case"
           password_input_errors={@password_input_errors}
           condition={:uppercase}
         />
@@ -117,7 +117,7 @@ defmodule EasyBillsWeb.OnboardingLive.Shared.NewPasswordInputComponent do
 
       <div class="grid gap-y-2">
         <.password_condition
-          description="Number"
+          description="number"
           password_input_errors={@password_input_errors}
           condition={:digit}
         />
