@@ -17,9 +17,8 @@ defmodule EasyBillsWeb.UserForgotPasswordLive do
         >
           <CoreComponents.back_icon /> <span class="mt-[-2px] ml-1">Back</span>
         </.link>
-        <div class="flex mt-16">
+        <div class="flex mb-4 hidden lg:block">
           <Icons.logo_icon />
-          <h2 class="text-6xl font-bold ml-3 text-purple-600 mt-3">EasyBills</h2>
         </div>
         <.header class="text-center">
           Forgot password?

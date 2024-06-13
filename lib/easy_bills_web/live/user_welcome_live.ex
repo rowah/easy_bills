@@ -31,11 +31,8 @@ defmodule EasyBillsWeb.UserWelcomeLive do
     ~H"""
     <RegularTemplate.regular>
       <div class="mx-auto mt-16" id="avatar-image-container" phx-hook="UserAvatar">
-        <div class="flex mb-14 hidden lg:block">
-          <div class="flex">
-            <Icons.logo_icon />
-            <h2 class="text-6xl font-bold ml-3 text-purple-600 mt-3">EasyBills</h2>
-          </div>
+        <div class="flex mb-4 hidden lg:block">
+          <Icons.logo_icon />
         </div>
         <h3 class="font-bold text-2xl">
           Welcome! Let's create your profile.

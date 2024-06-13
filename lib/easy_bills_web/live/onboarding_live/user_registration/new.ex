@@ -26,11 +26,8 @@ defmodule EasyBillsWeb.OnboardingLive.UserRegistration.New do
           >
             <CoreComponents.back_icon /> <span class="mt-[-2px] ml-1">Back</span>
           </.link>
-          <div class="flex mb-6 hidden lg:block">
-            <div class="flex">
-              <Icons.logo_icon />
-              <h2 class="text-6xl font-bold ml-3 text-purple-600 mt-3">EasyBills</h2>
-            </div>
+          <div class="flex mb-4 hidden lg:block">
+            <Icons.logo_icon />
           </div>
           <h3 class="text-center font-bold text-3xl">
             Create an account

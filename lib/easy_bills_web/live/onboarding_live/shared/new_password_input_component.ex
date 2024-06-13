@@ -38,7 +38,6 @@ defmodule EasyBillsWeb.OnboardingLive.Shared.NewPasswordInputComponent do
       |> Stream.filter(fn {key, _message} -> key == :password end)
       |> Enum.reduce([], fn {_key, {message, _validation}}, acc ->
         case message do
-          # "must have at least one lowercase character" -> [:lowercase | acc]
           "must have at least one upper-case character" -> [:uppercase | acc]
           "must be at least 8+ characters" -> [:length | acc]
           "must have at least one special character (*#$%&!-@)" -> [:special_character | acc]
@@ -59,7 +58,6 @@ defmodule EasyBillsWeb.OnboardingLive.Shared.NewPasswordInputComponent do
   end
 
   defp color_errors(password_condition_errors, condition) do
-    # condition in password_condition_errors \\ :blank in password_input_errors,
     if Enum.member?(password_condition_errors, condition) ||
          Enum.member?(password_condition_errors, :blank),
        do: "phx-no-feedback:text-gray-500 text-red-500",
