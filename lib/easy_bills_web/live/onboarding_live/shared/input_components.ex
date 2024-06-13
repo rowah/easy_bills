@@ -40,7 +40,7 @@ defmodule EasyBillsWeb.OnboardingLive.Shared.InputComponents do
   @spec input_field(assigns()) :: output()
   def input_field(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do
     assigns
-    |> assign(:id, assigns.id || field.id)
+    |> assign(field: nil, id: assigns.id || field.id)
     |> assign(:errors, Enum.map(field.errors, &CoreComponents.translate_error(&1)))
     |> assign_new(:name, fn -> field.name end)
     |> assign_new(:value, fn -> field.value end)
@@ -90,23 +90,14 @@ defmodule EasyBillsWeb.OnboardingLive.Shared.InputComponents do
   def input_field(%{label_type: "icon"} = assigns) do
     ~H"""
     <div phx-feedback-for={@name} class={@class}>
-      <div class={[
-        "input-field-with-icon-label appearance-none shadow-box rounded-lg focus:outline-none focus:shadow-focus border-2 border-error overflow-hidden phx-no-feedback:border-opacity-0",
-        @errors == [] && "border-opacity-0",
-        @errors == [] && "border-opacity-100",
-        @input_class
-      ]}>
-        <%= render_slot(@inner_block) %>
-      </div>
-
       <input
         type={@type}
         name={@name}
         id={@id}
         value={Phoenix.HTML.Form.normalize_value(@type, @value)}
         class={[
-          "input-field w-full h-full font-sohne-leicht text-sm border-0 focus:ring-0 phx-no-feedback:text-gray-400 phx-no-feedback:placeholder:text-gray-400",
-          @errors == [] && "placeholder:text-gray-400",
+          "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-0 sm:text-sm sm:leading-6 phx-no-feedback:border-zinc-300 phx-no-feedback:focus:border-zinc-400 border-zinc-300 focus:border-zinc-400",
+          @errors == [] && "placeholder:text-gray-500",
           @errors != [] && "placeholder:text-red-500 text-error"
         ]}
         {@rest}

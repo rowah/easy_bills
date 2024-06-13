@@ -38,12 +38,11 @@ defmodule EasyBillsWeb.OnboardingLive.Shared.NewPasswordInputComponent do
       |> Stream.filter(fn {key, _message} -> key == :password end)
       |> Enum.reduce([], fn {_key, {message, _validation}}, acc ->
         case message do
-          "must have at least one lowercase character" -> [:lowercase | acc]
-          "must have at least one uppercase character" -> [:uppercase | acc]
-          "should be at least %{count} character(s)" -> [:length | acc]
-          "must have at least one special character" -> [:special | acc]
+          # "must have at least one lowercase character" -> [:lowercase | acc]
+          "must have at least one upper-case character" -> [:uppercase | acc]
+          "must be at least 8+ characters" -> [:length | acc]
+          "must have at least one special character (*#$%&!-@)" -> [:special_character | acc]
           "must have at least 1 digit" -> [:digit | acc]
-          "must have at least one letter" -> [:letter | acc]
           "can't be blank" -> [:blank | acc]
         end
       end)
@@ -70,6 +69,20 @@ defmodule EasyBillsWeb.OnboardingLive.Shared.NewPasswordInputComponent do
   defp password_condition_icon(assigns) do
     ~H"""
     <%= if Enum.empty?(@errors) do %>
+      <SharedComponents.password_criteria_icon
+        stroke_color="#D9D9D9"
+        class="hidden phx-no-feedback:block"
+      />
+      <SharedComponents.password_criteria_icon stroke_color="#4CAF50" class="phx-no-feedback:hidden" />
+    <% else %>
+      <.set_error_icon errors={@errors} condition={@condition} />
+    <% end %>
+    """
+  end
+
+  defp set_error_icon(assigns) do
+    ~H"""
+    <%= if (@condition in @errors || :blank in @errors) do %>
       <SharedComponents.password_criteria_not_met_icon class="phx-no-feedback:hidden" />
       <SharedComponents.password_criteria_icon
         stroke_color="#D9D9D9"
@@ -96,7 +109,7 @@ defmodule EasyBillsWeb.OnboardingLive.Shared.NewPasswordInputComponent do
         />
 
         <.password_condition
-          description="One uppercase letter"
+          description="Uppercase"
           password_input_errors={@password_input_errors}
           condition={:uppercase}
         />
@@ -104,15 +117,15 @@ defmodule EasyBillsWeb.OnboardingLive.Shared.NewPasswordInputComponent do
 
       <div class="grid gap-y-2">
         <.password_condition
-          description="One lowercase letter"
+          description="Number"
           password_input_errors={@password_input_errors}
-          condition={:lowercase}
+          condition={:digit}
         />
 
         <.password_condition
-          description="One special character"
+          description="special character (*#$%&!-@)"
           password_input_errors={@password_input_errors}
-          condition={:special}
+          condition={:special_character}
         />
       </div>
     </ul>
