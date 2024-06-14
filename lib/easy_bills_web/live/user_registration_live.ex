@@ -67,6 +67,21 @@ defmodule EasyBillsWeb.UserRegistrationLive do
     {:noreply, assign_form(socket, Map.put(changeset, :action, :validate))}
   end
 
+  def handle_event("resend_confirmation", %{"user_email" => user_email}, socket) do
+    case Accounts.get_user_by_email(user_email) do
+      user ->
+        Accounts.deliver_user_confirmation_instructions(
+          user,
+          &url(~p"/confirm/#{&1}")
+        )
+
+        {:noreply,
+         socket
+         |> put_flash(:info, "Confirmation instructions to email resent successfully.")
+         |> redirect(to: ~p"/")}
+    end
+  end
+
   defp assign_form(socket, %Ecto.Changeset{} = changeset) do
     form = to_form(changeset, as: "user")
 

@@ -17,9 +17,11 @@ defmodule EasyBillsWeb.OnboardingLive.Shared.SharedComponents do
           We've sent a confirmation email to <span class="font-medium text-indigo-500"><%= @form.data.email %></span>. Please follow the link in the message to confirm your email address. If you did not receive the email, please check your spam folder or:
         </p>
         <.button
+          id="resend_confirmation"
           phx-click="resend_confirmation"
           phx-disable-with="Resending link..."
           class="w-full mb-12"
+          phx-value-user_email={@form.data.email}
         >
           Resend Confirmation Instruction
         </.button>
