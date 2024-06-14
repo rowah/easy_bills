@@ -1,0 +1,13 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.input-field-with-icon-label {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+}
+
+.input-field {
+  grid-column: 1/-1;
+  grid-row: 1/-1;
+}

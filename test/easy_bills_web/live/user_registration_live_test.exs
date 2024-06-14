@@ -37,7 +37,7 @@ defmodule EasyBillsWeb.UserRegistrationLiveTest do
   end
 
   describe "register user" do
-    test "creates account and directs user to check their email to confirm their email address",
+    test "creates account and directs user to check their email to confirm their email address and resends confirmation instructions",
          %{conn: conn} do
       {:ok, lv, _html} = live(conn, ~p"/register")
       email = unique_user_email()
@@ -49,6 +49,15 @@ defmodule EasyBillsWeb.UserRegistrationLiveTest do
 
       assert result =~ "Please follow the link in the message to confirm your email address"
       assert result =~ "Resend Confirmation Instruction"
+
+      {:ok, conn} =
+        lv
+        |> element("#resend_confirmation")
+        |> render_click()
+        |> follow_redirect(conn, ~p"/")
+
+      assert conn.resp_body =~ "Confirmation instructions to email resent successfully."
+      assert conn.resp_body =~ "Sign in to EasyBills"
     end
 
     test "renders errors for duplicated email", %{conn: conn} do
@@ -91,8 +100,8 @@ defmodule EasyBillsWeb.UserRegistrationLiveTest do
         )
         |> render_change()
 
-      assert html =~ "special character"
-      assert html =~ "upper-case character"
+      assert html =~ "special character (*#$%&amp;!-@)"
+      assert html =~ "upper - case"
       assert html =~ "number"
       assert html =~ "8+ characters"
     end

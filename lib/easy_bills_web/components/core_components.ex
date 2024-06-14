@@ -358,49 +358,6 @@ defmodule EasyBillsWeb.CoreComponents do
     """
   end
 
-  # def input(%{type: "password"} = assigns) do
-  #   ~H"""
-  #   <div phx-feedback-for={@name}>
-  #     <span class="absolute inset-y-0 right-0 top-8 flex items-center pr-3 text-gray-700 cursor-pointer">
-  #       <.icon name="hero-eye" />
-  #       <.icon name="hero-eye-slash" class="hidden" />
-  #     </span>
-  #     <div>
-  #       <%!-- <.label for={@id}><%= @label %></.label> --%>
-  #       <label for={@id} class="block text-sm font-semibold leading-6 text-zinc-800">
-  #         Password
-  #       </label>
-  #       <input
-  #         type={@type}
-  #         name={@name}
-  #         id={@id}
-  #         value={Phoenix.HTML.Form.normalize_value(@type, @value)}
-  #         class={[
-  #           "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-0 sm:text-sm sm:leading-6",
-  #           "phx-no-feedback:border-zinc-300 phx-no-feedback:focus:border-zinc-400",
-  #           @errors == [] && "border-zinc-300 focus:border-zinc-400",
-  #           @errors != [] && "border-rose-400 focus:border-rose-400"
-  #         ]}
-  #         {@rest}
-  #       />
-  #       <%!-- <%= @name %> -name <%= @id %> -id <%= @type %> -type
-  #       user[password] -name user_password -id password -type --%>
-  #     </div>
-  #     <div class="flex flex-wrap">
-  #       <%!-- <.error :for={msg <- @errors}><%= msg %></.error> --%>
-  #       <p
-  #         :for={msg <- @errors}
-  #         class="mt-3 flex gap-3 w-1/2 text-sm leading-6 text-black items-center"
-  #       >
-  #         <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-  #         <%!-- <.icon name="hero-exclamation-circle-mini" class="mt-0.5 h-5 w-5 flex-none" /> --%>
-  #         <%= msg %>
-  #       </p>
-  #     </div>
-  #   </div>
-  #   """
-  # end
-
   # All other inputs text, datetime-local, url, password, etc. are handled here...
   def input(assigns) do
     ~H"""
@@ -415,7 +372,7 @@ defmodule EasyBillsWeb.CoreComponents do
           "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-0 sm:text-sm sm:leading-6",
           "phx-no-feedback:border-zinc-300 phx-no-feedback:focus:border-zinc-400",
           @errors == [] && "border-zinc-300 focus:border-zinc-400",
-          @errors != [] && "border-rose-400 focus:border-rose-400"
+          @errors != [] && "border-rose-400 focus:border-rose-400 placeholder:text-red-500 text-error"
         ]}
         {@rest}
       />
@@ -447,7 +404,7 @@ defmodule EasyBillsWeb.CoreComponents do
 
   def error(assigns) do
     ~H"""
-    <p class="mt-3 flex gap-1 text-sm leading-6 text-rose-600">
+    <p class="phx-no-feedback:hidden mt-3 flex gap-1 text-sm leading-6 text-rose-600">
       <.icon name="hero-exclamation-circle-mini" class="mt-0.5 h-5 w-5 flex-none" />
       <%= render_slot(@inner_block) %>
     </p>

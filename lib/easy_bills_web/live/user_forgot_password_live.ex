@@ -4,17 +4,11 @@ defmodule EasyBillsWeb.UserForgotPasswordLive do
   alias EasyBills.Accounts
   alias EasyBillsWeb.CommonComponents.Icons
   alias EasyBillsWeb.CoreComponents
+  alias EasyBillsWeb.OnboardingLive.Shared.RegularTemplate
 
   def render(assigns) do
     ~H"""
-    <div class="flex">
-      <div class="w-1/2 h-screen hidden lg:block">
-        <img
-          src={~p"/images/section-invoice.png"}
-          alt="Placeholder Image"
-          class="object-cover w-full h-full"
-        />
-      </div>
+    <RegularTemplate.regular>
       <div class="my-auto mx-auto space-y-16 max-w-md">
         <.link
           href={~p"/login"}
@@ -23,9 +17,8 @@ defmodule EasyBillsWeb.UserForgotPasswordLive do
         >
           <CoreComponents.back_icon /> <span class="mt-[-2px] ml-1">Back</span>
         </.link>
-        <div class="flex mt-16">
+        <div class="flex mb-4 hidden lg:block">
           <Icons.logo_icon />
-          <h2 class="text-6xl font-bold ml-3 text-purple-600 mt-3">EasyBills</h2>
         </div>
         <.header class="text-center">
           Forgot password?
@@ -48,7 +41,7 @@ defmodule EasyBillsWeb.UserForgotPasswordLive do
           <.link href={~p"/register"}>Register</.link> | <.link href={~p"/login"}>Log in</.link>
         </p>
       </div>
-    </div>
+    </RegularTemplate.regular>
     """
   end
 

@@ -46,6 +46,7 @@ defmodule EasyBills.Accounts.User do
     |> validate_required([:name, :username])
     |> validate_email(opts)
     |> validate_password(opts)
+    |> validate_acceptance(:policy_and_terms, message: "You must accept the terms and policy")
   end
 
   defp validate_email(changeset, opts) do
@@ -59,11 +60,15 @@ defmodule EasyBills.Accounts.User do
   defp validate_password(changeset, opts) do
     changeset
     |> validate_required([:password])
-    |> validate_length(:password, min: 8, message: "8+ characters")
+    |> validate_length(:password, min: 8, message: "must be at least 8+ characters")
     |> validate_length(:password, max: 72, message: "at most 72 character(s)")
-    |> validate_format(:password, ~r/[0-9]/, message: "number")
-    |> validate_format(:password, ~r/[A-Z]/, message: "upper-case character")
-    |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/, message: "special character (*#$%&!-@)")
+    |> validate_format(:password, ~r/[0-9]/, message: "must have at least 1 digit")
+    |> validate_format(:password, ~r/[A-Z]/,
+      message: "must have at least one upper-case character"
+    )
+    |> validate_format(:password, ~r/[!?@#$%^&*_]/,
+      message: "must have at least one special character (*#$%&!-@)"
+    )
     |> maybe_hash_password(opts)
   end
 

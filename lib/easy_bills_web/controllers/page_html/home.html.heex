@@ -1,15 +1,6 @@
 <.flash_group flash={@flash} />
-<div class="flex">
-  <div class="w-1/2 h-screen hidden lg:block mb-4">
-    <img
-      src={~p"/images/section-invoice.png"}
-      alt="Placeholder Image"
-      class="object-cover w-full h-full"
-    />
-  </div>
-  <%!-- mx-auto my-auto max-w-sm sm:mt-10 --%>
+<RegularTemplate.regular>
   <div class="my-auto max-w-sm mx-auto">
-    <%!-- <ul class="relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end"> --%>
     <%= if @current_user do %>
       <div class="space-y-4">
         <div class="flex md:mt-32 lg:mt-0">
@@ -112,25 +103,6 @@
           </p>
         </div>
       </div>
-      <%!-- <li>
-          <.link
-            href={~p"/register"}
-            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
-          >
-            Register
-          </.link>
-        </li>
-        <li>
-          <.link
-            href={~p"/login"}
-            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
-          >
-            Log in
-          </.link>
-        </li> --%>
     <% end %>
-    <%!-- </ul> --%>
   </div>
-</div>
-<!-- component -->
-<!-- Right: Login Form -->
+</RegularTemplate.regular>

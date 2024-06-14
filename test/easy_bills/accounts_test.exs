@@ -64,9 +64,9 @@ defmodule EasyBills.AccountsTest do
       assert %{
                email: ["Please enter a valid email address"],
                password: [
-                 "special character (*#$%&!-@)",
-                 "upper-case character",
-                 "number"
+                 "must have at least one special character (*#$%&!-@)",
+                 "must have at least one upper-case character",
+                 "must have at least 1 digit"
                ],
                name: ["can't be blank"],
                username: ["can't be blank"]
@@ -274,9 +274,9 @@ defmodule EasyBills.AccountsTest do
 
       assert %{
                password: [
-                 "special character (*#$%&!-@)",
-                 "upper-case character",
-                 "number"
+                 "must have at least one special character (*#$%&!-@)",
+                 "must have at least one upper-case character",
+                 "must have at least 1 digit"
                ],
                password_confirmation: ["does not match password"]
              } = errors_on(changeset)
@@ -487,9 +487,9 @@ defmodule EasyBills.AccountsTest do
 
       assert %{
                password: [
-                 "special character (*#$%&!-@)",
-                 "upper-case character",
-                 "number"
+                 "must have at least one special character (*#$%&!-@)",
+                 "must have at least one upper-case character",
+                 "must have at least 1 digit"
                ],
                password_confirmation: ["does not match password"]
              } = errors_on(changeset)
