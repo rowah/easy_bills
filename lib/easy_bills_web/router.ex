@@ -73,7 +73,6 @@ defmodule EasyBillsWeb.Router do
       live "/settings/confirm_email/:token", UserSettingsLive, :confirm_email
       live "/welcome", UserWelcomeLive
       live "/address", UserAddressLive
-      # live "/invoices", InvoicesLive
       live "/invoices", InvoiceLive.Index, :index
       live "/invoices/new", InvoiceLive.Index, :new
       live "/invoices/:id/edit", InvoiceLive.Index, :edit

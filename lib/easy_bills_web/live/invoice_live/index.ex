@@ -3,10 +3,15 @@ defmodule EasyBillsWeb.InvoiceLive.Index do
 
   alias EasyBills.Billing
   alias EasyBills.Billing.Invoice
+  alias EasyBillsWeb.CommonComponents.Icons
+  alias EasyBillsWeb.InvoiceComponents.EmptyInvoice
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :invoices, Billing.list_invoices())}
+    {:ok,
+     socket
+     |> stream_configure(:invoices, dom_id: &"invoice-#{&1.id}")
+     |> stream(:invoices, Billing.list_invoices())}
   end
 
   @impl true

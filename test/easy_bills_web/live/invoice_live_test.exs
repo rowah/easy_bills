@@ -4,9 +4,30 @@ defmodule EasyBillsWeb.InvoiceLiveTest do
   import Phoenix.LiveViewTest
   import EasyBills.BillingFixtures
 
-  @create_attrs %{amount: "some amount", client: %{}, description: "some description", due_at: "2024-06-14", from: %{}, status: "some status"}
-  @update_attrs %{amount: "some updated amount", client: %{}, description: "some updated description", due_at: "2024-06-15", from: %{}, status: "some updated status"}
-  @invalid_attrs %{amount: nil, client: nil, description: nil, due_at: nil, from: nil, status: nil}
+  @create_attrs %{
+    amount: "some amount",
+    client: %{},
+    description: "some description",
+    due_at: "2024-06-14",
+    from: %{},
+    status: "some status"
+  }
+  @update_attrs %{
+    amount: "some updated amount",
+    client: %{},
+    description: "some updated description",
+    due_at: "2024-06-15",
+    from: %{},
+    status: "some updated status"
+  }
+  @invalid_attrs %{
+    amount: nil,
+    client: nil,
+    description: nil,
+    due_at: nil,
+    from: nil,
+    status: nil
+  }
 
   defp create_invoice(_) do
     invoice = invoice_fixture()

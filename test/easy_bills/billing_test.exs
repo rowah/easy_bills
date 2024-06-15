@@ -8,7 +8,14 @@ defmodule EasyBills.BillingTest do
 
     import EasyBills.BillingFixtures
 
-    @invalid_attrs %{amount: nil, client: nil, description: nil, due_at: nil, from: nil, status: nil}
+    @invalid_attrs %{
+      amount: nil,
+      client: nil,
+      description: nil,
+      due_at: nil,
+      from: nil,
+      status: nil
+    }
 
     test "list_invoices/0 returns all invoices" do
       invoice = invoice_fixture()
@@ -21,7 +28,14 @@ defmodule EasyBills.BillingTest do
     end
 
     test "create_invoice/1 with valid data creates a invoice" do
-      valid_attrs = %{amount: "some amount", client: %{}, description: "some description", due_at: ~D[2024-06-14], from: %{}, status: "some status"}
+      valid_attrs = %{
+        amount: "some amount",
+        client: %{},
+        description: "some description",
+        due_at: ~D[2024-06-14],
+        from: %{},
+        status: "some status"
+      }
 
       assert {:ok, %Invoice{} = invoice} = Billing.create_invoice(valid_attrs)
       assert invoice.amount == "some amount"
@@ -38,7 +52,15 @@ defmodule EasyBills.BillingTest do
 
     test "update_invoice/2 with valid data updates the invoice" do
       invoice = invoice_fixture()
-      update_attrs = %{amount: "some updated amount", client: %{}, description: "some updated description", due_at: ~D[2024-06-15], from: %{}, status: "some updated status"}
+
+      update_attrs = %{
+        amount: "some updated amount",
+        client: %{},
+        description: "some updated description",
+        due_at: ~D[2024-06-15],
+        from: %{},
+        status: "some updated status"
+      }
 
       assert {:ok, %Invoice{} = invoice} = Billing.update_invoice(invoice, update_attrs)
       assert invoice.amount == "some updated amount"

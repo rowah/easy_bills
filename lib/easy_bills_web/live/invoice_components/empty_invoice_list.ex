@@ -1,4 +1,4 @@
-defmodule EasyBillsWeb.Invoices.EmptyInvoiceBox do
+defmodule EasyBillsWeb.InvoiceComponents.EmptyInvoice do
   @moduledoc false
 
   use EasyBillsWeb, :html
