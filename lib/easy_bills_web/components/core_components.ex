@@ -197,7 +197,7 @@ defmodule EasyBillsWeb.CoreComponents do
   def simple_form(assigns) do
     ~H"""
     <.form :let={f} for={@for} as={@as} {@rest}>
-      <div class="mt-10 space-y-8 bg-white">
+      <div class="mt-10 space-y-8">
         <%= render_slot(@inner_block, f) %>
         <div :for={action <- @actions} class="mt-2 flex items-center justify-between gap-6">
           <%= render_slot(action, f) %>
@@ -522,13 +522,15 @@ defmodule EasyBillsWeb.CoreComponents do
         <:item title="Views"><%= @post.views %></:item>
       </.list>
   """
+  attr :class, :string, default: nil
+
   slot :item, required: true do
     attr :title, :string, required: true
   end
 
   def list(assigns) do
     ~H"""
-    <div class="mt-14">
+    <div class={["mt-14", @class]}>
       <dl class="-my-4 divide-y divide-zinc-100">
         <div :for={item <- @item} class="flex gap-4 py-4 text-sm leading-6 sm:gap-8">
           <dt class="w-1/4 flex-none text-zinc-500"><%= item.title %></dt>
@@ -546,12 +548,14 @@ defmodule EasyBillsWeb.CoreComponents do
 
       <.back navigate={~p"/posts"}>Back to posts</.back>
   """
+  attr :class, :string, default: nil
+
   attr :navigate, :any, required: true
   slot :inner_block, required: true
 
   def back(assigns) do
     ~H"""
-    <div class="mt-16">
+    <div class={[@class]}>
       <.link navigate={@navigate} class="text-sm font-semibold leading-6 text-purple-500">
         <.icon name="hero-chevron-left" class="h-3 w-3" />
         <%= render_slot(@inner_block) %>

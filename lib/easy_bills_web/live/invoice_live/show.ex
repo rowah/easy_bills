@@ -18,4 +18,28 @@ defmodule EasyBillsWeb.InvoiceLive.Show do
 
   defp page_title(:show), do: "Show Invoice"
   defp page_title(:edit), do: "Edit Invoice"
+
+  defp transform_id(id) do
+    # ("#" <> id)
+    id
+    |> String.upcase()
+    |> String.slice(0, 6)
+  end
+
+  @impl true
+  def handle_event("delete", %{"id" => id}, socket) do
+    invoice = Billing.get_invoice!(id)
+    # TODO: handle result
+    {:ok, _} = Billing.delete_invoice(invoice)
+
+    {:noreply,
+     socket
+     |> stream_delete(:invoices, invoice)
+     |> push_patch(to: ~p"/invoices")}
+  end
+
+  @impl true
+  def handle_event("edit", %{"id" => id}, socket) do
+    {:noreply, push_navigate(socket, to: ~p"/invoices/#{id}/edit")}
+  end
 end
