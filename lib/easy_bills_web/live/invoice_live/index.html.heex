@@ -1,4 +1,5 @@
 <div class="bg-white">
+  <pre><%= inspect assigns.streams.invoices.inserts, pretty: true %></pre>
   <nav class="bg-black flex flex-col absolute w-58 h-full justify-between rounded-r-3xl">
     <Icons.logo_icon_white />
     <div class="space-x-auto text-center">
@@ -33,13 +34,21 @@
   </nav>
   <main class="p-5 h-[100vh] text-center tracking-tight text-black">
     <div class="flex w-1/2 justify-between mx-auto mt-6">
-      <div>
+      <div class="text-left">
         <h2 class="font-bold text-lg">Invoices</h2>
-        <h6 class="text-xs font-gray-300">No invoices</h6>
+        <%= if ![] == @streams.invoices do %>
+          <h6 class="text-xs text-gray-400">No invoices</h6>
+        <% else %>
+          <h6 class="text-xs text-gray-400">
+            There are a total of <%= length(@streams.invoices.inserts) %> invoices
+          </h6>
+        <% end %>
       </div>
       <div class="flex flex-row items-center font-bold">
-        <p class="mr-1">Filter by status</p>
-        <.icon name="hero-chevron-down" />
+        <span class="flex items-center cursor-pointer">
+          <p class="mr-1">Filter by status</p>
+          <.icon name="hero-chevron-down" class="text-purple-700 font-bold h-4 w-4" />
+        </span>
         <.link patch={~p"/invoices/new"}>
           <button class="btn bg-purple-500 rounded-full w-36 h-12 text-white flex items-center justify-between px-2 ml-6">
             <Icons.white_background_plus_icon /> New Invoice
@@ -47,12 +56,12 @@
         </.link>
       </div>
     </div>
-    <div id="invoices" class="invoices" phx-update="stream">
+    <div id="invoices" class="invoices space-y-2" phx-update="stream">
       <div id="invoices-empty-state" class="hidden only:block">
         <EmptyInvoice.empty_inbox />
       </div>
       <div :for={{dom_id, invoice} <- @streams.invoices} id={dom_id} class="invoice">
-        <%= invoice.description %>
+        <.live_component module={InvoiceComponent} invoice={invoice} id={"invoice-#{invoice.id}"} />
       </div>
     </div>
   </main>

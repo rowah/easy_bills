@@ -4,6 +4,7 @@ defmodule EasyBillsWeb.InvoiceLive.Index do
   alias EasyBills.Billing
   alias EasyBills.Billing.Invoice
   alias EasyBillsWeb.CommonComponents.Icons
+  alias EasyBillsWeb.InvoiceComponents.InvoiceComponent
   alias EasyBillsWeb.InvoiceComponents.EmptyInvoice
 
   @impl true
