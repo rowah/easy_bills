@@ -553,7 +553,7 @@ defmodule EasyBillsWeb.CoreComponents do
     ~H"""
     <div class="mt-16">
       <.link navigate={@navigate} class="text-sm font-semibold leading-6 text-purple-500">
-        <.icon name="hero-arrow-left-solid" class="h-3 w-3" />
+        <.icon name="hero-chevron-left" class="h-3 w-3" />
         <%= render_slot(@inner_block) %>
       </.link>
     </div>
