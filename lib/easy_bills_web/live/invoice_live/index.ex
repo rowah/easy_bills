@@ -34,7 +34,7 @@ defmodule EasyBillsWeb.InvoiceLive.Index do
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Invoices")
+    |> assign(:page_title, "Invoices")
     |> assign(:invoice, nil)
   end
 

@@ -35,13 +35,10 @@
     <div class="flex w-1/2 justify-between mx-auto mt-6">
       <div class="text-left">
         <h2 class="font-bold text-lg">Invoices</h2>
-        <%= if ![] == @streams.invoices do %>
-          <h6 class="text-xs text-gray-400">No invoices</h6>
-        <% else %>
-          <h6 class="text-xs text-gray-400">
-            There are a total of <%= length(@streams.invoices.inserts) %> invoices
-          </h6>
-        <% end %>
+        <h6 class="text-xs text-gray-400">No invoices</h6>
+        <h6 class="text-xs text-gray-400">
+          There are a total of <%= length(@streams.invoices.inserts) %> invoices
+        </h6>
       </div>
       <div class="flex flex-row items-center font-bold">
         <span class="flex items-center cursor-pointer">

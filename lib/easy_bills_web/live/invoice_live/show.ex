@@ -42,4 +42,22 @@ defmodule EasyBillsWeb.InvoiceLive.Show do
   def handle_event("edit", %{"id" => id}, socket) do
     {:noreply, push_navigate(socket, to: ~p"/invoices/#{id}/edit")}
   end
+
+  # @impl true
+  # def handle_event("mark_as_paid", %{"id" => id}, socket) do
+  #   invoice = Billing.get_invoice!(id)
+  #   # TODO: handle result
+  #   {:ok, _} = Billing.mark_as_paid(invoice)
+
+  #   {:noreply, socket}
+  # end
+
+  # @impl true
+  # def handle_event("mark_as_unpaid", %{"id" => id}, socket) do
+  #   invoice = Billing.get_invoice!(id)
+  #   # TODO: handle result
+  #   {:ok, _} = Billing.mark_as_unpaid(invoice)
+
+  #   {:noreply, socket}
+  # end
 end

@@ -2,6 +2,7 @@ defmodule EasyBillsWeb.InvoiceLiveTest do
   use EasyBillsWeb.ConnCase
 
   import Phoenix.LiveViewTest
+  alias EasyBillsWeb.AccountsFixtures
   import EasyBills.BillingFixtures
 
   @create_attrs %{
@@ -38,13 +39,15 @@ defmodule EasyBillsWeb.InvoiceLiveTest do
     setup [:create_invoice]
 
     test "lists all invoices", %{conn: conn, invoice: invoice} do
-      {:ok, _index_live, html} = live(conn, ~p"/invoices")
+      #
+      {:ok, _index_live, html} = conn |> log_in_user(user_fixture()) |> live(~p"/invoices")
 
-      assert html =~ "Listing Invoices"
+      assert html =~ "Invoices"
       assert html =~ invoice.amount
     end
 
     test "saves new invoice", %{conn: conn} do
+      #
       {:ok, index_live, _html} = live(conn, ~p"/invoices")
 
       assert index_live |> element("a", "New Invoice") |> render_click() =~
@@ -68,6 +71,7 @@ defmodule EasyBillsWeb.InvoiceLiveTest do
     end
 
     test "updates invoice in listing", %{conn: conn, invoice: invoice} do
+      #
       {:ok, index_live, _html} = live(conn, ~p"/invoices")
 
       assert index_live |> element("#invoices-#{invoice.id} a", "Edit") |> render_click() =~
@@ -91,6 +95,7 @@ defmodule EasyBillsWeb.InvoiceLiveTest do
     end
 
     test "deletes invoice in listing", %{conn: conn, invoice: invoice} do
+      #
       {:ok, index_live, _html} = live(conn, ~p"/invoices")
 
       assert index_live |> element("#invoices-#{invoice.id} a", "Delete") |> render_click()
@@ -101,7 +106,14 @@ defmodule EasyBillsWeb.InvoiceLiveTest do
   describe "Show" do
     setup [:create_invoice]
 
+    setup %{conn: conn} do
+      password = valid_user_password()
+      user = user_fixture(%{password: password})
+      %{conn: log_in_user(conn, user), user: user, password: password}
+    end
+
     test "displays invoice", %{conn: conn, invoice: invoice} do
+      #
       {:ok, _show_live, html} = live(conn, ~p"/invoices/#{invoice}")
 
       assert html =~ "Show Invoice"
@@ -109,6 +121,7 @@ defmodule EasyBillsWeb.InvoiceLiveTest do
     end
 
     test "updates invoice within modal", %{conn: conn, invoice: invoice} do
+      #
       {:ok, show_live, _html} = live(conn, ~p"/invoices/#{invoice}")
 
       assert show_live |> element("a", "Edit") |> render_click() =~
