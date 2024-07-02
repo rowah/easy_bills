@@ -60,6 +60,15 @@ defmodule EasyBills.Accounts do
   """
   def get_user!(id), do: Repo.get!(User, id)
 
+  @doc """
+  Gets a single user.
+  """
+  def get_user_with_business_address(id) do
+    User
+    |> preload(:business_address)
+    |> Repo.get!(id)
+  end
+
   ## User registration
 
   @doc """

@@ -1,15 +1,19 @@
 defmodule EasyBillsWeb.InvoiceLive.Show do
   use EasyBillsWeb, :live_view
 
+  alias EasyBills.Accounts
   alias EasyBills.Billing
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket}
+    current_user =
+      Accounts.get_user_with_business_address(socket.assigns.current_user.id)
+
+    {:ok, socket |> assign(:current_user, current_user)}
   end
 
   @impl true
-  def handle_params(%{"id" => id}, _, socket) do
+  def handle_params(%{"id" => id}, _url, socket) do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
@@ -20,7 +24,6 @@ defmodule EasyBillsWeb.InvoiceLive.Show do
   defp page_title(:edit), do: "Edit Invoice"
 
   defp transform_id(id) do
-    # ("#" <> id)
     id
     |> String.upcase()
     |> String.slice(0, 6)
