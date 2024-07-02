@@ -6,7 +6,7 @@ defmodule EasyBills.Accounts do
   import Ecto.Query, warn: false
   alias EasyBills.Repo
 
-  alias EasyBills.Accounts.{User, UserNotifier, UserToken}
+  alias EasyBills.Accounts.{BusinessAddress, User, UserNotifier, UserToken}
 
   ## Database getters
 
@@ -174,10 +174,15 @@ defmodule EasyBills.Accounts do
     UserNotifier.deliver_update_email_instructions(user, update_email_url_fun.(encoded_token))
   end
 
-  def update_user_address(user, address_params) do
-    user
-    |> Ecto.Changeset.change(%{address: address_params})
-    |> Repo.update()
+  @doc """
+  Returns an `%Ecto.Changeset{}` for changing the user address.
+  """
+
+  def add_user_address(user, address_params \\ %{}) do
+    %BusinessAddress{}
+    |> BusinessAddress.changeset(address_params)
+    |> Ecto.Changeset.put_assoc(:user, user)
+    |> Repo.insert()
   end
 
   @doc """
