@@ -4,10 +4,11 @@ defmodule EasyBills.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias EasyBills.Accounts.BusinessAddress
+
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "users" do
-    field :address, :map
     field :avatar_url, :string
     field :confirmed_at, :naive_datetime
     field :email, :string
@@ -15,6 +16,8 @@ defmodule EasyBills.Accounts.User do
     field :name, :string
     field :password, :string, virtual: true, redact: true
     field :username, :string
+
+    has_one :business_address, EasyBills.Accounts.BusinessAddress
 
     timestamps()
   end
@@ -49,6 +52,7 @@ defmodule EasyBills.Accounts.User do
     |> validate_email(opts)
     |> validate_password(opts)
     |> validate_acceptance(:policy_and_terms, message: "You must accept the terms and policy")
+    |> cast_assoc(:business_address, with: &BusinessAddress.changeset/2)
   end
 
   defp validate_email(changeset, opts) do

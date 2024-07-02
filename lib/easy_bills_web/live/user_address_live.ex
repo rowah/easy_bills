@@ -10,7 +10,6 @@ defmodule EasyBillsWeb.UserAddressLive do
   @impl Phoenix.LiveView
   def mount(_params, _session, socket) do
     user = socket.assigns.current_user
-
     changeset = User.registration_changeset(user, %{})
 
     socket =
@@ -39,7 +38,6 @@ defmodule EasyBillsWeb.UserAddressLive do
         <h3 class="text-center font-bold text-2xl">
           Enter your business address details:
         </h3>
-        <%!-- <img src={@current_user.avatar_url} alt="Image" /> --%>
         <.simple_form
           for={@form}
           id="address_form"
@@ -96,8 +94,8 @@ defmodule EasyBillsWeb.UserAddressLive do
   def handle_event("update_address", %{"user" => address_params}, socket) do
     user = socket.assigns.current_user
 
-    case Accounts.update_user_address(user, address_params) do
-      {:ok, _user} ->
+    case Accounts.add_user_address(user, address_params) do
+      {:ok, _business_address} ->
         {:noreply,
          socket
          |> put_flash(:info, "Address updated successfully.")
