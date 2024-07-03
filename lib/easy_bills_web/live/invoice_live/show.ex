@@ -3,6 +3,7 @@ defmodule EasyBillsWeb.InvoiceLive.Show do
 
   alias EasyBills.Accounts
   alias EasyBills.Billing
+  alias EasyBillsWeb.CommonComponents.NavComponent
 
   @impl true
   def mount(_params, _session, socket) do

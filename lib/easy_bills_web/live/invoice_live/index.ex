@@ -4,6 +4,7 @@ defmodule EasyBillsWeb.InvoiceLive.Index do
   alias EasyBills.Billing
   alias EasyBills.Billing.Invoice
   alias EasyBillsWeb.CommonComponents.Icons
+  alias EasyBillsWeb.CommonComponents.NavComponent
   alias EasyBillsWeb.InvoiceComponents.InvoiceComponent
   alias EasyBillsWeb.InvoiceComponents.EmptyInvoice
 
@@ -34,7 +35,7 @@ defmodule EasyBillsWeb.InvoiceLive.Index do
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Invoices")
+    |> assign(:page_title, "Listing Invoices")
     |> assign(:invoice, nil)
   end
 
