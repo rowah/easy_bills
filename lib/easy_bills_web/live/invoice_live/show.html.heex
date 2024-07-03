@@ -1,7 +1,7 @@
-<div class="max-w-2xl mx-auto space-y-6">
-  <.back class="mt-8" navigate={~p"/invoices"}>Go Back</.back>
+<NavComponent.navbar current_user={@current_user} />
+<div class="max-w-2xl pt-4 mx-auto space-y-6">
+  <.back navigate={~p"/invoices"}>Go Back</.back>
   <.header class="p-6 bg-white text-xs">
-    <span class="text-xs">Status: <%= @invoice.status %></span>
     <:actions>
       <.link patch={~p"/invoices/#{@invoice}/show/edit"} phx-click={JS.push_focus()}>
         <button class="bg-gray-100 p-4 px-6 text-gray-400 rounded-3xl font-bold mr-4 min-w-12">
@@ -70,22 +70,22 @@
         <h3 class="mt-2 text-gray-400">Bill To</h3>
         <ul class="text-xs">
           <li class="font-medium mt-2 text-gray-400">
-            <%= @current_user.business_address.street_address %>
+            <%= @invoice.client_street_address %>
           </li>
           <li class="mt-2 text-gray-400">
-            <%= @current_user.business_address.city %>
+            <%= @invoice.client_city %>
           </li>
           <li class="mt-2 text-gray-400">
-            <%= @current_user.business_address.postal_code %>
+            <%= @invoice.client_postal_code %>
           </li>
           <li class="mt-2 text-gray-400">
-            <%= @current_user.business_address.country %>
+            <%= @invoice.client_country %>
           </li>
         </ul>
       </div>
       <div>
         <h3 class="mt-2 text-gray-400">Sent To</h3>
-        <p class="font-bold"><%= @invoice.client %></p>
+        <p class="font-bold"><%= @invoice.client_email %></p>
       </div>
     </section>
 
@@ -115,7 +115,7 @@
       <tfoot>
         <tr>
           <td colspan="3">Amount Due</td>
-          <td>£<%= @invoice.amount %></td>
+          <%!-- <td>£<%= @invoice.amount %></td> --%>
         </tr>
       </tfoot>
     </table>

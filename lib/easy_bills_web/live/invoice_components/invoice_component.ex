@@ -27,13 +27,13 @@ defmodule EasyBillsWeb.InvoiceComponents.InvoiceComponent do
         <span>Due on </span><%= @invoice.due_at %>
       </li>
       <li class="text-lg font-bold mt-2 text-gray-400">
-        <%!-- <%= @invoice.client.name %> --%> Test Test
+        <%= @invoice.client_name %>
       </li>
       <li class="text-lg font-bold mt-2">
-        <span>£ </span><%= @invoice.amount %>
+        <%!-- <span>£ </span><%= @invoice.amount %> --%>
       </li>
       <li class="text-sm font-medium mt-2">
-        <%= @invoice.status %>
+        <%!-- <%= @invoice.status %> --%>
       </li>
       <li class="text-sm font-medium mt-2 cursor-pointer">
         <.link navigate={~p"/invoices/#{@invoice}"}>

@@ -9,22 +9,40 @@ defmodule EasyBillsWeb.InvoiceLive.FormComponent do
     <div>
       <.header>
         <%= @title %>
-        <:subtitle>Use this form to manage invoice records in your database.</:subtitle>
+        <:subtitle>Bill To</:subtitle>
       </.header>
 
       <.simple_form
         for={@form}
+        class="space-y-2"
         id="invoice-form"
         phx-target={@myself}
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:due_at]} type="date" label="Due at" />
-        <.input field={@form[:amount]} type="text" label="Amount" />
-        <.input field={@form[:status]} type="text" label="Status" />
-        <.input field={@form[:description]} type="text" label="Description" />
+        <.input field={@form[:client_name]} type="text" label="Client name" />
+        <.input field={@form[:client_email]} type="email" label="Client email" />
+        <.input field={@form[:client_street_address]} type="text" label="Client address" />
+        <div class="grid grid-cols-3 gap-4">
+          <.input field={@form[:client_city]} type="text" label="City" />
+          <.input field={@form[:client_postal_code]} type="text" label="Postal Code" />
+          <.input field={@form[:client_country]} type="text" label="Country" />
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <.input field={@form[:due_at]} type="date" label="Invoice Date" />
+          <.input field={@form[:terms]} type="text" label="Payment Terms" />
+        </div>
+        <.input field={@form[:description]} type="text" label="Project Description" />
+        <h6>Item List</h6>
+        <div class="cursor-pointer text-center bg-gray-200 p-2 rounded-2xl">
+          <.icon name="hero-plus-small" /><span>Add New Item</span>
+        </div>
+        <%!-- <div>
+          <.button>Discard</.button>
+          <.button>Save as Draft</.button>
+        </div> --%>
         <:actions>
-          <.button phx-disable-with="Saving...">Save Invoice</.button>
+          <.button phx-disable-with="Saving...">Save and Send</.button>
         </:actions>
       </.simple_form>
     </div>
