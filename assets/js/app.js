@@ -20,10 +20,11 @@ import 'phoenix_html'
 // Establish Phoenix Socket and LiveView configuration.
 import { Socket } from 'phoenix'
 import { LiveSocket } from 'phoenix_live_view'
-// import Uploaders from './uploaders'
+import ItemHooks from './hooks/item'
 import ProfileFormHooks from './hooks/profile_form'
 import topbar from '../vendor/topbar'
 let Hooks = {
+  ...ItemHooks,
   ...ProfileFormHooks,
 }
 

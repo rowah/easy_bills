@@ -19,6 +19,12 @@ defmodule EasyBills.Billing.Invoice do
 
     belongs_to :user, User
 
+    embeds_many :items, Item do
+      field :item_name, :string
+      field :quantity, :integer
+      field :unit_price, :float
+    end
+
     timestamps()
   end
 
@@ -47,5 +53,12 @@ defmodule EasyBills.Billing.Invoice do
       :client_country,
       :terms
     ])
+    |> cast_embed(:items, with: &items_changeset/2)
+  end
+
+  defp items_changeset(invoice, attrs) do
+    invoice
+    |> cast(attrs, [:item_name, :quantity, :unit_price])
+    |> validate_required([:item_name, :quantity, :unit_price])
   end
 end

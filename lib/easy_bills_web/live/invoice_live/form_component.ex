@@ -33,17 +33,50 @@ defmodule EasyBillsWeb.InvoiceLive.FormComponent do
           <.input field={@form[:terms]} type="text" label="Payment Terms" />
         </div>
         <.input field={@form[:description]} type="text" label="Project Description" />
-        <h6>Item List</h6>
-        <div class="cursor-pointer text-center bg-gray-200 p-2 rounded-2xl">
-          <.icon name="hero-plus-small" /><span>Add New Item</span>
+        <div class="space-y-2 max-h-[300px]" id="items" phx-hook="ItemsContainer">
+          <h6>Item List</h6>
+          <div class="">
+            <table class="w-full">
+              <thead class="text-sm text-left leading-6 text-zinc-500">
+                <tr>
+                  <th>Item Name</th>
+                  <th>Quantity</th>
+                  <th>Unit Price</th>
+                  <th>Total</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="table-items-body"></tbody>
+            </table>
+
+            <template id="new-item">
+              <tr class="" id="new-item">
+                <td><.input field={@form[:items]} type="text" /></td>
+                <td><.input field={@form[:items]} type="number" /></td>
+                <td><.input field={@form[:items]} type="number" /></td>
+                <td>£</td>
+                <td>
+                  <.icon name="hero-trash-solid" class="delete-item cursor-pointer text-gray-500" />
+                </td>
+              </tr>
+            </template>
+          </div>
         </div>
-        <%!-- <div>
-          <.button>Discard</.button>
-          <.button>Save as Draft</.button>
-        </div> --%>
+        <div
+          id="add-item-button"
+          class="cursor-pointer bg-gray-200 p-2 text-center rounded-2xl text-sm"
+          data-type={}
+        >
+          <span>&plus; Add New Item</span>
+        </div>
         <:actions>
           <.button phx-disable-with="Saving...">Save and Send</.button>
         </:actions>
+        <input
+          class="cursor-pointer bg-gray-200 py-3 px-4 text-center rounded-full"
+          type="reset"
+          value="Discard"
+        />
       </.simple_form>
     </div>
     """
