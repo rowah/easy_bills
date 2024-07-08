@@ -60,5 +60,7 @@ defmodule EasyBills.Billing.Invoice do
     invoice
     |> cast(attrs, [:item_name, :quantity, :unit_price])
     |> validate_required([:item_name, :quantity, :unit_price])
+    |> validate_number(:quantity, greater_than: 0)
+    |> validate_number(:unit_price, greater_than: 0.0)
   end
 end
