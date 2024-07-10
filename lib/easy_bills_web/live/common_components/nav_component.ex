@@ -38,10 +38,10 @@ defmodule EasyBillsWeb.CommonComponents.NavComponent do
             class="rounded-full h-20 w-20 mx-auto mb-6 cursor-pointer"
             phx-click={show_modal("profile-modal")}
           />
-          <h4 class="mb-2 text-[42px] font-bold text-zinc-800">
+          <h4 class="mb-2 text-lg font-bold text-zinc-800">
             <%= @current_user.username <> " " <> @current_user.name %>
           </h4>
-          <div class="flex flex-col space-y-4 ml-20">
+          <div class="flex flex-col space-y-4 ml-24">
             <.link
               navigate={~p"/invoices"}
               class="text-[0.8125rem] leading-6 text-gray-500 font-semibold hover:text-zinc-700"
