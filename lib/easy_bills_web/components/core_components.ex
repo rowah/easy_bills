@@ -124,7 +124,7 @@ defmodule EasyBillsWeb.CoreComponents do
       phx-mounted={@show && show_modal(@id)}
       phx-remove={hide_modal(@id)}
       data-cancel={JS.exec(@on_cancel, "phx-remove")}
-      class="relative z-50 hidden"
+      class="relative z-30 hidden"
     >
       <div
         id={"#{@id}-bg"}
@@ -132,7 +132,7 @@ defmodule EasyBillsWeb.CoreComponents do
         aria-hidden="true"
       />
       <div
-        class="fixed start-0 bottom-0 pl-[4%] overflow-y-auto"
+        class="fixed start-0 bottom-0 w-[30%] overflow-y-auto"
         aria-labelledby={"#{@id}-title"}
         aria-describedby={"#{@id}-description"}
         role="dialog"
@@ -144,7 +144,7 @@ defmodule EasyBillsWeb.CoreComponents do
           phx-window-keydown={JS.exec("data-cancel", to: "##{@id}")}
           phx-key="escape"
           phx-click-away={JS.exec("data-cancel", to: "##{@id}")}
-          class="shadow-zinc-700/10 ring-zinc-700/10 relative ml-8 hidden rounded-2xl bg-white p-6 shadow-lg ring-1 transition"
+          class="shadow-zinc-700/10 ring-zinc-700/10 relative hidden rounded-2xl bg-white p-6 shadow-lg ring-1 transition"
         >
           <div id={"#{@id}-content"}>
             <%= render_slot(@inner_block) %>

@@ -226,8 +226,6 @@ defmodule EasyBillsWeb.UserSettingsLive do
   defp apply_action(socket, :edit_bio, _params) do
     socket
     |> assign(:page_title, "Edit Profile Information")
-
-    # |> assign(:user, socket.assigns.current_user)
   end
 
   defp apply_action(socket, :edit_password, _params) do
