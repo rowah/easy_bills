@@ -132,7 +132,7 @@ defmodule EasyBillsWeb.UserSettingsLiveTest do
         })
 
       assert result =~ "Change Password"
-      assert result =~ "upper-case character"
+      assert result =~ "upper - case"
     end
 
     test "renders errors with invalid data (phx-submit)", %{conn: conn} do
@@ -149,7 +149,7 @@ defmodule EasyBillsWeb.UserSettingsLiveTest do
         |> render_submit()
 
       assert result =~ "Change Password"
-      assert result =~ "upper-case character"
+      assert result =~ "upper - case"
       assert result =~ "is not valid"
     end
   end

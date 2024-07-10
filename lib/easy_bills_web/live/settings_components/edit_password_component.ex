@@ -3,6 +3,8 @@ defmodule EasyBillsWeb.SettingsComponents.EditPasswordComponent do
 
   use EasyBillsWeb, :live_component
 
+  alias EasyBillsWeb.OnboardingLive.Shared.NewPasswordInputComponent
+
   @impl true
   def mount(socket) do
     {:ok, socket}
@@ -44,7 +46,9 @@ defmodule EasyBillsWeb.SettingsComponents.EditPasswordComponent do
             id="hidden_user_email"
             value={@current_email}
           />
-          <.input field={@password_form[:password]} type="password" label="New password" required />
+          <div class="relative">
+            <NewPasswordInputComponent.new_password_input form={@password_form} />
+          </div>
           <.input
             field={@password_form[:current_password]}
             name="current_password"
