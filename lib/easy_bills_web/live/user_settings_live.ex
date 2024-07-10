@@ -2,77 +2,129 @@ defmodule EasyBillsWeb.UserSettingsLive do
   use EasyBillsWeb, :live_view
 
   alias EasyBills.Accounts
+  alias EasyBillsWeb.CommonComponents.NavComponent
+  alias EasyBillsWeb.SettingsComponents.EmailNotificationsComponent
+  alias EasyBillsWeb.SettingsComponents.EditPasswordComponent
+  alias EasyBillsWeb.SettingsComponents.EditBioComponent
 
-  def render(assigns) do
+  @impl Phoenix.LiveView
+  def render(%{live_action: :edit_bio} = assigns) do
     ~H"""
-    <.header class="text-center">
-      Account Settings
-      <:subtitle>Manage your account email address and password settings</:subtitle>
-    </.header>
+    <div class="bg-gray-100 h-screen">
+      <NavComponent.navbar current_user={@current_user} />
 
-    <div class="space-y-12 divide-y">
-      <div>
-        <.simple_form
-          for={@email_form}
-          id="email_form"
-          phx-submit="update_email"
-          phx-change="validate_email"
-        >
-          <.input field={@email_form[:email]} type="email" label="Email" required />
-          <.input
-            field={@email_form[:current_password]}
-            name="current_password"
-            id="current_password_for_email"
-            type="password"
-            label="Current password"
-            value={@email_form_current_password}
-            required
+      <div class="mx-auto w-1/2 py-8">
+        <.header class="text-[1.5rem]">
+          Settings
+        </.header>
+        <div class="flex justify-between w-[36%] mt-3 text-sm mb-8">
+          <.link patch={~p"/settings"} class="focus:text-purple-500">
+            Personal
+          </.link>
+          <.link patch={~p"/settings/edit_password"} class="focus:text-purple-500">
+            Password
+          </.link>
+          <.link patch={~p"/settings/edit_email_notifications"} class="focus:text-purple-500">
+            Email Notifications
+          </.link>
+        </div>
+        <div class="space-y-12 divide-y bg-white p-10 rounded-lg">
+          <.live_component
+            module={EditBioComponent}
+            id={@current_user.id}
+            current_user={@current_user}
+            action={@live_action}
+            email_form={@email_form}
+            title={@page_title}
+            email_form_current_password={@email_form_current_password}
+            password_form={@password_form}
+            trigger_submit={@trigger_submit}
+            current_password={@current_password}
+            current_email={@current_email}
           />
-          <:actions>
-            <.button phx-disable-with="Changing...">Change Email</.button>
-          </:actions>
-        </.simple_form>
-      </div>
-      <div>
-        <.simple_form
-          for={@password_form}
-          id="password_form"
-          action={~p"/login?_action=password_updated"}
-          method="post"
-          phx-change="validate_password"
-          phx-submit="update_password"
-          phx-trigger-action={@trigger_submit}
-        >
-          <.input
-            field={@password_form[:email]}
-            type="hidden"
-            id="hidden_user_email"
-            value={@current_email}
-          />
-          <.input field={@password_form[:password]} type="password" label="New password" required />
-          <.input
-            field={@password_form[:password_confirmation]}
-            type="password"
-            label="Confirm new password"
-          />
-          <.input
-            field={@password_form[:current_password]}
-            name="current_password"
-            type="password"
-            label="Current password"
-            id="current_password_for_password"
-            value={@current_password}
-            required
-          />
-          <:actions>
-            <.button phx-disable-with="Changing...">Change Password</.button>
-          </:actions>
-        </.simple_form>
+        </div>
       </div>
     </div>
     """
   end
 
+  def render(%{live_action: :edit_password} = assigns) do
+    ~H"""
+    <div class="bg-gray-100 h-screen">
+      <NavComponent.navbar current_user={@current_user} />
+      <div class="mx-auto w-1/2 py-8">
+        <.header class="text-[1.5rem]">
+          Settings
+        </.header>
+        <div class="flex justify-between w-[36%] mt-3 text-sm mb-8">
+          <.link patch={~p"/settings"} class="focus:text-purple-500">
+            Personal
+          </.link>
+          <.link patch={~p"/settings/edit_password"} class="focus:text-purple-500">Password</.link>
+          <.link patch={~p"/settings/edit_email_notifications"} class="focus:text-purple-500">
+            Email Notifications
+          </.link>
+        </div>
+        <div class="space-y-12 divide-y bg-white p-10 rounded-lg">
+          <.live_component
+            module={EditPasswordComponent}
+            id={@current_user.id}
+            current_user={@current_user}
+            action={@live_action}
+            email_form={@email_form}
+            title={@page_title}
+            email_form_current_password={@email_form_current_password}
+            password_form={@password_form}
+            trigger_submit={@trigger_submit}
+            current_password={@current_password}
+            current_email={@current_email}
+          />
+        </div>
+      </div>
+    </div>
+    """
+  end
+
+  def render(%{live_action: :edit_email_notifications} = assigns) do
+    ~H"""
+    <div class="bg-gray-100 h-screen">
+      <NavComponent.navbar current_user={@current_user} />
+      <div class="mx-auto w-1/2 py-12">
+        <.header class="text-[1.5rem]">
+          Settings
+        </.header>
+        <div class="flex justify-between w-[36%] mt-3 text-sm mb-8">
+          <.link patch={~p"/settings"} class="focus:text-purple-500">
+            Personal
+          </.link>
+          <.link patch={~p"/settings/edit_password"} class="focus:text-purple-500">
+            Password
+          </.link>
+          <.link patch={~p"/settings/edit_email_notifications"} class="focus:text-purple-500">
+            Email Notifications
+          </.link>
+        </div>
+        <div class="space-y-12 divide-y bg-white p-10 rounded-lg">
+          <.live_component
+            module={EmailNotificationsComponent}
+            id={@current_user.id}
+            current_user={@current_user}
+            action={@live_action}
+            email_form={@email_form}
+            title={@page_title}
+            email_form_current_password={@email_form_current_password}
+            password_form={@password_form}
+            trigger_submit={@trigger_submit}
+            current_password={@current_password}
+            current_email={@current_email}
+          />
+        </div>
+      </div>
+    </div>
+    """
+  end
+
+  @impl true
   def mount(%{"token" => token}, _session, socket) do
     socket =
       case Accounts.update_user_email(socket.assigns.current_user, token) do
@@ -103,6 +155,12 @@ defmodule EasyBillsWeb.UserSettingsLive do
     {:ok, socket}
   end
 
+  @impl true
+  def handle_params(params, _url, socket) do
+    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
+  end
+
+  @impl true
   def handle_event("validate_email", params, socket) do
     %{"current_password" => password, "user" => user_params} = params
 
@@ -163,5 +221,22 @@ defmodule EasyBillsWeb.UserSettingsLive do
       {:error, changeset} ->
         {:noreply, assign(socket, password_form: to_form(changeset))}
     end
+  end
+
+  defp apply_action(socket, :edit_bio, _params) do
+    socket
+    |> assign(:page_title, "Edit Profile Information")
+
+    # |> assign(:user, socket.assigns.current_user)
+  end
+
+  defp apply_action(socket, :edit_password, _params) do
+    socket
+    |> assign(:page_title, "Change Password")
+  end
+
+  defp apply_action(socket, :edit_email_notifications, _params) do
+    socket
+    |> assign(:page_title, "Edit Notification Preferences")
   end
 end

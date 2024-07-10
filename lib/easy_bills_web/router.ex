@@ -69,7 +69,9 @@ defmodule EasyBillsWeb.Router do
 
     live_session :require_authenticated_user,
       on_mount: [{EasyBillsWeb.UserAuth, :ensure_authenticated}] do
-      live "/settings", UserSettingsLive, :edit
+      live "/settings", UserSettingsLive, :edit_bio
+      live "/settings/edit_password", UserSettingsLive, :edit_password
+      live "/settings/edit_email_notifications", UserSettingsLive, :edit_email_notifications
       live "/settings/confirm_email/:token", UserSettingsLive, :confirm_email
       live "/welcome", UserWelcomeLive
       live "/address", UserAddressLive
