@@ -13,7 +13,7 @@ defmodule EasyBillsWeb.UserSettingsLiveTest do
         |> live(~p"/settings")
 
       assert html =~ "Change Email"
-      assert html =~ "Change Password"
+      assert html =~ "Edit Profile Information"
     end
 
     test "redirects if user is not logged in", %{conn: conn} do
@@ -92,15 +92,14 @@ defmodule EasyBillsWeb.UserSettingsLiveTest do
     test "updates the user password", %{conn: conn, user: user, password: password} do
       new_password = valid_user_password()
 
-      {:ok, lv, _html} = live(conn, ~p"/settings")
+      {:ok, lv, _html} = live(conn, ~p"/settings/edit_password")
 
       form =
         form(lv, "#password_form", %{
           "current_password" => password,
           "user" => %{
             "email" => user.email,
-            "password" => new_password,
-            "password_confirmation" => new_password
+            "password" => new_password
           }
         })
 
@@ -119,7 +118,7 @@ defmodule EasyBillsWeb.UserSettingsLiveTest do
     end
 
     test "renders errors with invalid data (phx-change)", %{conn: conn} do
-      {:ok, lv, _html} = live(conn, ~p"/settings")
+      {:ok, lv, _html} = live(conn, ~p"/settings/edit_password")
 
       result =
         lv
@@ -134,26 +133,23 @@ defmodule EasyBillsWeb.UserSettingsLiveTest do
 
       assert result =~ "Change Password"
       assert result =~ "upper-case character"
-      assert result =~ "does not match password"
     end
 
     test "renders errors with invalid data (phx-submit)", %{conn: conn} do
-      {:ok, lv, _html} = live(conn, ~p"/settings")
+      {:ok, lv, _html} = live(conn, ~p"/settings/edit_password")
 
       result =
         lv
         |> form("#password_form", %{
           "current_password" => "invalid",
           "user" => %{
-            "password" => "too short",
-            "password_confirmation" => "does not match"
+            "password" => "too short"
           }
         })
         |> render_submit()
 
       assert result =~ "Change Password"
       assert result =~ "upper-case character"
-      assert result =~ "does not match password"
       assert result =~ "is not valid"
     end
   end
