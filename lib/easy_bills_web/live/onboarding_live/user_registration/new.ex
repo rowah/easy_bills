@@ -74,7 +74,7 @@ defmodule EasyBillsWeb.OnboardingLive.UserRegistration.New do
               required
             />
             <div class="relative">
-              <NewPasswordInputComponent.new_password_input form={@form} />
+              <NewPasswordInputComponent.new_password_input form={@form} label="Password" />
             </div>
 
             <label class="flex flex-col left-0 flex-row-reverse items-center justify-between">

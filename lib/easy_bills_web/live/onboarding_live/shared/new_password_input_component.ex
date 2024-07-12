@@ -19,6 +19,7 @@ defmodule EasyBillsWeb.OnboardingLive.Shared.NewPasswordInputComponent do
       custom_errors={true}
       field={@form[:password]}
       input_class="relative"
+      label={@label}
       label_type="icon"
       placeholder="Enter Your Password"
       type="password"
