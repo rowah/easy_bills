@@ -46,7 +46,8 @@ defmodule EasyBillsWeb.SettingsComponents.EditBioComponent do
             required
           />
           <:actions>
-            <.button phx-disable-with="Changing...">Change Email</.button>
+            <div class="text-rose-500 cursor-pointer" phx-click="delete_account">Delete Account</div>
+            <.button phx-disable-with="Changing...">Save Changes</.button>
           </:actions>
         </.simple_form>
       </div>

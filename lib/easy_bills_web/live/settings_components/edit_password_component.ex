@@ -59,6 +59,7 @@ defmodule EasyBillsWeb.SettingsComponents.EditPasswordComponent do
             required
           />
           <:actions>
+            <div class="text-rose-500 cursor-pointer" phx-click="delete_account">Delete Account</div>
             <.button phx-disable-with="Changing...">Change Password</.button>
           </:actions>
         </.simple_form>
