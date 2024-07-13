@@ -3,6 +3,7 @@ defmodule EasyBillsWeb.SettingsComponents.EditPasswordComponent do
 
   use EasyBillsWeb, :live_component
 
+  alias EasyBillsWeb.OnboardingLive.Shared.DeleteAccountComponent
   alias EasyBillsWeb.OnboardingLive.Shared.NewPasswordInputComponent
 
   @impl true
@@ -59,10 +60,22 @@ defmodule EasyBillsWeb.SettingsComponents.EditPasswordComponent do
             required
           />
           <:actions>
-            <div class="text-rose-500 cursor-pointer" phx-click="delete_account">Delete Account</div>
-            <.button phx-disable-with="Changing...">Change Password</.button>
+            <div class="text-rose-500 cursor-pointer" phx-click={show_modal("delete-account-modal")}>
+              Delete Account
+            </div>
+            <.button phx-disable-with="Changing...">Save changes</.button>
           </:actions>
         </.simple_form>
+        <.modal id="delete-account-modal">
+          <.live_component
+            module={DeleteAccountComponent}
+            id="delete_account_component"
+            current_user={@current_user}
+            title="Delete Account"
+            email_form={@email_form}
+            trigger_submit={@trigger_submit}
+          />
+        </.modal>
       </div>
     </div>
     """

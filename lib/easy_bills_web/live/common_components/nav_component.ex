@@ -30,7 +30,7 @@ defmodule EasyBillsWeb.CommonComponents.NavComponent do
         </div>
       </nav>
       <.profile_modal id="profile-modal">
-        <div class="text-center rounded-lg ml-[30%]">
+        <div class="text-center rounded-lg ml-[25%]">
           <img
             src={@current_user.avatar_url}
             alt={"#{@current_user.username}'s" <> " Avatar"}

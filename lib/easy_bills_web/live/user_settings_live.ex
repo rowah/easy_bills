@@ -10,7 +10,7 @@ defmodule EasyBillsWeb.UserSettingsLive do
   @impl Phoenix.LiveView
   def render(%{live_action: :edit_bio} = assigns) do
     ~H"""
-    <div class="bg-gray-100 h-screen">
+    <div class="bg-gray-100 min-h-screen">
       <NavComponent.navbar current_user={@current_user} />
 
       <div class="mx-auto w-1/2 py-8">
@@ -34,12 +34,11 @@ defmodule EasyBillsWeb.UserSettingsLive do
             id={@current_user.id}
             current_user={@current_user}
             action={@live_action}
+            address_form={@address_form}
             email_form={@email_form}
             title={@page_title}
             email_form_current_password={@email_form_current_password}
-            password_form={@password_form}
             trigger_submit={@trigger_submit}
-            current_password={@current_password}
             current_email={@current_email}
           />
         </div>
@@ -50,7 +49,7 @@ defmodule EasyBillsWeb.UserSettingsLive do
 
   def render(%{live_action: :edit_password} = assigns) do
     ~H"""
-    <div class="bg-gray-100 h-screen">
+    <div class="bg-gray-100 min-h-screen">
       <NavComponent.navbar current_user={@current_user} />
       <div class="mx-auto w-1/2 py-8">
         <.header class="text-[1.5rem]">
@@ -70,10 +69,9 @@ defmodule EasyBillsWeb.UserSettingsLive do
             module={EditPasswordComponent}
             id={@current_user.id}
             current_user={@current_user}
-            action={@live_action}
             email_form={@email_form}
+            action={@live_action}
             title={@page_title}
-            email_form_current_password={@email_form_current_password}
             password_form={@password_form}
             trigger_submit={@trigger_submit}
             current_password={@current_password}
@@ -87,7 +85,7 @@ defmodule EasyBillsWeb.UserSettingsLive do
 
   def render(%{live_action: :edit_email_notifications} = assigns) do
     ~H"""
-    <div class="bg-gray-100 h-screen">
+    <div class="bg-gray-100 min-h-screen">
       <NavComponent.navbar current_user={@current_user} />
       <div class="mx-auto w-1/2 py-12">
         <.header class="text-[1.5rem]">
@@ -109,14 +107,11 @@ defmodule EasyBillsWeb.UserSettingsLive do
             module={EmailNotificationsComponent}
             id={@current_user.id}
             current_user={@current_user}
-            action={@live_action}
+            email_notifications_form={@email_notifications_form}
             email_form={@email_form}
+            action={@live_action}
             title={@page_title}
-            email_form_current_password={@email_form_current_password}
-            password_form={@password_form}
             trigger_submit={@trigger_submit}
-            current_password={@current_password}
-            current_email={@current_email}
           />
         </div>
       </div>
@@ -140,15 +135,25 @@ defmodule EasyBillsWeb.UserSettingsLive do
 
   def mount(_params, _session, socket) do
     user = socket.assigns.current_user
-    email_changeset = Accounts.change_user_email(user)
-    password_changeset = Accounts.change_user_password(user)
+    email_changeset = Accounts.change_user_email(user) |> IO.inspect(label: "email_changeset")
+
+    password_changeset =
+      Accounts.change_user_password(user) |> IO.inspect(label: "password_changeset")
+
+    address_changeset =
+      Accounts.change_user_address(user) |> IO.inspect(label: "address_changeset")
+
+    # notifications_changeset =
+    # Accounts.change_user_notifications(user) |> IO.inspect(label: "notifications_changeset")
 
     socket =
       socket
       |> assign(:current_password, nil)
       |> assign(:email_form_current_password, nil)
       |> assign(:current_email, user.email)
+      |> assign(:address_form, to_form(address_changeset))
       |> assign(:email_form, to_form(email_changeset))
+      |> assign(:email_notifications_form, to_form(email_changeset))
       |> assign(:password_form, to_form(password_changeset))
       |> assign(:trigger_submit, false)
 
@@ -220,6 +225,21 @@ defmodule EasyBillsWeb.UserSettingsLive do
 
       {:error, changeset} ->
         {:noreply, assign(socket, password_form: to_form(changeset))}
+    end
+  end
+
+  def handle_event("delete_account", _params, socket) do
+    user = socket.assigns.current_user
+
+    case Accounts.delete_user(user) do
+      {:ok, _user} ->
+        {:noreply,
+         socket
+         |> put_flash(:info, "Your account has been deleted.")
+         |> push_navigate(to: ~p"/")}
+
+      {:error, changeset} ->
+        {:noreply, assign(socket, changeset: changeset)}
     end
   end
 
