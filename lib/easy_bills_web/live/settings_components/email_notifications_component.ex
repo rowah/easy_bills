@@ -56,7 +56,11 @@ defmodule EasyBillsWeb.SettingsComponents.EmailNotificationsComponent do
           required
         />
         <:actions>
-          <div class="text-rose-500 cursor-pointer" phx-click={show_modal("delete-account-modal")}>
+          <div
+            id="delete-account"
+            class="text-rose-500 cursor-pointer"
+            phx-click={show_modal("delete-account-modal")}
+          >
             Delete Account
           </div>
           <.button phx-disable-with="Changing...">Save Changes</.button>

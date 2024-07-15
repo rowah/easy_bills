@@ -42,10 +42,12 @@ defmodule EasyBillsWeb.OnboardingLive.Shared.DeleteAccountComponent do
           />
 
           <:actions>
-            <.button phx-disable-with="Deleting..." class="w-16 ">Ok</.button>
+            <.button phx-disable-with="Deleting..." class="w-16" disabled>
+              Ok
+            </.button>
             <div
               phx-click={JS.exec("data-cancel", to: "#delete-account-modal")}
-              class="rounded-full border border-gray-400 px-4 py-1 cursor-pointer"
+              class="rounded-full border border-purple-700 text-purple-700 px-4 py-1 cursor-pointer"
             >
               Cancel
             </div>

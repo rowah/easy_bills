@@ -3,9 +3,9 @@ defmodule EasyBillsWeb.UserSettingsLive do
 
   alias EasyBills.Accounts
   alias EasyBillsWeb.CommonComponents.NavComponent
-  alias EasyBillsWeb.SettingsComponents.EmailNotificationsComponent
-  alias EasyBillsWeb.SettingsComponents.EditPasswordComponent
   alias EasyBillsWeb.SettingsComponents.EditBioComponent
+  alias EasyBillsWeb.SettingsComponents.EditPasswordComponent
+  alias EasyBillsWeb.SettingsComponents.EmailNotificationsComponent
 
   @impl Phoenix.LiveView
   def render(%{live_action: :edit_bio} = assigns) do
@@ -135,13 +135,13 @@ defmodule EasyBillsWeb.UserSettingsLive do
 
   def mount(_params, _session, socket) do
     user = socket.assigns.current_user
-    email_changeset = Accounts.change_user_email(user) |> IO.inspect(label: "email_changeset")
+    email_changeset = Accounts.change_user_email(user)
 
     password_changeset =
-      Accounts.change_user_password(user) |> IO.inspect(label: "password_changeset")
+      Accounts.change_user_password(user)
 
     address_changeset =
-      Accounts.change_user_address(user) |> IO.inspect(label: "address_changeset")
+      Accounts.change_user_address(user)
 
     # notifications_changeset =
     # Accounts.change_user_notifications(user) |> IO.inspect(label: "notifications_changeset")

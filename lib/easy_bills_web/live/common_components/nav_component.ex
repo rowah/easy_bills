@@ -22,6 +22,7 @@ defmodule EasyBillsWeb.CommonComponents.NavComponent do
             <.icon name="hero-sun" class="hidden" />
           </div>
           <img
+            id="profile-toggler"
             src={@current_user.avatar_url}
             alt={"#{@current_user.username}'s" <> " Avatar"}
             class="rounded-full h-20 w-20 mx-auto mb-6 cursor-pointer"

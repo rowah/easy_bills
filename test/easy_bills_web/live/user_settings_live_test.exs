@@ -12,8 +12,56 @@ defmodule EasyBillsWeb.UserSettingsLiveTest do
         |> log_in_user(user_fixture())
         |> live(~p"/settings")
 
-      assert html =~ "Save Changes"
+      assert html =~ "Personal"
+      assert html =~ "Password"
+      assert html =~ "Email Notifications"
       assert html =~ "Edit Profile Information"
+      assert html =~ "Delete Account"
+    end
+
+    test "redirect to edit password page when password link is clicked", %{conn: conn} do
+      {:ok, lv, _html} =
+        conn
+        |> log_in_user(user_fixture())
+        |> live(~p"/settings")
+
+      result =
+        lv
+        |> element("a", "Password")
+        |> render_click()
+
+      assert result =~ "Change Password"
+      assert result =~ "upper - case"
+    end
+
+    test "redirect to edit email notifications page when email notifications link is clicked", %{
+      conn: conn
+    } do
+      {:ok, lv, _html} =
+        conn
+        |> log_in_user(user_fixture())
+        |> live(~p"/settings")
+
+      result =
+        lv
+        |> element("a", "Email Notifications")
+        |> render_click()
+
+      assert result =~ "Email Notifications"
+    end
+
+    test "redirect to edit bio page when edit bio link is clicked", %{conn: conn} do
+      {:ok, lv, _html} =
+        conn
+        |> log_in_user(user_fixture())
+        |> live(~p"/settings/edit_email_notifications")
+
+      result =
+        lv
+        |> element("a", "Personal")
+        |> render_click()
+
+      assert result =~ "Edit Profile Information"
     end
 
     test "redirects if user is not logged in", %{conn: conn} do
@@ -202,5 +250,39 @@ defmodule EasyBillsWeb.UserSettingsLiveTest do
       assert %{"error" => message} = flash
       assert message == "You must log in to access this page."
     end
+  end
+
+  describe "delete account" do
+    setup %{conn: conn} do
+      user = user_fixture()
+      %{conn: log_in_user(conn, user), user: user}
+    end
+
+    # test "deletes user", %{conn: conn, user: user} do
+    #   {:ok, lv, _html} = live(conn, ~p"/settings")
+
+    #   result =
+    #     lv
+    #     |> element("#delete-account")
+    #     |> render_click()
+
+    #   assert result =~ "Delete Account"
+    #   assert result =~ "Would you like to delete your EasyBills account"
+    #   assert result =~ user.email
+
+    # {:ok, conn} = live(conn, ~p"/settings/delete_account")
+    # assert conn.assigns.live_action == :confirm
+
+    # assert {:error, redirect} = live(conn, ~p"/settings/delete_account")
+    # assert {:live_redirect, %{to: path, flash: flash}} = redirect
+    # assert path == ~p"/settings"
+    # assert %{"error" => "Delete Account"} = flash
+
+    # assert_raise Ecto.NoResultsError, fn ->
+    #   Accounts.get_user!(user.id)
+    # end
+
+    # assert Accounts.get_user_by_email(user.email)
+    # end
   end
 end
