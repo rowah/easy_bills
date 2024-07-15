@@ -12,7 +12,7 @@ defmodule EasyBillsWeb.UserSettingsLiveTest do
         |> log_in_user(user_fixture())
         |> live(~p"/settings")
 
-      assert html =~ "Change Email"
+      assert html =~ "Save Changes"
       assert html =~ "Edit Profile Information"
     end
 
@@ -61,7 +61,7 @@ defmodule EasyBillsWeb.UserSettingsLiveTest do
           "user" => %{"email" => "with spaces"}
         })
 
-      assert result =~ "Change Email"
+      assert result =~ "Save Changes"
       assert result =~ "Please enter a valid email address"
     end
 
@@ -76,7 +76,7 @@ defmodule EasyBillsWeb.UserSettingsLiveTest do
         })
         |> render_submit()
 
-      assert result =~ "Change Email"
+      assert result =~ "Save Changes"
       assert result =~ "did not change"
       assert result =~ "is not valid"
     end
