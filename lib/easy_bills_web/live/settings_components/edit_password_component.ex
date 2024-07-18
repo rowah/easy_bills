@@ -47,18 +47,19 @@ defmodule EasyBillsWeb.SettingsComponents.EditPasswordComponent do
             id="hidden_user_email"
             value={@current_email}
           />
-          <div class="relative">
-            <NewPasswordInputComponent.new_password_input form={@password_form} label="New password" />
-          </div>
           <.input
             field={@password_form[:current_password]}
             name="current_password"
             type="password"
             label="Old password"
             id="current_password_for_password"
+            placeholder="Enter your old password"
             value={@current_password}
             required
           />
+          <div class="relative">
+            <NewPasswordInputComponent.new_password_input form={@password_form} label="New password" />
+          </div>
           <:actions>
             <div
               id="delete-account"
