@@ -11,7 +11,7 @@ defmodule EasyBillsWeb.InvoicesLive do
   @impl Phoenix.LiveView
   def render(assigns) do
     ~H"""
-    <div class="bg-white">
+    <div class="text-gray-900 dark:text-white bg-white dark:bg-gray_secondary antialiased">
       <nav class="bg-black flex flex-col absolute w-58 h-full justify-between rounded-r-3xl">
         <Icons.logo_icon_white />
         <div class="space-x-auto text-center">
@@ -32,9 +32,18 @@ defmodule EasyBillsWeb.InvoicesLive do
               Log out
             </.link>
           </p>
-          <div class="border-b-2 mb-4 pb-2 text-white">
-            <.icon name="hero-moon" />
-            <.icon name="hero-sun" class="hidden" />
+          <div
+            id="theme-toggle"
+            phx-click="toggle_dark_mode"
+            class="border-b-2 mb-4 pb-2 text-white"
+            phx-hook="DarkModeToggle"
+          >
+            <span id="theme-toggle-light-icon" class="cursor-pointer">
+              <.icon name="hero-moon" />
+            </span>
+            <span id="theme-toggle-dark-icon" class="hidden cursor-pointer">
+              <.icon name="hero-sun" />
+            </span>
           </div>
 
           <img
@@ -44,7 +53,7 @@ defmodule EasyBillsWeb.InvoicesLive do
           />
         </div>
       </nav>
-      <main class="p-5 h-[100vh] text-center tracking-tight text-black">
+      <main class="p-5 h-[100vh] text-center tracking-tight">
         <div class="flex w-1/2 justify-between mx-auto mt-6">
           <div>
             <h2 class="font-bold text-lg">Invoices</h2>
@@ -62,5 +71,10 @@ defmodule EasyBillsWeb.InvoicesLive do
       </main>
     </div>
     """
+  end
+
+  @impl Phoenix.LiveView
+  def handle_event("toggle_dark_mode", _value, socket) do
+    {:noreply, push_event(socket, "toggle_dark_mode", %{})}
   end
 end

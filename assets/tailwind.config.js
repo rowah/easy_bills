@@ -6,11 +6,20 @@ const fs = require('fs')
 const path = require('path')
 
 module.exports = {
+  darkMode: 'class',
   content: ['./js/**/*.js', '../lib/*_web.ex', '../lib/*_web/**/*.*ex'],
   theme: {
     extend: {
       colors: {
-        brand: '#FD4F00',
+        purple_primary: '#7c5dfa',
+        purple_secondary: '#9277ff',
+        gray_primary: '#f8f8fb',
+        gray_secondary: '#141625',
+        orange_primary: '#ec5757',
+        orange_secondary: '#9277ff',
+      },
+      fontFamily: {
+        roboto: ['Roboto', 'sans-serif'],
       },
     },
   },
