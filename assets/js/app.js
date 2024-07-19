@@ -22,9 +22,11 @@ import { Socket } from 'phoenix'
 import { LiveSocket } from 'phoenix_live_view'
 // import Uploaders from './uploaders'
 import ProfileFormHooks from './hooks/profile_form'
+import darkModeHooks from './hooks/dark_mode'
 import topbar from '../vendor/topbar'
 let Hooks = {
   ...ProfileFormHooks,
+  ...darkModeHooks,
 }
 
 let csrfToken = document

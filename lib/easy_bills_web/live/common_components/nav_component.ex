@@ -17,9 +17,18 @@ defmodule EasyBillsWeb.CommonComponents.NavComponent do
       <nav class="bg-black flex flex-col fixed w-58 h-full justify-between z-40 rounded-r-3xl">
         <Icons.logo_icon_white />
         <div class="space-x-auto text-center">
-          <div class="border-b-2 mb-4 pb-2 text-white">
-            <.icon name="hero-moon" />
-            <.icon name="hero-sun" class="hidden" />
+          <div
+            id="theme-toggle"
+            phx-click="toggle_dark_mode"
+            class="border-b-2 mb-4 pb-2 text-white"
+            phx-hook="DarkModeToggle"
+          >
+            <span id="theme-toggle-light-icon" class="cursor-pointer">
+              <.icon name="hero-moon" />
+            </span>
+            <span id="theme-toggle-dark-icon" class="hidden cursor-pointer">
+              <.icon name="hero-sun" />
+            </span>
           </div>
           <img
             id="profile-toggler"

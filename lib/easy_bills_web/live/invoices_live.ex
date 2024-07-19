@@ -12,9 +12,9 @@ defmodule EasyBillsWeb.InvoicesLive do
   @impl Phoenix.LiveView
   def render(assigns) do
     ~H"""
-    <div class="bg-white">
+    <div class="text-gray-900 dark:text-white bg-white dark:bg-gray_secondary antialiased">
       <NavComponent.navbar current_user={@current_user} />
-      <main class="p-5 h-[100vh] text-center tracking-tight text-black">
+      <main class=" p-5 h-[100vh] text-center tracking-tight">
         <div class="flex w-1/2 justify-between mx-auto mt-6">
           <div>
             <h2 class="font-bold text-lg">Invoices</h2>
@@ -32,5 +32,10 @@ defmodule EasyBillsWeb.InvoicesLive do
       </main>
     </div>
     """
+  end
+
+  @impl Phoenix.LiveView
+  def handle_event("toggle_dark_mode", _value, socket) do
+    {:noreply, push_event(socket, "toggle_dark_mode", %{})}
   end
 end
