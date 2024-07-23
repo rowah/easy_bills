@@ -90,6 +90,9 @@ defmodule EasyBillsWeb.OnboardingLive.Shared.InputComponents do
   def input_field(%{label_type: "icon"} = assigns) do
     ~H"""
     <div phx-feedback-for={@name} class={@class}>
+      <.label for={@id} class="text-gray-400 dark:text-white">
+        <%= @label %>
+      </.label>
       <input
         type={@type}
         name={@name}

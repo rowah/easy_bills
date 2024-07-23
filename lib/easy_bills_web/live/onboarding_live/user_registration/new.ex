@@ -16,13 +16,13 @@ defmodule EasyBillsWeb.OnboardingLive.UserRegistration.New do
   @impl Phoenix.LiveComponent
   def render(assigns) do
     ~H"""
-    <div>
+    <div class="text-gray-900 dark:text-white bg-white dark:bg-gray_secondary antialiased">
       <RegularTemplate.regular socket={@socket}>
         <div class="mx-auto mt-16">
           <.link
             href={~p"/"}
             id="back-icon"
-            class="flex text-purple-600 absolute mt-[-6%] lg:mt-[-2%] lg:ml-[-8%]"
+            class="flex text-purple-600 dark:text-purple-300 absolute mt-[-6%] lg:mt-[-2%] lg:ml-[-8%]"
           >
             <CoreComponents.back_icon /> <span class="mt-[-2px] ml-1">Back</span>
           </.link>
