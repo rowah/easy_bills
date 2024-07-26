@@ -13,7 +13,7 @@ defmodule EasyBillsWeb.UserForgotPasswordLive do
         <.link
           href={~p"/login"}
           id="back-icon"
-          class="flex text-purple-600 absolute ml-[-8%] mt-6 lg:mt-[-4%]"
+          class="flex text-purple-600 dark:text-white absolute ml-[-8%] mt-6 lg:mt-[-4%]"
         >
           <CoreComponents.back_icon /> <span class="mt-[-2px] ml-1">Back</span>
         </.link>

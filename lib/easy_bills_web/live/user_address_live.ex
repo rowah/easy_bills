@@ -52,7 +52,7 @@ defmodule EasyBillsWeb.UserAddressLive do
           </.error>
 
           <div class=" md:flex md:space-x-3">
-            <div class="md:w-1/2">
+            <div class="md:w-1/2 text-gray-800">
               <.input
                 field={@form[:country]}
                 type="select"
