@@ -109,6 +109,20 @@ defmodule EasyBills.Accounts do
   end
 
   @doc """
+  Returns an `%Ecto.Changeset{}` for changing the user notifications.
+
+  ## Examples
+
+      iex> change_user_notifications(user)
+      %Ecto.Changeset{data: %User{}}
+
+  """
+
+  def change_user_notifications(user, attrs \\ %{}) do
+    User.notifications_changeset(user, attrs)
+  end
+
+  @doc """
   Emulates that the email will change without actually changing
   it in the database.
 
@@ -183,6 +197,16 @@ defmodule EasyBills.Accounts do
     |> BusinessAddress.changeset(address_params)
     |> Ecto.Changeset.put_assoc(:user, user)
     |> Repo.insert()
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for changing the user address.
+  """
+
+  def change_user_address(user, address_params \\ %{}) do
+    %BusinessAddress{}
+    |> BusinessAddress.changeset(address_params)
+    |> Ecto.Changeset.put_assoc(:user, user)
   end
 
   @doc """
@@ -369,5 +393,22 @@ defmodule EasyBills.Accounts do
       {:ok, %{user: user}} -> {:ok, user}
       {:error, :user, changeset, _} -> {:error, changeset}
     end
+  end
+
+  @doc """
+  Deletes the user and all associated tokens and data from the database.
+
+  Returns an error tuple if an invalid token was given.
+
+  ## Examples
+
+      iex> delete_user(user)
+      {:ok, %User{}}
+
+      iex> delete_user(user)
+      {:error, %Ecto.Changeset{}}
+  """
+  def delete_user(user) do
+    Repo.delete(user)
   end
 end

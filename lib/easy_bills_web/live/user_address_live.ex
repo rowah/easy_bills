@@ -82,7 +82,7 @@ defmodule EasyBillsWeb.UserAddressLive do
     """
   end
 
-  def country_options do
+  defp country_options do
     Enum.map(Countries.all(), & &1.name) |> Enum.sort()
   end
 
