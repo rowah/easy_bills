@@ -116,7 +116,8 @@ defmodule EasyBillsWeb.CoreComponents do
       class={[
         "fixed right-2 w-full z-50 p-3",
         @kind == :info && "bg-emerald-50 text-emerald-800 ring-emerald-500 fill-cyan-900",
-        @kind == :error && "bg-red-400 font-bold text-white shadow-md ring-rose-500 fill-rose-900"
+        @kind == :error &&
+          "bg-red-400 font-bold text-white dark:text-red-900 shadow-md ring-rose-500 fill-rose-900"
       ]}
       {@rest}
     >
@@ -197,7 +198,7 @@ defmodule EasyBillsWeb.CoreComponents do
   def simple_form(assigns) do
     ~H"""
     <.form :let={f} for={@for} as={@as} {@rest}>
-      <div class="mt-10 space-y-8 bg-white">
+      <div class="mt-10 space-y-6">
         <%= render_slot(@inner_block, f) %>
         <div :for={action <- @actions} class="mt-2 flex items-center justify-between gap-6">
           <%= render_slot(action, f) %>
@@ -391,7 +392,7 @@ defmodule EasyBillsWeb.CoreComponents do
 
   def label(assigns) do
     ~H"""
-    <label for={@for} class="block text-sm font-semibold leading-6 text-zinc-800">
+    <label for={@for} class="block text-sm font-semibold leading-6 text-zinc-800 dark:text-white">
       <%= render_slot(@inner_block) %>
     </label>
     """
@@ -424,10 +425,10 @@ defmodule EasyBillsWeb.CoreComponents do
     ~H"""
     <header class={[@actions != [] && "flex items-center justify-between gap-6", @class]}>
       <div>
-        <h1 class="text-lg font-semibold leading-8 text-zinc-800">
+        <h1 class="text-lg font-semibold leading-8 text-zinc-800 dark:text-white">
           <%= render_slot(@inner_block) %>
         </h1>
-        <p :if={@subtitle != []} class="mt-2 text-sm leading-6 text-zinc-600">
+        <p :if={@subtitle != []} class="mt-2 text-sm leading-6 text-zinc-600 dark:text-white">
           <%= render_slot(@subtitle) %>
         </p>
       </div>
@@ -645,10 +646,11 @@ defmodule EasyBillsWeb.CoreComponents do
   """
   attr :name, :string, required: true
   attr :class, :string, default: nil
+  attr :id, :string, default: nil
 
   def icon(%{name: "hero-" <> _} = assigns) do
     ~H"""
-    <span class={[@name, @class]} />
+    <span id={@id} class={[@name, @class]} />
     """
   end
 

@@ -171,6 +171,9 @@ defmodule EasyBillsWeb.UserAuthTest do
 
       {:halt, updated_socket} = UserAuth.on_mount(:ensure_authenticated, %{}, session, socket)
       assert updated_socket.assigns.current_user == nil
+
+      assert updated_socket.assigns.flash["error"] == "You must log in to access this page."
+      # assert redirected_to(updated_socket) == ~p"/login"
     end
 
     test "redirects to login page if there isn't a user_token", %{conn: conn} do
@@ -183,6 +186,9 @@ defmodule EasyBillsWeb.UserAuthTest do
 
       {:halt, updated_socket} = UserAuth.on_mount(:ensure_authenticated, %{}, session, socket)
       assert updated_socket.assigns.current_user == nil
+
+      assert updated_socket.assigns.flash["error"] == "You must log in to access this page."
+      # assert redirected_to(updated_socket) == ~p"/login"
     end
   end
 
