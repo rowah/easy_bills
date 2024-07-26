@@ -34,3 +34,6 @@ config :logger, level: :warning
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
+
+# prevent Oban from running jobs and plugins during test runs
+config :easy_bills, Oban, testing: :inline

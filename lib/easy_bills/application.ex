@@ -7,11 +7,14 @@ defmodule EasyBills.Application do
 
   @impl true
   def start(_type, _args) do
+    Oban.Telemetry.attach_default_logger(encode: false, level: :debug)
+
     children = [
       # Start the Telemetry supervisor
       EasyBillsWeb.Telemetry,
       # Start the Ecto repository
       EasyBills.Repo,
+      {Oban, Application.fetch_env!(:easy_bills, Oban)},
       # Start the PubSub system
       {Phoenix.PubSub, name: EasyBills.PubSub},
       # Start Finch

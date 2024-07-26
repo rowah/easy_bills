@@ -59,6 +59,17 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :easy_bills, Oban,
+  engine: Oban.Engines.Basic,
+  plugins: [
+    # keeps job rows in the database after they have executed for at least 7 days
+    {Oban.Plugins.Pruner, max_age: 60 * 60 * 24 * 7},
+    # rescue after a generous period of time, like 30 minutes:
+    {Oban.Plugins.Lifeline, rescue_after: :timer.minutes(30)}
+  ],
+  queues: [default: 10],
+  repo: EasyBills.Repo
+
 # Forces the compilation of NIF
 config :rustler_precompiled, :force_build, mjml: true
 

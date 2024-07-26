@@ -75,7 +75,8 @@ defmodule EasyBills.MixProject do
       {:excoveralls, "~> 0.18", only: :test},
       {:hackney, "~> 1.20"},
       {:mjml, "~> 3.0"},
-      {:countries, "~> 1.6"}
+      {:countries, "~> 1.6"},
+      {:oban, "~> 2.17"}
     ]
   end
 
